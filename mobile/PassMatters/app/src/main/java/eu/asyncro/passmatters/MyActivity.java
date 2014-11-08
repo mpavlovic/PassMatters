@@ -1,4 +1,4 @@
-package hr.asyncro.passmatters;
+package eu.asyncro.passmatters;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,14 +11,14 @@ public class MyActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my);
+        setContentView(hr.asyncro.passmatters.R.layout.activity_my);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.my, menu);
+        getMenuInflater().inflate(hr.asyncro.passmatters.R.menu.my, menu);
         return true;
     }
 
@@ -30,7 +30,7 @@ public class MyActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == hr.asyncro.passmatters.R.id.action_settings) {
             return true;
         }
 

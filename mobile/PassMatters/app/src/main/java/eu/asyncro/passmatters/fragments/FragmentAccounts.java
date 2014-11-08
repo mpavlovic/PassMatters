@@ -7,11 +7,10 @@ import eu.asyncro.passmatters.R;
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class FragmentSignIn extends LightFragment{
-
+public class FragmentAccounts extends LightFragment {
     @Override
     public int provideLayoutRes() {
-        return R.layout.fragment_sign_in;
+        return R.layout.fragment_accounts;
     }
 
     @Override

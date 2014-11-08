@@ -1,7 +1,20 @@
 package eu.asyncro.passmatters.activitys;
 
+import com.dmacan.lightandroid.LightActivity;
+
+import eu.asyncro.passmatters.R;
+
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class ActivityMain {
+public class ActivityMain extends LightActivity {
+    @Override
+    public int provideLayoutRes() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void main() {
+
+    }
 }

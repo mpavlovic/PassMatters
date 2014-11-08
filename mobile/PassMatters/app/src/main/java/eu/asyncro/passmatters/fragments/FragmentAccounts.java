@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.widget.Button;
+
 import com.dmacan.lightandroid.LightFragment;
 
 import eu.asyncro.passmatters.R;

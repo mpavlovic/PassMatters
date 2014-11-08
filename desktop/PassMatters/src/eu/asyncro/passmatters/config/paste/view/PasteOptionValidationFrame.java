@@ -6,18 +6,25 @@
 
 package eu.asyncro.passmatters.config.paste.view;
 
+import eu.asyncro.passmatters.config.paste.controller.PasteOptionValidator;
+import java.awt.AWTException;
+
 /**
  *
  * @author Milan
  */
 public class PasteOptionValidationFrame extends javax.swing.JFrame {
 
+    private PasteOptionValidator validator;
+    
     /**
      * Creates new form PasteOptionValidationFrame
      */
     public PasteOptionValidationFrame() {
         initComponents();
+        setLocationRelativeTo(null);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +35,7 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField1 = new javax.swing.JTextField();
+        txtPasted = new javax.swing.JTextField();
         lblValidating = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,7 +50,7 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1)
+                    .addComponent(txtPasted)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblValidating)
                         .addGap(0, 283, Short.MAX_VALUE)))
@@ -53,7 +60,7 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPasted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblValidating)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -62,43 +69,35 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PasteOptionValidationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PasteOptionValidationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PasteOptionValidationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PasteOptionValidationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    
+    public void showFrame() throws AWTException {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
+            @Override
             public void run() {
-                new PasteOptionValidationFrame().setVisible(true);
+                clearAll();
+                setVisible(true);
+                txtPasted.requestFocusInWindow();
+                validator.pasteRecordedText();
             }
         });
     }
 
+    public void setValidator(PasteOptionValidator validator) {
+        this.validator = validator;
+    }
+    
+    public String getPastedText() {
+        return txtPasted.getText();
+    }
+    
+    private void clearAll() {
+        txtPasted.setText(null);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblValidating;
+    private javax.swing.JTextField txtPasted;
     // End of variables declaration//GEN-END:variables
+ 
 }

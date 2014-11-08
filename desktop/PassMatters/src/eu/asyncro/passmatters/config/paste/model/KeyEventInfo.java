@@ -1,11 +1,13 @@
 package eu.asyncro.passmatters.config.paste.model;
 
+import java.io.Serializable;
+
 /**
  * Contains information about keyboard events.
  * 
  * @author Milan
  */
-public class KeyEventInfo {
+public class KeyEventInfo implements Serializable {
     
     private int eventType;
     private int keyCode;

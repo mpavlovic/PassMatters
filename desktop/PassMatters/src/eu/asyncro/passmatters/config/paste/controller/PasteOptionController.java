@@ -1,25 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eu.asyncro.passmatters.config.paste.controller;
 
+import eu.asyncro.passmatters.config.paste.model.PasteShortcut;
 import eu.asyncro.passmatters.config.paste.view.InputPasteOptionFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteOptionValidationFrame;
+import eu.asyncro.passmatters.config.paste.view.PasteValidationFailedFrame;
+import eu.asyncro.passmatters.dao.DAOFactory;
+import java.awt.AWTException;
+import java.util.concurrent.ExecutionException;
+import javax.swing.SwingWorker;
 
 
 /**
  * Used for user's paste keyboard shortcut configuration. 
  * @author Milan
  */
-public class PasteOptionController implements PasteOptionValidator {
+public class PasteOptionController implements PasteOptionValidator, 
+        PasteOptionConfigurator 
+{
+    private boolean savingResult = false;
     
     private InputPasteOptionFrame inputPasteOptionFrame;
     private PasteOptionValidationFrame pasteOptionValidationFrame;
-    
-    private String pasteString;
+    private String copyText;
+    private KeyEventRecorder recorder;
     
     public PasteOptionController() {
         initialize();
@@ -30,24 +33,106 @@ public class PasteOptionController implements PasteOptionValidator {
         inputPasteOptionFrame.setValidator(this);
         
         pasteOptionValidationFrame = new PasteOptionValidationFrame();
+        pasteOptionValidationFrame.setValidator(this);
     }
     
     
-    public void startConfig() {
-        generatePasteString();
-        inputPasteOptionFrame.showFrame(pasteString);
-    }
-
     @Override
-    public void validatePasteShortcut() {
-        
+    public void configurePasteOption() {
+        startConfig();
     }
     
+    @Override
+    public void startPasteValidation(KeyEventRecorder recorder) {
+        this.recorder = recorder;
+        try {
+            pasteOptionValidationFrame.showFrame();
+        } catch (AWTException ex) {
+            // TODO messenger
+            System.out.println(ex.getMessage());
+        }
+    }
     
-    private void generatePasteString() {
+    @Override
+    public void pasteRecordedText() {
+        new SwingWorker<Void, Void> () {
+            
+            @Override
+            protected Void doInBackground() throws Exception {
+                recorder.typeRecordedKeys();
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                super.done();
+                checkPastedText();
+            }
+            
+        }.execute();
+    }
+    
+    private void startConfig() {
+        generateCopyText();
+        inputPasteOptionFrame.clearAll();
+        inputPasteOptionFrame.showFrame(copyText);
+    }
+    
+    private void checkPastedText() {
+        String pastedText = pasteOptionValidationFrame.getPastedText();
+        pasteOptionValidationFrame.dispose();
+        
+        if(pastedText.equals(copyText)) {
+            savePasteShortcut();
+            
+        }
+        else {
+            recorder.clear();
+            new PasteValidationFailedFrame(this);
+        }
+    }
+    
+    private void generateCopyText() {
         // TODO complete method logic
         
-        pasteString = "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4=";
+        copyText = "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4=";
+    }
+    
+    private void savePasteShortcut() {
+        final PasteShortcut pasteShortcut = new PasteShortcut(recorder.getRecordedKeyEvents());
+        try {
+                new SwingWorker<Boolean, Void>() {
+
+                @Override
+                protected Boolean doInBackground() throws Exception {
+                    return DAOFactory.getFactory(DAOFactory.FILE)
+                            .getPasteShortcutDAO()
+                            .savePasteShortcut(pasteShortcut);
+                }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            super.done();
+                            savingResult = get();
+                            finishConfig();
+                        } catch (InterruptedException | ExecutionException ex) {
+                            // TODO messenger
+                        }
+                    }
+            }.execute();
+        } catch (Exception ex) {
+            // TODO Messenger  
+        }
+    }
+
+    private void finishConfig() {
+        if(true == savingResult) {
+            // login from main App if needed
+        }
+        else {
+            // show error messege
+        }
     }
     
 }

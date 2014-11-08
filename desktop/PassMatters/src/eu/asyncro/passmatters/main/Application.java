@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eu.asyncro.passmatters.main;
 
-import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
+import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import java.io.File;
 
 /**
@@ -22,8 +16,8 @@ public class Application {
     public static void main(String[] args) {
         
         if(!isShortcutFileCreated()) {
-            PasteOptionController pasteOptionController = new PasteOptionController();
-            pasteOptionController.startConfig();
+            PasteOptionController pasteOptionConfigurator = new PasteOptionController();
+            pasteOptionConfigurator.configurePasteOption();
         }
         else {
             // TODO login

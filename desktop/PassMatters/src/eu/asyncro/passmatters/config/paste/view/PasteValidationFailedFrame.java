@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package eu.asyncro.passmatters.config.paste.view;
+
+import eu.asyncro.passmatters.config.paste.controller.PasteOptionConfigurator;
 
 /**
  *
  * @author Milan
  */
-public class PasteValidationFailedDialog extends javax.swing.JDialog {
+public class PasteValidationFailedFrame extends javax.swing.JFrame {
 
+    private PasteOptionConfigurator configurator;
+    
     /**
      * Creates new form PasteOptionValidationFailedDialog
      */
-    public PasteValidationFailedDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public PasteValidationFailedFrame(PasteOptionConfigurator configurator) {
+        this.configurator = configurator;
         initComponents();
+        showFrame();
     }
 
     /**
@@ -47,9 +46,19 @@ public class PasteValidationFailedDialog extends javax.swing.JDialog {
         btnExit.setText("Exit");
         btnExit.setFocusable(false);
         btnExit.setName("btnExit"); // NOI18N
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         btnTryAgain.setText("Try again");
         btnTryAgain.setName("btnTryAgain"); // NOI18N
+        btnTryAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTryAgainActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,44 +93,22 @@ public class PasteValidationFailedDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PasteValidationFailedDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PasteValidationFailedDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PasteValidationFailedDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PasteValidationFailedDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        dispose();
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
-        /* Create and display the dialog */
+    private void btnTryAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTryAgainActionPerformed
+        dispose();
+        configurator.configurePasteOption();
+    }//GEN-LAST:event_btnTryAgainActionPerformed
+
+    private void showFrame() {
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                PasteValidationFailedDialog dialog = new PasteValidationFailedDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                setLocationRelativeTo(null);
+                setVisible(true);
             }
         });
     }

@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class KeyEventRecorder extends KeyAdapter {
     
-    private List<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
+    private ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
     
     @Override
     public void keyReleased(KeyEvent e) {
@@ -56,7 +56,7 @@ public class KeyEventRecorder extends KeyAdapter {
         recordedKeyEvents.clear();
     }
 
-    public List<KeyEventInfo> getRecordedKeyEvents() {
+    public ArrayList<KeyEventInfo> getRecordedKeyEvents() {
         return recordedKeyEvents;
     }
     

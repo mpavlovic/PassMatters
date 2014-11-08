@@ -29,6 +29,7 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
      */
     public InputPasteOptionFrame() {
         initComponents();
+        addListeners();
         setLocationRelativeTo(null);
     }
 
@@ -97,16 +98,17 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
                 super.keyReleased(e);
                 keyCount--;
                 recorder.addKeyEventInfo(e, KeyEvent.KEY_RELEASED);
-                // try to close - watch for clear
+                if(0 == keyCount) {
+                    dispose();
+                    validator.startPasteValidation(recorder);
+                }
             }
 
             @Override
             public void keyPressed(KeyEvent e) {
                 super.keyPressed(e); 
                 keyCount++;
-                recorder.addKeyEventInfo(e, KeyEvent.KEY_RELEASED);
-                // try to close - watch for clear
-                
+                recorder.addKeyEventInfo(e, KeyEvent.KEY_PRESSED);
             }
             
         });
@@ -120,11 +122,16 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
         txtForCopy.setText(copyString);
     }
     
-    
+    public void clearAll() {
+        txtForCopy.setText(null);
+        txtForPaste.setText(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lblCopyText;
     private javax.swing.JTextField txtForCopy;
     private javax.swing.JTextField txtForPaste;
     // End of variables declaration//GEN-END:variables
+
+    
 }

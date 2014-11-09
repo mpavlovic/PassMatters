@@ -11,8 +11,7 @@ import com.dmacan.lightandroid.api.listener.OnErrorListener;
 
 import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.controllers.ControllerSignIn;
-import eu.asyncro.passmatters.data.DataSignIn;
-import eu.asyncro.passmatters.data.responses.ResponseSignIn;
+import eu.asyncro.passmatters.data.requests.RequestSignIn;
 import retrofit.RetrofitError;
 
 /**
@@ -52,8 +51,8 @@ public class FragmentSignIn extends LightFragment implements View.OnClickListene
         }
     }
 
-    private DataSignIn getData() {
-        DataSignIn data = new DataSignIn();
+    private RequestSignIn getData() {
+        RequestSignIn data = new RequestSignIn();
         data.setPassword(password.getText().toString());
         data.setUsername(username.getText().toString());
         return data;

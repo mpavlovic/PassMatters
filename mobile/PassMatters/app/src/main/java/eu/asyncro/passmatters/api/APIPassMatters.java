@@ -12,7 +12,7 @@ import retrofit.http.POST;
  */
 public interface APIPassMatters {
 
-    public static String API_LOCATION = "";
+    public static String API_LOCATION = "http://95.85.4.199/mac/index.php";
 
     @POST("/signIn")
     void signIn(@Body LightRequest request, Callback<ResponseSignIn> response);

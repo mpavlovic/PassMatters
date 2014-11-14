@@ -8,9 +8,16 @@ import com.dmacan.lightandroid.api.listener.OnDataReadListener;
 import com.dmacan.lightandroid.api.listener.OnErrorListener;
 import com.dmacan.lightandroid.presenter.LightAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.controllers.ControllerAccounts;
+import eu.asyncro.passmatters.controllers.ManagerSession;
+import eu.asyncro.passmatters.data.DataAccount;
 import eu.asyncro.passmatters.data.requests.RequestAccounts;
+import eu.asyncro.passmatters.data.responses.ResponseAccounts;
+import eu.asyncro.passmatters.presenters.PresenterAccount;
 import retrofit.RetrofitError;
 
 /**
@@ -30,29 +37,37 @@ public class FragmentAccounts extends LightFragment implements OnDataReadListene
     @Override
     public void main() {
         init();
-        RequestAccounts requestAccounts= new RequestAccounts();
-        requestAccounts.setToken("tokenasdjkas");
+        RequestAccounts requestAccounts = new RequestAccounts();
+        requestAccounts.setToken(ManagerSession.getToken(getActivity().getBaseContext()));
         controllerAccounts.getAccounts(requestAccounts);
-
-
     }
 
     private void init() {
         controllerAccounts = new ControllerAccounts();
         controllerAccounts.setOnDataReadListener(this);
         controllerAccounts.setOnErrorListener(this);
-        listView=(ListView) getView().findViewById(R.id.lvAccounts);
+        listView = (ListView) getView().findViewById(R.id.lvAccounts);
     }
 
     @Override
     public void onDataRead(LightResponse response) {
-
-        adapter=new LightAdapter(getActivity().getBaseContext());
+        ResponseAccounts accounts = (ResponseAccounts) response;
+        List<DataAccount> accountList = new ArrayList<DataAccount>();
+        for (DataAccount data : accounts.getAccounts()) {
+            accountList.add(data);
+        }
+        adapter = new LightAdapter(getActivity().getBaseContext());
+        fillAdapter(accounts.getAccounts());
         listView.setAdapter(adapter);
     }
 
     @Override
     public void onError(RetrofitError error) {
 
+    }
+
+    private void fillAdapter(DataAccount[] accounts) {
+        for (DataAccount account : accounts)
+            adapter.addItem(new PresenterAccount(account));
     }
 }

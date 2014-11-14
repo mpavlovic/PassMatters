@@ -1,9 +1,8 @@
 package eu.asyncro.passmatters.controllers;
 
 import com.dmacan.lightandroid.data.LightController;
-import com.dmacan.lightandroid.util.LightAPIUtil;
 
-import eu.asyncro.passmatters.api.APIPassMatters;
+import eu.asyncro.passmatters.data.DataAccount;
 import eu.asyncro.passmatters.data.requests.RequestAccount;
 import eu.asyncro.passmatters.data.requests.RequestAccounts;
 import eu.asyncro.passmatters.data.responses.ResponseAccounts;
@@ -30,18 +29,25 @@ public class ControllerAccounts extends LightController {
         }
     };
 
-    public void getAccounts(RequestAccounts request){
-      //  LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).getAccounts(request, callbackAccounts);
+    public void getAccounts(RequestAccounts request) {
+        //  LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).getAccounts(request, callbackAccounts);
         demoAccounts();
     }
 
 
-    private void demoAccounts (){
+    private void demoAccounts() {
+        DataAccount[] account = new DataAccount[3];
+        account[0] = new DataAccount(1, "Facebook");
+        account[1] = new DataAccount(2, "Linkedin");
+        account[2] = new DataAccount(3, "Twitter");
 
+        ResponseAccounts response = new ResponseAccounts();
+        response.setAccounts(account);
+        getOnDataReadListener().onDataRead(response);
 
     }
 
-    public void sendAccount(RequestAccount request){
+    public void sendAccount(RequestAccount request) {
         //  LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).getAccounts(request, callbackAccounts);
 
     }

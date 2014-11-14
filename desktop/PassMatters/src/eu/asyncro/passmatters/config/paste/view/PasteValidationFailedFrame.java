@@ -95,7 +95,7 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         dispose();
-        System.exit(0);
+        //System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnTryAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTryAgainActionPerformed

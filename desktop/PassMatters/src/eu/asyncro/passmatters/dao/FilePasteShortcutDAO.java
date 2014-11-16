@@ -29,7 +29,8 @@ public class FilePasteShortcutDAO implements PasteShortcutDAO {
         {
             oos.writeObject(pasteShortcut);
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            // TODO messenger
+            
             result = false;
         }
         return result;

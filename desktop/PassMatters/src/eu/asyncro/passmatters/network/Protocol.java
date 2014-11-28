@@ -7,7 +7,7 @@
 package eu.asyncro.passmatters.network;
 
 /**
- * This class contains raw JSON formatted messages which can be 
+ * This class contains final JSON formatted messages which can be 
  * received from or send to server while communicating.
  * @author Milan
  */

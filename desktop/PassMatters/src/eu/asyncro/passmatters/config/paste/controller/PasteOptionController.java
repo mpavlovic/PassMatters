@@ -5,7 +5,10 @@ import eu.asyncro.passmatters.config.paste.view.InputPasteOptionFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteOptionValidationFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteValidationFailedFrame;
 import eu.asyncro.passmatters.dao.DAOFactory;
+import eu.asyncro.passmatters.main.MainAppListener;
+import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
 import java.awt.AWTException;
+import java.io.File;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
 
@@ -23,10 +26,16 @@ public class PasteOptionController implements PasteOptionValidator,
     private PasteOptionValidationFrame pasteOptionValidationFrame;
     private String copyText;
     private KeyEventRecorder recorder;
+    private MainAppListener mainAppListener;
     
     public PasteOptionController() {
         initialize();
     }
+
+    public PasteOptionController(MainAppListener mainAppListener) {
+        this();
+        this.mainAppListener = mainAppListener;
+    }  
     
     private void initialize() {
         inputPasteOptionFrame = new InputPasteOptionFrame();
@@ -126,12 +135,17 @@ public class PasteOptionController implements PasteOptionValidator,
         }
     }
 
+    public boolean isShortcutFileCreated() {
+        File file = new File(PASTE_SHORTCUT_FILE_NAME);
+        return file.exists();
+    }
+    
     private void finishConfig() {
         if(true == savingResult) {
-            // login from main App if needed
+            mainAppListener.pasteConfigFinished();
         }
         else {
-            // show error messege
+            // TODO show error messege
         }
     }
     

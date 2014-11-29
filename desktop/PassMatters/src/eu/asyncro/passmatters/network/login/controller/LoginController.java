@@ -6,6 +6,7 @@
 
 package eu.asyncro.passmatters.network.login.controller;
 
+import eu.asyncro.passmatters.main.MainAppListener;
 import eu.asyncro.passmatters.network.Client;
 import eu.asyncro.passmatters.network.ConnectionController;
 import eu.asyncro.passmatters.network.HTTPClient;
@@ -32,9 +33,16 @@ public class LoginController implements Loginer {
     private LoginFrame loginFrame;
     private Client client;
     private ConnectionController connectionController;
-       
+    private MainAppListener mainAppListener;
+    private boolean isUserLoggedIn = false;
+    
     public LoginController() {
         initailize();
+    }
+
+    public LoginController(MainAppListener mainAppListener) {
+        this();
+        this.mainAppListener = mainAppListener;
     }
     
     private void initailize() {
@@ -49,6 +57,10 @@ public class LoginController implements Loginer {
         loginFrame.showFrame();
     }
 
+    public boolean isUserLoggedIn() {
+        return isUserLoggedIn;
+    }
+    
     @Override
     public void submit(final User user) {       
         new SwingWorker<Boolean, Object>() {
@@ -63,7 +75,7 @@ public class LoginController implements Loginer {
                 
                 if(!authenticateOnServer(token)) return false;
                 
-                // pokrenuti slušanje
+                // TODO pokrenuti slušanje
                 
                 return result;
             }
@@ -75,8 +87,10 @@ public class LoginController implements Loginer {
                     boolean result = get();
                     if(result) {
                         System.out.println("logged in"); // TODO maknuti
-                        // obavijestiti app o main windowu i prikazati ga
+                        isUserLoggedIn = true;
+                        mainAppListener.loginFinished();
                         loginFrame.dispose();
+                        // obavijestiti app o main windowu i prikazati ga
                     }
                     else {
                         loginFrame.setLoginFailed();

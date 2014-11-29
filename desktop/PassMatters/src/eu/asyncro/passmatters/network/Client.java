@@ -20,8 +20,7 @@ import java.util.Iterator;
 public abstract class Client {
     
     public static final String REQUEST_GET = "GET";
-    public static final String REQUEST_POST = "POST";
-    
+    public static final String REQUEST_POST = "POST";    
     
     protected String urlString;
     protected String requestMethod;
@@ -30,6 +29,11 @@ public abstract class Client {
     protected URL url; 
     
     private final String ENCODING = "UTF-8";
+
+    public Client(String urlString, String requestMethod) {
+        this.urlString = urlString;
+        this.requestMethod = requestMethod;
+    }
     
     public Client(String urlString, String requestMethod, Hashtable<String, String> parameters) 
             throws MalformedURLException, UnsupportedEncodingException 
@@ -37,13 +41,19 @@ public abstract class Client {
         this.urlString = urlString;
         this.requestMethod = requestMethod;
         this.parametersTable = parameters;
-        setStringParameters();
-        setUrl();
+        finalizeURLParameters();
     }
     
     public abstract String sendRequest() throws Exception;
+
+    public void setParameters(Hashtable<String, String> parameters) 
+            throws UnsupportedEncodingException, MalformedURLException 
+    {
+        this.parametersTable = parameters;
+        finalizeURLParameters();
+    }
     
-    private void setStringParameters() throws 
+    private void setStringParameters() throws // refactor name ??
             UnsupportedEncodingException 
     {
         StringBuilder sb = new StringBuilder();
@@ -69,5 +79,12 @@ public abstract class Client {
             finalURLBuilder.append(parametersString);
         }
         this.url = new URL(finalURLBuilder.toString());
+    }
+    
+    private void finalizeURLParameters() 
+            throws UnsupportedEncodingException, MalformedURLException 
+    {
+        setStringParameters();
+        setUrl();
     }
 }

@@ -29,6 +29,10 @@ public class HTTPClient extends Client {
     {
         super(url, requestMethod, parameters);
     }
+
+    public HTTPClient(String urlString, String requestMethod) {
+        super(urlString, requestMethod);
+    }
     
     @Override
     public String sendRequest() throws IOException {
@@ -53,7 +57,7 @@ public class HTTPClient extends Client {
         
         while((responseLine = br.readLine()) != null) {
             responseBuilder.append(responseLine);
-            System.out.println(responseLine); // TODO maknuti
+            //System.out.print(responseLine); // TODO remove line
         }
         
         br.close();

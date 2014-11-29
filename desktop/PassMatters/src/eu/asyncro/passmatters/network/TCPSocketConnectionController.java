@@ -23,14 +23,14 @@ public class TCPSocketConnectionController extends ConnectionController {
     private BufferedReader inputFromServer;
 
     @Override
-    public void openConnection() throws IOException 
+    public boolean openConnection() throws IOException 
     {
         clientSocket = new Socket(IP_ADDRESS, PORT);
         openStreams();
 
         String messageFromServer;
         messageFromServer = inputFromServer.readLine();
-        System.out.println(messageFromServer);
+        return messageFromServer.equals(Protocol.CONNECTED);
     }
     
     private void openStreams() throws IOException 
@@ -41,17 +41,16 @@ public class TCPSocketConnectionController extends ConnectionController {
     }
     
     @Override
-    public void sendData(String data) throws IOException 
+    public String sendData(String data) throws IOException 
     {
         outputToServer.flush();
         outputToServer.write(data.getBytes());
 
         // TODO - waiting for message ??
         String messageFromServer;
-        while((messageFromServer = inputFromServer.readLine()) != null) {
-            System.out.println(messageFromServer);
-            // TODO handle message
-        }   
+        messageFromServer = inputFromServer.readLine();
+        
+        return messageFromServer;
     }
     
     /**

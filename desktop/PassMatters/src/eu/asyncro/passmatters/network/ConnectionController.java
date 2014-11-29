@@ -16,8 +16,8 @@ public abstract class ConnectionController {
     
     protected boolean listening = true;
     
-    public abstract void openConnection() throws Exception;
-    public abstract void sendData(String data) throws Exception;
+    public abstract boolean openConnection() throws Exception;
+    public abstract String sendData(String data) throws Exception;
     public abstract void closeConnection() throws Exception;
     
     

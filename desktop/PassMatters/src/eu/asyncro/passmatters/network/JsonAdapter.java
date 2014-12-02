@@ -22,6 +22,7 @@ public class JsonAdapter {
         jsonString = jsonString.replace(END,"");
         JSONObject object = new JSONObject(jsonString);
         if(object.getInt(CODE) == 1 && object.getString(MESSAGE).equals("Success")) {
+            System.out.println(object.getString("token"));
             return object.getString("token");
         }
         else return null;

@@ -26,7 +26,7 @@ import javax.swing.SwingWorker;
  *
  * @author Milan
  */
-public class LoginController implements Loginer {
+public class AuthenticationController implements Loginer {
     
     private final String URL = "http://178.62.212.164/api/login";
     
@@ -36,11 +36,11 @@ public class LoginController implements Loginer {
     private MainAppListener mainAppListener;
     private boolean isUserLoggedIn = false;
     
-    public LoginController() {
+    public AuthenticationController() {
         initailize();
     }
 
-    public LoginController(MainAppListener mainAppListener) {
+    public AuthenticationController(MainAppListener mainAppListener) {
         this();
         this.mainAppListener = mainAppListener;
     }
@@ -75,7 +75,12 @@ public class LoginController implements Loginer {
                 
                 if(!authenticateOnServer(token)) return false;
                 
-                // TODO pokrenuti slušanje
+                connectionController.startListening();
+                
+                
+                Thread.sleep(15000);
+                connectionController.closeConnection(); // TODO REMOVE!!!
+                
                 
                 return result;
             }
@@ -96,7 +101,8 @@ public class LoginController implements Loginer {
                         loginFrame.setLoginFailed();
                     }
                 } catch (InterruptedException | ExecutionException ex) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
+                    ex.printStackTrace();
                     // TODO messenger
                 }
             }

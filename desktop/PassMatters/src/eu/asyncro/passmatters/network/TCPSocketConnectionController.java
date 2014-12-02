@@ -25,6 +25,7 @@ public class TCPSocketConnectionController extends ConnectionController {
     @Override
     public boolean openConnection() throws IOException 
     {
+        
         clientSocket = new Socket(IP_ADDRESS, PORT);
         openStreams();
 
@@ -62,5 +63,33 @@ public class TCPSocketConnectionController extends ConnectionController {
     {
         clientSocket.close();
     }
-
+    
+    // new Class ?
+    @Override
+    public void startListening() {
+        new Thread(new Runnable() {
+            // TODO variable listening...
+            @Override
+            public void run() {
+                try(BufferedReader listener = new BufferedReader(
+                            new InputStreamReader(clientSocket.getInputStream()))) 
+                {
+                    String message;
+                    System.out.println("listening...");
+                    while((message = listener.readLine()) != null) {
+                        System.out.println(message);
+                        // handle password fill...
+                    }
+                    
+                } catch (IOException ex) {
+                    //Logger.getLogger(TCPSocketConnectionController.class.getName()).log(Level.SEVERE, null, ex);
+                    // TODO fix
+                    ex.printStackTrace();
+                    
+                }
+            }
+        }).start();
+    }
+    
+ 
 }

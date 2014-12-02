@@ -7,9 +7,7 @@
 package eu.asyncro.passmatters.main;
 
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
-import eu.asyncro.passmatters.network.login.controller.LoginController;
-import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
-import java.io.File;
+import eu.asyncro.passmatters.network.login.controller.AuthenticationController;
 
 /**
  *
@@ -18,14 +16,14 @@ import java.io.File;
 public class MainController implements MainAppListener {
     
     private PasteOptionController pasteOptionController;
-    private LoginController loginController;
+   AuthenticationController authController;
     
     public MainController() {
         initialize();
     }
     
     private void initialize() {
-        loginController = new LoginController(this);
+        authController = new AuthenticationController(this);
         pasteOptionController = new PasteOptionController(this);
     }
     
@@ -36,7 +34,7 @@ public class MainController implements MainAppListener {
                 pasteOptionController.configurePasteOption();
             }
             else {
-                loginController.startLogin();
+                authController.startLogin();
             }
             
         } catch(Exception ex) {
@@ -47,8 +45,8 @@ public class MainController implements MainAppListener {
     
     @Override
     public void pasteConfigFinished() {
-        if(!loginController.isUserLoggedIn()) {
-            loginController.startLogin();
+        if(!authController.isUserLoggedIn()) {
+            authController.startLogin();
         }
     }
     

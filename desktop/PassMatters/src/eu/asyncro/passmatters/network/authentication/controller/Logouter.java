@@ -6,12 +6,10 @@
 
 package eu.asyncro.passmatters.network.authentication.controller;
 
-import eu.asyncro.passmatters.network.authentication.model.User;
-
 /**
  *
  * @author Milan
  */
-public interface Loginer {
-    public void submit(User user);
+public interface Logouter {
+    public void logout() throws Exception;
 }

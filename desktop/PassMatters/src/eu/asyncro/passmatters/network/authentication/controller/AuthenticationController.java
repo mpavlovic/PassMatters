@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.network.login.controller;
+package eu.asyncro.passmatters.network.authentication.controller;
 
 import eu.asyncro.passmatters.main.MainAppListener;
 import eu.asyncro.passmatters.network.Client;
@@ -14,8 +14,8 @@ import eu.asyncro.passmatters.network.JsonAdapter;
 import eu.asyncro.passmatters.network.Protocol;
 import eu.asyncro.passmatters.network.TCPSocketConnectionController;
 import eu.asyncro.passmatters.network.WebServiceResultHandler;
-import eu.asyncro.passmatters.network.login.model.User;
-import eu.asyncro.passmatters.network.login.view.LoginFrame;
+import eu.asyncro.passmatters.network.authentication.model.User;
+import eu.asyncro.passmatters.network.authentication.view.LoginFrame;
 import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -26,15 +26,17 @@ import javax.swing.SwingWorker;
  *
  * @author Milan
  */
-public class AuthenticationController implements Loginer {
+public class AuthenticationController implements Loginer, Logouter {
     
-    private final String URL = "http://178.62.212.164/api/login";
+    private final String LOGIN_URL = "http://178.62.212.164/api/login";
+    private final String LOGOUT_URL = "http://178.62.212.164/api/logout";
     
     private LoginFrame loginFrame;
     private Client client;
     private ConnectionController connectionController;
     private MainAppListener mainAppListener;
     private boolean isUserLoggedIn = false;
+    private String token;
     
     public AuthenticationController() {
         initailize();
@@ -49,7 +51,7 @@ public class AuthenticationController implements Loginer {
         loginFrame = new LoginFrame();
         loginFrame.setLoginer(this);
         
-        client = new HTTPClient(URL, Client.REQUEST_POST);
+        client = new HTTPClient(LOGIN_URL, Client.REQUEST_POST);
         connectionController = new TCPSocketConnectionController();
     }
     
@@ -67,7 +69,7 @@ public class AuthenticationController implements Loginer {
             @Override
             protected Boolean doInBackground() throws Exception {
                 boolean result = true;
-                String token = getLoginToken(user.getUsername(), user.getPassword());
+                token = getLoginToken(user.getUsername(), user.getPassword());
                 
                 if(token == null) return false;
                 
@@ -76,11 +78,6 @@ public class AuthenticationController implements Loginer {
                 if(!authenticateOnServer(token)) return false;
                 
                 connectionController.startListening();
-                
-                
-                Thread.sleep(15000);
-                connectionController.closeConnection(); // TODO REMOVE!!!
-                
                 
                 return result;
             }
@@ -138,6 +135,58 @@ public class AuthenticationController implements Loginer {
         String authString = JsonAdapter.getAuthJsonString(token);
         String authResult = connectionController.sendData(authString);
         return authResult.equals(Protocol.AUTHENTICATED);
+    }
+    
+    private boolean invalidateToken() 
+            throws Exception 
+    {
+        Hashtable<String, String> params = new Hashtable<>();
+        params.put("token", token);
+        client.setUrl(LOGOUT_URL);
+        client.setParameters(params);
+        String response = client.sendRequest();
+        System.out.println(response); // TODO remove
+        return response.equals(Protocol.USER_LOGGED_OUT);
+    }
+
+    @Override
+    public void logout() throws Exception {
+        
+        new SwingWorker<Boolean, Object>() {
+
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                System.out.println("tcp logout started"); // TODO remove
+                if(!connectionController.closeConnection()) return false;
+                System.out.println("tcp logout finished"); // TODO remove
+                
+                if(!invalidateToken()) return false;
+                
+                return true;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    super.done();
+                    if(get()) {
+                        System.out.println("FINISH"); // TODO remove
+                        isUserLoggedIn = false;
+                        // TODO inform main controller about finished logout
+                    }
+                    else {
+                        System.out.println("logout problem"); // TODO change
+                    }
+                } catch (InterruptedException | ExecutionException ex) {
+                    Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
+                    // TODO message ?
+                }
+            }
+            
+        }.execute();
+        
+        
+        
     }
     
     

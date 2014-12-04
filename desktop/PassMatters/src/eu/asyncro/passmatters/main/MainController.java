@@ -7,7 +7,7 @@
 package eu.asyncro.passmatters.main;
 
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
-import eu.asyncro.passmatters.network.login.controller.AuthenticationController;
+import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
 
 /**
  *
@@ -53,7 +53,15 @@ public class MainController implements MainAppListener {
 
     @Override
     public void loginFinished() {
-        System.out.println("login finished");
+        try {
+            System.out.println("login finished"); // todo remove
+            
+            //authController.logout(); // TODO remove!!
+            
+        } catch (Exception ex) {
+            //Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        }
     }
     
 }

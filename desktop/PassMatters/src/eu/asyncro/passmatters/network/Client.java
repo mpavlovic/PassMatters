@@ -52,8 +52,22 @@ public abstract class Client {
         this.parametersTable = parameters;
         finalizeURLParameters();
     }
+
+    public void setUrl(String urlString) 
+            throws UnsupportedEncodingException, MalformedURLException 
+    {
+        this.urlString = urlString;
+        finalizeURLParameters();
+    }
     
-    private void setStringParameters() throws // refactor name ??
+    private void finalizeURLParameters() 
+            throws UnsupportedEncodingException, MalformedURLException 
+    {
+        formatStringParameters();
+        formatUrl();
+    }
+    
+    private void formatStringParameters() throws 
             UnsupportedEncodingException 
     {
         StringBuilder sb = new StringBuilder();
@@ -71,7 +85,7 @@ public abstract class Client {
         this.parametersString = sb.toString();
     }
     
-    private void setUrl() throws MalformedURLException {
+    private void formatUrl() throws MalformedURLException {
         StringBuilder finalURLBuilder = new StringBuilder();
         finalURLBuilder.append(urlString);
         if(requestMethod.equals(REQUEST_GET)) {
@@ -80,11 +94,5 @@ public abstract class Client {
         }
         this.url = new URL(finalURLBuilder.toString());
     }
-    
-    private void finalizeURLParameters() 
-            throws UnsupportedEncodingException, MalformedURLException 
-    {
-        setStringParameters();
-        setUrl();
-    }
+
 }

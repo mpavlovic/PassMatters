@@ -19,7 +19,7 @@ public abstract class ConnectionController {
     public abstract boolean openConnection() throws Exception;
     public abstract String sendData(String data) throws Exception;
     public abstract void startListening();
-    public abstract void closeConnection() throws Exception;
+    public abstract boolean closeConnection() throws Exception;
     
     
 }

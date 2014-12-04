@@ -48,8 +48,10 @@ public class TCPSocketConnectionController extends ConnectionController {
         outputToServer.write(data.getBytes());
 
         // TODO - waiting for message ??
-        String messageFromServer;
-        messageFromServer = inputFromServer.readLine();
+        String messageFromServer = null;
+        if(!data.equals(Protocol.LOGOUT)) {
+            messageFromServer = inputFromServer.readLine();
+        }
         
         return messageFromServer;
     }
@@ -59,9 +61,13 @@ public class TCPSocketConnectionController extends ConnectionController {
      * @throws IOException 
      */
     @Override
-    public void closeConnection() throws IOException 
+    public boolean closeConnection() throws IOException 
     {
+        sendData(Protocol.LOGOUT);
+        System.out.println("before close"); // TODO remove
         clientSocket.close();
+        System.out.println("after close"); // TODO remove
+        return true;
     }
     
     // new Class ?
@@ -77,15 +83,13 @@ public class TCPSocketConnectionController extends ConnectionController {
                     String message;
                     System.out.println("listening...");
                     while((message = listener.readLine()) != null) {
-                        System.out.println(message);
-                        // handle password fill...
+                        System.out.println("From listener: " + message);
+                        // TODO handle password fill...
                     }
                     
                 } catch (IOException ex) {
-                    //Logger.getLogger(TCPSocketConnectionController.class.getName()).log(Level.SEVERE, null, ex);
-                    // TODO fix
-                    ex.printStackTrace();
-                    
+                    // TODO fix ??
+                    System.out.println("EXCEPTION IN LISTENER: " + ex.getMessage());
                 }
             }
         }).start();

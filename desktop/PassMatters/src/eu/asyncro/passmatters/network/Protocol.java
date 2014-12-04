@@ -18,7 +18,8 @@ public class Protocol {
     public static final String CONNECTED = "{status: 1, message: \"Connected\"}";
     public static final String USER_NOT_FOUND = "{status: 0, message: \"User not found\"}";
     public static final String AUTHENTICATED = "{status: 1, message: \"Authenticated\"}";
+    public static final String USER_LOGGED_OUT = "{\"code\":1,\"message\":\"User logged out\"}";
     
     // request messages
-    public static final String LOGOUT = "{step: 3}";
+    public static final String LOGOUT = "{\"step\": 3}";
 }

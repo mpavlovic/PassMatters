@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.network.login.view;
+package eu.asyncro.passmatters.network.authentication.view;
 
-import eu.asyncro.passmatters.network.login.controller.Loginer;
-import eu.asyncro.passmatters.network.login.model.User;
+import eu.asyncro.passmatters.network.authentication.controller.Loginer;
+import eu.asyncro.passmatters.network.authentication.model.User;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

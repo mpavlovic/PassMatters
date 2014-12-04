@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.network.login.model;
+package eu.asyncro.passmatters.network.authentication.model;
 
 /**
  *

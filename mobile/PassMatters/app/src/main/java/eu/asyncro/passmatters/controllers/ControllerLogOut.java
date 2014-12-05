@@ -4,9 +4,8 @@ import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
 import eu.asyncro.passmatters.api.APIPassMatters;
-import eu.asyncro.passmatters.data.requests.RequestSignIn;
 import eu.asyncro.passmatters.data.responses.ResponseLogOut;
-import eu.asyncro.passmatters.data.responses.ResponseSignIn;
+import eu.asyncro.passmatters.interfaces.OnLogOutListener;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -15,11 +14,14 @@ import retrofit.client.Response;
  * Created by ahuskano on 12/5/2014.
  */
 public class ControllerLogOut extends LightController {
+
+    private OnLogOutListener onLogOutListener;
+
     private Callback<ResponseLogOut> callbackLogout = new Callback<ResponseLogOut>() {
         @Override
         public void success(ResponseLogOut responseLogOut, Response response) {
-            if (getOnDataReadListener() != null)
-                getOnDataReadListener().onDataRead(responseLogOut);
+            if (getOnLogOutListener() != null)
+                getOnLogOutListener().onLogOut(responseLogOut);
 
         }
 
@@ -35,4 +37,11 @@ public class ControllerLogOut extends LightController {
 
     }
 
+    public OnLogOutListener getOnLogOutListener() {
+        return onLogOutListener;
+    }
+
+    public void setOnLogOutListener(OnLogOutListener onLogOutListener) {
+        this.onLogOutListener = onLogOutListener;
+    }
 }

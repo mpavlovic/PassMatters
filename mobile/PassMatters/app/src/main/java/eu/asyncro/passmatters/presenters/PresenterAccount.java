@@ -28,4 +28,12 @@ public class PresenterAccount implements LightAdapterItem {
     public int provideItemLayoutRes() {
         return R.layout.account_list_item;
     }
+
+    public DataAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(DataAccount account) {
+        this.account = account;
+    }
 }

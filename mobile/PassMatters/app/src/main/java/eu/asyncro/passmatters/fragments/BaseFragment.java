@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import com.dmacan.lightandroid.LightFragment;
 
 import eu.asyncro.passmatters.R;
+import eu.asyncro.passmatters.controllers.ControllerLogOut;
+import eu.asyncro.passmatters.controllers.ManagerSession;
 
 /**
  * Created by ahuskano on 12/5/2014.
@@ -14,6 +16,9 @@ import eu.asyncro.passmatters.R;
 public abstract class BaseFragment extends LightFragment {
 
     public abstract int getMenuResource();
+
+    protected ControllerLogOut controllerLogOut;
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -25,9 +30,18 @@ public abstract class BaseFragment extends LightFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logOut:
-                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentSignIn()).commit();
+                if (controllerLogOut != null)
+                    controllerLogOut.logOut(ManagerSession.getToken(getActivity().getBaseContext()));
                 break;
         }
         return true;
+    }
+
+    public ControllerLogOut getControllerLogOut() {
+        return controllerLogOut;
+    }
+
+    public void setControllerLogOut(ControllerLogOut controllerLogOut) {
+        this.controllerLogOut = controllerLogOut;
     }
 }

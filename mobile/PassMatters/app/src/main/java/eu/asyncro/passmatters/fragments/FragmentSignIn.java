@@ -63,9 +63,12 @@ public class FragmentSignIn extends LightFragment implements View.OnClickListene
     @Override
     public void onDataRead(LightResponse response) {
         ResponseSignIn res = (ResponseSignIn) response;
-        ManagerSession.saveToken(getActivity().getBaseContext(), res.getToken());
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentAccounts()).commit();
-
+        if (res.getCode() == getResources().getInteger(R.integer.success_code)) {
+            ManagerSession.saveToken(getActivity().getBaseContext(), res.getToken());
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentAccounts()).commit();
+        } else {
+            toastIt(res.getMessage());
+        }
     }
 
     @Override

@@ -15,7 +15,6 @@ import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.controllers.ControllerAccounts;
 import eu.asyncro.passmatters.controllers.ManagerSession;
 import eu.asyncro.passmatters.data.DataAccount;
-import eu.asyncro.passmatters.data.requests.RequestAccounts;
 import eu.asyncro.passmatters.data.responses.ResponseAccounts;
 import eu.asyncro.passmatters.presenters.PresenterAccount;
 import retrofit.RetrofitError;
@@ -37,9 +36,7 @@ public class FragmentAccounts extends LightFragment implements OnDataReadListene
     @Override
     public void main() {
         init();
-        RequestAccounts requestAccounts = new RequestAccounts();
-        requestAccounts.setToken(ManagerSession.getToken(getActivity().getBaseContext()));
-        controllerAccounts.getAccounts(requestAccounts);
+        controllerAccounts.getAccounts(ManagerSession.getToken(getActivity().getBaseContext()));
     }
 
     private void init() {
@@ -52,13 +49,17 @@ public class FragmentAccounts extends LightFragment implements OnDataReadListene
     @Override
     public void onDataRead(LightResponse response) {
         ResponseAccounts accounts = (ResponseAccounts) response;
-        List<DataAccount> accountList = new ArrayList<DataAccount>();
-        for (DataAccount data : accounts.getAccounts()) {
-            accountList.add(data);
+        if (accounts.getCode() == getResources().getInteger(R.integer.success_code)) {
+            List<DataAccount> accountList = new ArrayList<DataAccount>();
+            for (DataAccount data : accounts.getAccounts()) {
+                accountList.add(data);
+            }
+            adapter = new LightAdapter(getActivity().getBaseContext());
+            fillAdapter(accounts.getAccounts());
+            listView.setAdapter(adapter);
+        } else {
+            toastIt(accounts.getMessage());
         }
-        adapter = new LightAdapter(getActivity().getBaseContext());
-        fillAdapter(accounts.getAccounts());
-        listView.setAdapter(adapter);
     }
 
     @Override

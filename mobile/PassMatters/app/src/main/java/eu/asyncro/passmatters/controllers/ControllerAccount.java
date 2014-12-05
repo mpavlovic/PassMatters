@@ -20,8 +20,8 @@ public class ControllerAccount extends LightController {
     private Callback<ResponseAccount> callbackAccount = new Callback<ResponseAccount>() {
         @Override
         public void success(ResponseAccount responseAccount, Response response) {
-            if (getOnDataReadListener() != null)
-                getOnDataReadListener().onDataRead(responseAccount);
+            if (getOnAccountSendedListener() != null)
+                getOnAccountSendedListener().onAccountSended(responseAccount);
         }
 
         @Override

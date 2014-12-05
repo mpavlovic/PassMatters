@@ -18,6 +18,7 @@ import eu.asyncro.passmatters.controllers.ControllerAccounts;
 import eu.asyncro.passmatters.controllers.ControllerLogOut;
 import eu.asyncro.passmatters.controllers.ManagerSession;
 import eu.asyncro.passmatters.data.DataAccount;
+import eu.asyncro.passmatters.data.responses.ResponseAccount;
 import eu.asyncro.passmatters.data.responses.ResponseAccounts;
 import eu.asyncro.passmatters.data.responses.ResponseLogOut;
 import eu.asyncro.passmatters.interfaces.OnAccountSendedListener;
@@ -107,7 +108,9 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
     }
 
     @Override
-    public void onAccountSended() {
-
+    public void onAccountSended(LightResponse response) {
+        ResponseAccount responseAccount = (ResponseAccount) response;
+      //  if (responseAccount.getStatus() == getResources().getInteger(R.integer.error_code))
+       //     controllerLogOut.logOut(ManagerSession.getToken(getActivity().getBaseContext()));
     }
 }

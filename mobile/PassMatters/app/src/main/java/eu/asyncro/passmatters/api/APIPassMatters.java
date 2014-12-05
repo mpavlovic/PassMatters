@@ -28,7 +28,6 @@ public interface APIPassMatters {
     @GET("/api/logout")
     void logOut(@Query("token") String token, Callback<ResponseLogOut> response);
 
-
     @POST("/signIn")
     void sendAccount(@Body RequestAccount request, Callback<ResponseAccounts> response);
 

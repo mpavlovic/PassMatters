@@ -1,5 +1,8 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.dmacan.lightandroid.LightFragment;
@@ -22,7 +25,7 @@ import retrofit.RetrofitError;
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class FragmentAccounts extends LightFragment implements OnDataReadListener, OnErrorListener {
+public class FragmentAccounts extends BaseFragment implements OnDataReadListener, OnErrorListener {
 
     private ControllerAccounts controllerAccounts;
     private LightAdapter adapter;
@@ -70,5 +73,11 @@ public class FragmentAccounts extends LightFragment implements OnDataReadListene
     private void fillAdapter(DataAccount[] accounts) {
         for (DataAccount account : accounts)
             adapter.addItem(new PresenterAccount(account));
+    }
+
+
+    @Override
+    public int getMenuResource() {
+        return R.menu.accounts_menu;
     }
 }

@@ -4,7 +4,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.dmacan.lightandroid.LightFragment;
 import com.dmacan.lightandroid.api.LightResponse;
 import com.dmacan.lightandroid.api.listener.OnDataReadListener;
 import com.dmacan.lightandroid.api.listener.OnErrorListener;
@@ -19,7 +18,7 @@ import retrofit.RetrofitError;
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class FragmentSignIn extends LightFragment implements View.OnClickListener, OnDataReadListener, OnErrorListener {
+public class FragmentSignIn extends BaseFragment implements View.OnClickListener, OnDataReadListener, OnErrorListener {
 
     private ControllerSignIn controller;
     private EditText username;
@@ -74,5 +73,10 @@ public class FragmentSignIn extends LightFragment implements View.OnClickListene
     @Override
     public void onError(RetrofitError error) {
 
+    }
+
+    @Override
+    public int getMenuResource() {
+        return 0;
     }
 }

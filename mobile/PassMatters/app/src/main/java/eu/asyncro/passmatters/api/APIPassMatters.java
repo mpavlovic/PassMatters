@@ -4,12 +4,12 @@ import com.dmacan.lightandroid.api.LightRequest;
 
 import eu.asyncro.passmatters.data.requests.RequestAccount;
 import eu.asyncro.passmatters.data.responses.ResponseAccounts;
+import eu.asyncro.passmatters.data.responses.ResponseLogOut;
 import eu.asyncro.passmatters.data.responses.ResponseSignIn;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
-import retrofit.http.Path;
 import retrofit.http.Query;
 
 /**
@@ -24,6 +24,10 @@ public interface APIPassMatters {
 
     @GET("/api/listAccounts")
     void getAccounts(@Query("token") String token, Callback<ResponseAccounts> response);
+
+    @GET("/api/logout")
+    void logOut(@Query("token") String token, Callback<ResponseLogOut> response);
+
 
     @POST("/signIn")
     void sendAccount(@Body RequestAccount request, Callback<ResponseAccounts> response);

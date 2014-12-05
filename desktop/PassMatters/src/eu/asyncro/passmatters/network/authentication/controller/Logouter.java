@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.network;
+package eu.asyncro.passmatters.network.authentication.controller;
 
 /**
  *
  * @author Milan
  */
-public interface Communicator {
-    
-    boolean connect();
-    boolean disconnect();
-    
+public interface Logouter {
+    public void logout() throws Exception;
 }

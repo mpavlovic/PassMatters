@@ -10,23 +10,33 @@ import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
 
 /**
- *
+ * Main controller class which establishes main application workflow.
  * @author Milan
  */
 public class MainController implements MainAppListener {
     
     private PasteOptionController pasteOptionController;
    AuthenticationController authController;
-    
+    /**
+     * Constructor.
+     */
     public MainController() {
         initialize();
     }
     
+    /**
+     * Initializes all other components (controllers etc.).
+     */
     private void initialize() {
         authController = new AuthenticationController(this);
         pasteOptionController = new PasteOptionController(this);
     }
     
+    /**
+     * First method which is called in Application's main method.
+     * If Application is started for first time, paste option 
+     * configuration wizard begins. In other case app login starts.
+     */
     public void startApp() {
         try {
             
@@ -43,6 +53,11 @@ public class MainController implements MainAppListener {
         }
     }
     
+    /**
+     * Method is called every time when paste option
+     * configuration is finished. If user is not logged in,
+     * login will be performed.
+     */
     @Override
     public void pasteConfigFinished() {
         if(!authController.isUserLoggedIn()) {
@@ -50,7 +65,10 @@ public class MainController implements MainAppListener {
         }
     }
     
-
+    /**
+     * Method is called every time when login procedure
+     * is finished. Main app window will be shown. 
+     */
     @Override
     public void loginFinished() {
         try {

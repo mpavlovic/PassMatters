@@ -18,18 +18,28 @@ public class KeyEventRecorder extends KeyAdapter {
     
     private ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
     
+    /**
+     * Executes every time when keyboard key is released.
+     * @param e KeyEvent for key release.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         super.keyReleased(e); //To change body of generated methods, choose Tools | Templates.
         addKeyEventInfo(e, KeyEvent.KEY_RELEASED);
     }
-
+    
+    
     @Override
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e); //To change body of generated methods, choose Tools | Templates.
         addKeyEventInfo(e, KeyEvent.KEY_PRESSED);
     }
     
+    /**
+     * Adds fired KeyEvent to internal list of recorded key events.
+     * @param e fired KeyEvent
+     * @param type KeyEvent.KEY_PRESSED or KeyEvent.KEY_RELEASED
+     */
     public void addKeyEventInfo(KeyEvent e, int type) {
         if(type == KeyEvent.KEY_PRESSED) {
             recordedKeyEvents.add(new KeyEventInfo(KeyEvent.KEY_PRESSED, e.getKeyCode()));
@@ -39,6 +49,11 @@ public class KeyEventRecorder extends KeyAdapter {
         }
     }
     
+    /**
+     * Simulates recorded key strokes. 
+     * The effect is as same as it wolud be if user types keyboard keys.
+     * @throws AWTException 
+     */
     public void typeRecordedKeys() throws AWTException {
         Robot robot = new Robot();
         
@@ -52,10 +67,17 @@ public class KeyEventRecorder extends KeyAdapter {
         }
     }
     
+    /**
+     * Clears all recorded key events.
+     */
     public void clear() {
         recordedKeyEvents.clear();
     }
-
+    
+    /**
+     * Resturns recorded key events.
+     * @return recorded key events ArrayList.
+     */
     public ArrayList<KeyEventInfo> getRecordedKeyEvents() {
         return recordedKeyEvents;
     }

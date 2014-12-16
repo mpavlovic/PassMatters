@@ -6,6 +6,7 @@
 
 package eu.asyncro.passmatters.util;
 
+import eu.asyncro.passmatters.config.paste.model.PasteShortcut;
 import eu.asyncro.passmatters.main.MainAppListener;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -16,7 +17,7 @@ import java.awt.datatransfer.Transferable;
  *
  * @author Milan
  */
-public class PasswordTyper implements ClipboardOwner {
+public class FormFiller implements ClipboardOwner {
 
     private String password;
     private MainAppListener mainAppListener;
@@ -24,11 +25,18 @@ public class PasswordTyper implements ClipboardOwner {
     
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
+        // currently do nothing
+    }
+    
+    public void fillFocusedForm() throws Exception 
+    {
+        Transferable firstClipboardContent = getClipboardContents();
+        //PasteShortcut pasteShortcut = 
+        
         
     }
     
-    
-    private Transferable getClipboardContents() throws IllegalStateException
+    private Transferable getClipboardContents() throws IllegalStateException // if clipboard is not available
     {
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); // TODO should it be outside ?
         Transferable contents = clipboard.getContents(null);

@@ -6,7 +6,6 @@ import java.awt.Robot;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Used for keyboard events recording.
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public class KeyEventRecorder extends KeyAdapter {
     
-    private ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
+    protected ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
     
     /**
      * Executes every time when keyboard key is released.

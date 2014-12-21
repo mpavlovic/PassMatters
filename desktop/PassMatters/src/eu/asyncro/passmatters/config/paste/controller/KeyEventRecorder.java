@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * 
  * @author Milan
  */
-public class KeyEventRecorder extends KeyAdapter {
+public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
     
     protected ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
     
@@ -79,6 +79,35 @@ public class KeyEventRecorder extends KeyAdapter {
      */
     public ArrayList<KeyEventInfo> getRecordedKeyEvents() {
         return recordedKeyEvents;
+    }
+
+    /**
+     * Simulates given keystrokes. 
+     * This method accepts list of keys to be typed. 
+     * It doesn't use keys which are currently saved inside this class.
+     * @param keys Keys to be typed.
+     * @param typeEnterKey If true, the enter key will be typed last.
+     * @throws AWTException 
+     */
+    @Override
+    public void typeKeys(ArrayList<KeyEventInfo> keys, boolean typeEnterKey) 
+            throws AWTException 
+    {
+        Robot robot = new Robot();
+        
+        for(KeyEventInfo info: keys) {
+            if(info.getEventType() == KeyEvent.KEY_PRESSED) {
+                robot.keyPress(info.getKeyCode());
+            }
+            else if(info.getEventType() == KeyEvent.KEY_RELEASED) {
+                robot.keyRelease(info.getKeyCode());
+            }
+        }
+        
+        if(typeEnterKey) {
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        }
     }
     
 }

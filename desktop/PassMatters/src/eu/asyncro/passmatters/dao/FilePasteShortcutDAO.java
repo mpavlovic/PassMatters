@@ -27,11 +27,9 @@ public class FilePasteShortcutDAO implements PasteShortcutDAO {
                 new ObjectInputStream(new FileInputStream(pasteShortcutFile)))
         {
             pasteShortcut = (PasteShortcut) ois.readObject();
-        }
-        catch (IOException ex) {
-            
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(FilePasteShortcutDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         
         return pasteShortcut;

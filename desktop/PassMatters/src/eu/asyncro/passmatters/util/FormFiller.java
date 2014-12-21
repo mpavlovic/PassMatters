@@ -6,11 +6,15 @@
 
 package eu.asyncro.passmatters.util;
 
+import eu.asyncro.passmatters.config.paste.controller.KeyEventRecorder;
+import eu.asyncro.passmatters.config.paste.controller.KeyTyper;
 import eu.asyncro.passmatters.config.paste.model.PasteShortcut;
+import eu.asyncro.passmatters.dao.DAOFactory;
 import eu.asyncro.passmatters.main.MainAppListener;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 
 /**
@@ -19,21 +23,32 @@ import java.awt.datatransfer.Transferable;
  */
 public class FormFiller implements ClipboardOwner {
 
-    private String password;
     private MainAppListener mainAppListener;
-    
+
+    public FormFiller(MainAppListener mainAppListener) {
+        this.mainAppListener = mainAppListener;
+    }
     
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
         // currently do nothing
     }
     
-    public void fillFocusedForm() throws Exception 
+    public void fillFocusedForm(String content) throws Exception 
     {
         Transferable firstClipboardContent = getClipboardContents();
-        //PasteShortcut pasteShortcut = 
         
+        PasteShortcut pasteShortcut = 
+                DAOFactory.getFactory(DAOFactory.FILE)
+                .getPasteShortcutDAO()
+                .getPasteShortcut();
         
+        setClipboardContents(content);
+        
+        KeyTyper typer = new KeyEventRecorder();
+        typer.typeKeys(pasteShortcut.getKeyEvents(), true);
+        
+        returnContentsToClipboard(firstClipboardContent);
     }
     
     private Transferable getClipboardContents() throws IllegalStateException // if clipboard is not available
@@ -43,10 +58,20 @@ public class FormFiller implements ClipboardOwner {
         return contents;
     }
     
-    private void setClipboardContents(String content) {
-        
+    private void setClipboardContents(String content) 
+            throws IllegalStateException
+    {
+        StringSelection stringSelection = new StringSelection(content);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, this);
     }
     
+    private void returnContentsToClipboard(Transferable contents) 
+            throws IllegalStateException
+    {
+         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+         clipboard.setContents(contents, this);
+    }
     
     
 }

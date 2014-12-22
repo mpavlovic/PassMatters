@@ -18,9 +18,9 @@ public class Application {
 //            MainController maincontroller = new MainController();
 //            maincontroller.startApp();
             
-            Thread.sleep(5000);
+            Thread.sleep(3000);
             FormFiller ff = new FormFiller(null);
-            ff.fillFocusedForm("TEST");
+            ff.fillFocusedForm("wc8H3W4U!Q");
             System.out.println("gotovo");
             
             /*

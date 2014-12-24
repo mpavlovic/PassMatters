@@ -20,7 +20,7 @@ public class Application {
             
             Thread.sleep(3000);
             FormFiller ff = new FormFiller(null);
-            ff.fillFocusedForm("wc8H3W4U!Q");
+            ff.fillFocusedForm("password");
             System.out.println("gotovo");
             
             /*

@@ -14,8 +14,11 @@ import eu.asyncro.passmatters.main.MainAppListener;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 /**
  *
@@ -25,6 +28,7 @@ public class FormFiller implements ClipboardOwner {
 
     private MainAppListener mainAppListener;
     private Clipboard clipboard;
+    private static final long SLEEP_INTERVAL = 30;
     
     public FormFiller(MainAppListener mainAppListener) 
             throws IllegalStateException 
@@ -40,43 +44,70 @@ public class FormFiller implements ClipboardOwner {
     
     public void fillFocusedForm(String content) throws Exception 
     {
-        Transferable clipboardContentBeforePassword = getClipboardContents(); //TODO null
-        System.out.println(clipboardContentBeforePassword.toString());
+        Transferable clipboardContentBeforeNewOne = getClipboardContents(); //TODO null
+        System.out.println(clipboardContentBeforeNewOne.toString()); // TODO remove
         
         PasteShortcut pasteShortcut = 
                 DAOFactory.getFactory(DAOFactory.FILE)
                 .getPasteShortcutDAO()
-                .getPasteShortcut();
+                .getPasteShortcut(); // TODO null
         
+        clearClipboard();
         setClipboardContents(content);
         
         KeyTyper typer = new KeyEventRecorder();
         typer.typeKeys(pasteShortcut.getKeyEvents(), true);
         
-        returnContentsToClipboard(clipboardContentBeforePassword);
+        returnContentsToClipboard(clipboardContentBeforeNewOne);
     }
     
-    private Transferable getClipboardContents() throws IllegalStateException // if clipboard is not available
+    private Transferable getClipboardContents() throws IllegalStateException
     {
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); // TODO should it be outside ?
+        //Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); // TODO should it be outside ?
         Transferable contents = clipboard.getContents(null);
         return contents;
     }
     
     private void setClipboardContents(String content) 
-            throws IllegalStateException
+            throws IllegalStateException, InterruptedException
     {
+        Thread.sleep(SLEEP_INTERVAL);
         StringSelection stringSelection = new StringSelection(content);
         //Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, this);
     }
     
     private void returnContentsToClipboard(Transferable contents) 
-            throws IllegalStateException
+            throws IllegalStateException, InterruptedException
     {
-         //Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-         clipboard.setContents(contents, this);
+        clearClipboard();
+        Thread.sleep(SLEEP_INTERVAL);
+        //Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(contents, this);
     }
     
+    private void clearClipboard() throws InterruptedException 
+    {
+        Thread.sleep(SLEEP_INTERVAL);
+        
+        clipboard.setContents(new Transferable() {
+
+            @Override
+            public DataFlavor[] getTransferDataFlavors() {
+                return new DataFlavor[0];
+            }
+
+            @Override
+            public boolean isDataFlavorSupported(DataFlavor flavor) {
+                return false;
+            }
+
+            @Override
+            public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException, IOException {
+                throw new UnsupportedFlavorException(flavor);
+            }
+            
+        }, this);
+    } 
     
 }

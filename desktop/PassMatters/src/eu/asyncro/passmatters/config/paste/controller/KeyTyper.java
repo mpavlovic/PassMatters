@@ -7,7 +7,6 @@
 package eu.asyncro.passmatters.config.paste.controller;
 
 import eu.asyncro.passmatters.config.paste.model.KeyEventInfo;
-import java.awt.AWTException;
 import java.util.ArrayList;
 
 /**
@@ -15,5 +14,5 @@ import java.util.ArrayList;
  * @author Milan
  */
 public interface KeyTyper {
-    void typeKeys(ArrayList<KeyEventInfo> keys, boolean typeEnterKey) throws AWTException;
+    void typeKeys(ArrayList<KeyEventInfo> keys, boolean typeEnterKey) throws Exception;
 }

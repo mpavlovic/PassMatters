@@ -10,9 +10,17 @@ import eu.asyncro.passmatters.config.paste.model.KeyEventInfo;
 import java.util.ArrayList;
 
 /**
- *
+ * Contains method(s) for simulating keyboard key typing.
  * @author Milan
  */
 public interface KeyTyper {
-    void typeKeys(ArrayList<KeyEventInfo> keys, boolean typeEnterKey) throws Exception;
+
+    /**
+     * Simulates given keystrokes. 
+     * This method accepts list of keys to be typed. 
+     * @param keys Keys to be typed.
+     * @param typeEnterKey If true, the enter key will be typed last.
+     * @throws Exception
+     */
+    public void typeKeys(ArrayList<KeyEventInfo> keys, boolean typeEnterKey) throws Exception;
 }

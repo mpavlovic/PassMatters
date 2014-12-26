@@ -81,6 +81,10 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     
+    /**
+     * Shows this frame.
+     * @param copyString String which is shown in first (upper) text field. 
+     */
     public void showFrame(final String copyString) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -90,6 +94,9 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * Adds appropriate listeners to frame components.
+     */
     private void addListeners() {
         txtForPaste.addKeyListener(new KeyAdapter() {
 
@@ -114,14 +121,26 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Sets validator for pasted text validation.
+     * @param validator PasteOptionValidator 
+     */
     public void setValidator(PasteOptionValidator validator) {
         this.validator = validator;
     }
     
+    /**
+     * Sets the string that user needs to copy from
+     * first to second text field. 
+     * @param copyString String to be copied
+     */
     public void setCopyString(String copyString) {
         txtForCopy.setText(copyString);
     }
     
+    /**
+     * Clears all text fields in frame.
+     */
     public void clearAll() {
         txtForCopy.setText(null);
         txtForPaste.setText(null);

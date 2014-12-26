@@ -10,7 +10,9 @@ import eu.asyncro.passmatters.config.paste.controller.PasteOptionValidator;
 import java.awt.AWTException;
 
 /**
- *
+ * Frame with one text field used for string matching 
+ * between application generated text and user's copied one. 
+ * 
  * @author Milan
  */
 public class PasteOptionValidationFrame extends javax.swing.JFrame {
@@ -69,7 +71,10 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+   /**
+    * Shows this frame with focused text field and pasted text inside it.
+    * @throws AWTException 
+    */ 
     public void showFrame() throws AWTException {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -78,19 +83,30 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
                 clearAll();
                 setVisible(true);
                 txtPasted.requestFocusInWindow();
-                validator.pasteRecordedText();
+                validator.pasteTextWithRecordedKeys();
             }
         });
     }
 
+    /**
+     * Sets validator for pasted text validation.
+     * @param validator PasteOptionValidator 
+     */
     public void setValidator(PasteOptionValidator validator) {
         this.validator = validator;
     }
     
+    /**
+     * Returns text that user copied and pasted in InputPasteoptionFrame.
+     * @return String with pasted text.
+     */
     public String getPastedText() {
         return txtPasted.getText();
     }
     
+    /**
+     * Clears text from text field on frame. 
+     */
     private void clearAll() {
         txtPasted.setText(null);
     }

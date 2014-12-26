@@ -7,9 +7,13 @@
 package eu.asyncro.passmatters.config.paste.controller;
 
 /**
- *
+ * Contains method(s) for paste option configuration.
  * @author Milan
  */
 public interface PasteOptionConfigurator {
-    void configurePasteOption();
+
+    /**
+     * Starts paste option configuration.
+     */
+    public void configurePasteOption();
 }

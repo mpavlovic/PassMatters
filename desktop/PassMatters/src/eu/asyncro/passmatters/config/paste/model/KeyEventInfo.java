@@ -16,11 +16,19 @@ public class KeyEventInfo implements Serializable {
         this.eventType = eventType;
         this.keyCode = keyCode;
     }
-
+    
+    /**
+     * Returns KeyEvent type of this key event.
+     * @return integer representing KeyEvent type
+     */
     public int getEventType() {
         return eventType;
     }
 
+    /**
+     * Returns KeyEvent key code of this key event.
+     * @return integer representing KeyEvent key code.
+     */
     public int getKeyCode() {
         return keyCode;
     }

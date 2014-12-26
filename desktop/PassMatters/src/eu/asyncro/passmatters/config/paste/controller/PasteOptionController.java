@@ -29,15 +29,25 @@ public class PasteOptionController implements PasteOptionValidator,
     private KeyEventRecorder recorder;
     private MainAppListener mainAppListener;
     
+    /**
+     * Constructor.
+     */
     public PasteOptionController() {
         initialize();
     }
-
+    
+    /**
+     * Constructor. 
+     * @param mainAppListener MainAppListener for global application events.
+     */
     public PasteOptionController(MainAppListener mainAppListener) {
         this();
         this.mainAppListener = mainAppListener;
     }  
     
+    /**
+     * Initializes some class components.
+     */
     private void initialize() {
         inputPasteOptionFrame = new InputPasteOptionFrame();
         inputPasteOptionFrame.setValidator(this);
@@ -63,7 +73,7 @@ public class PasteOptionController implements PasteOptionValidator,
     }
     
     @Override
-    public void pasteRecordedText() {
+    public void pasteTextWithRecordedKeys() {
         new SwingWorker<Void, Void> () {
             
             @Override
@@ -81,19 +91,27 @@ public class PasteOptionController implements PasteOptionValidator,
         }.execute();
     }
     
+    /**
+     * Starts paste option configuration 
+     * by showing config frame.
+     */
     private void startConfig() {
         generateCopyText();
         inputPasteOptionFrame.clearAll();
         inputPasteOptionFrame.showFrame(copyText);
     }
     
+    /**
+     * Checks whether the user pasted text in
+     * paste option validation frame matches generated one.
+     * If true, starts paste shortcut saving.
+     */
     private void checkPastedText() {
         String pastedText = pasteOptionValidationFrame.getPastedText();
         pasteOptionValidationFrame.dispose();
         
         if(pastedText.equals(copyText)) {
             savePasteShortcut();
-            
         }
         else {
             recorder.clear();
@@ -101,12 +119,19 @@ public class PasteOptionController implements PasteOptionValidator,
         }
     }
     
+    /**
+     * Generates random string for copying 
+     * during paste option configuration. 
+     */
     private void generateCopyText() {
         // TODO complete method logic
         
         copyText = "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4=";
     }
     
+    /**
+     * Saves recorded keys for paste shortcut.
+     */
     private void savePasteShortcut() {
         final PasteShortcut pasteShortcut = new PasteShortcut(recorder.getRecordedKeyEvents());
         try {
@@ -134,12 +159,21 @@ public class PasteOptionController implements PasteOptionValidator,
             Messenger.showErrorMessage("Could not save schortcut.", null);
         }
     }
-
+    
+    /**
+     * Checks if file with user's paste shortcut keystrokes exists.
+     * @return true if file exists, false otherwise
+     * @see exists() method in JDK class File
+     */
     public boolean isShortcutFileCreated() {
         File file = new File(PASTE_SHORTCUT_FILE_NAME);
         return file.exists();
     }
     
+    /**
+     * Informs main application listener 
+     * that paste option configuration finished.
+     */
     private void finishConfig() {
         if(true == savingResult) {
             mainAppListener.pasteConfigFinished();

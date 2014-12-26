@@ -20,6 +20,7 @@ public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
     
     /**
      * Executes every time when keyboard key is released.
+     * Overrides KeyAdapter method. 
      * @param e KeyEvent for key release.
      */
     @Override
@@ -28,7 +29,11 @@ public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
         addKeyEventInfo(e, KeyEvent.KEY_RELEASED);
     }
     
-    
+    /**
+     * Executes every time when keyboard key is pressed.
+     * Overrides KeyAdapter method. 
+     * @param e KeyEvent for key press.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         super.keyPressed(e); //To change body of generated methods, choose Tools | Templates.

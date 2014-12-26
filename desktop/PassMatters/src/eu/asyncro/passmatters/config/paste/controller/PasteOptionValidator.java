@@ -8,6 +8,16 @@ package eu.asyncro.passmatters.config.paste.controller;
  * @author Milan
  */
 public interface PasteOptionValidator {
-    void startPasteValidation(KeyEventRecorder recorder);
-    void pasteRecordedText();
+
+    /**
+     * Starts paste option validation procedure.
+     * @param recorder Recorder which contains recorded keyboard events.
+     */
+    public void startPasteValidation(KeyEventRecorder recorder);
+
+    /**
+     *Simulates recored keyboard events for validation purposes.
+     * Ideally, keyboard events should be for user's paste keyboard shortcut.
+     */
+    public void pasteTextWithRecordedKeys();
 }

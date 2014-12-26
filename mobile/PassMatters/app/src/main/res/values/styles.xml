@@ -1,8 +1,13 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="wuffyTheme" parent="Theme.Base.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/actionBarStyle</item>
+
+    </style>
+    <style name="actionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/blue</item>
+        <item name="android:icon">@drawable/ic_launcher</item>
     </style>
 
 </resources>

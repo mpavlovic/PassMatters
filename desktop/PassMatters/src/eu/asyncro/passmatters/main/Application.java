@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.main;
 
+import eu.asyncro.passmatters.util.FormFiller;
+
 /**
  *This is application entry point class with main method.
  * @author Milan
@@ -13,9 +15,14 @@ public class Application {
         
         try {
             
-            MainController maincontroller = new MainController();
-            maincontroller.startApp();
-
+//            MainController maincontroller = new MainController();
+//            maincontroller.startApp();
+            
+            Thread.sleep(3000);
+            FormFiller ff = new FormFiller(null);
+            ff.fillFocusedForm("password");
+            System.out.println("gotovo");
+            
             /*
             System.out.println("login...");
             Hashtable<String, String> params = new Hashtable<>();
@@ -38,7 +45,7 @@ public class Application {
             */        
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }   
     }
 }

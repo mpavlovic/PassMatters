@@ -8,6 +8,7 @@ package eu.asyncro.passmatters.main;
 
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
+import eu.asyncro.passmatters.util.Messenger;
 
 /**
  * Main controller class which establishes main application workflow.
@@ -48,8 +49,8 @@ public class MainController implements MainAppListener {
             }
             
         } catch(Exception ex) {
-            System.out.println(ex.getMessage());
-            // TODO messenger
+            System.out.println(ex.getMessage()); // TODO remove
+            Messenger.showErrorMessage("Unexpected error occured.", null);
         }
     }
     

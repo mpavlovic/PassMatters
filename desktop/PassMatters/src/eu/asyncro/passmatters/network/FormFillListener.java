@@ -8,6 +8,7 @@ package eu.asyncro.passmatters.network;
 
 import eu.asyncro.passmatters.main.MainAppListener;
 import eu.asyncro.passmatters.util.FormFiller;
+import eu.asyncro.passmatters.util.Messenger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -26,7 +27,6 @@ public class FormFillListener extends Thread {
 
     public FormFillListener(Socket clientSocket, MainAppListener mainAppListener) {
         this.clientSocket = clientSocket;
-        if(mainAppListener == null) System.out.println("mainapp is null in form fill listener"); // TODO remove
         formFiller = new FormFiller(mainAppListener);
     }
     
@@ -43,11 +43,9 @@ public class FormFillListener extends Thread {
                 formFiller.fillFocusedForm(message);
             }
 
-        } catch (IOException ex) {
-            // TODO fix ??
-            System.out.println("EXCEPTION IN LISTENER: " + ex.getMessage());
         } catch (Exception ex) {
             Logger.getLogger(FormFillListener.class.getName()).log(Level.SEVERE, null, ex); // TODO fix
+            Messenger.showErrorMessage("There was a problem in network listener:" + ex.getMessage(), null);
         }
     }
 }

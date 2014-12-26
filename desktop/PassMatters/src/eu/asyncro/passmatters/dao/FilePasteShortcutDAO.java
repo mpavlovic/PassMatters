@@ -44,8 +44,6 @@ public class FilePasteShortcutDAO implements PasteShortcutDAO {
         {
             oos.writeObject(pasteShortcut);
         } catch (IOException ex) {
-            // TODO messenger
-            
             result = false;
         }
         return result;

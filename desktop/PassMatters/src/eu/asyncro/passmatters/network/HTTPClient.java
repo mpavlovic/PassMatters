@@ -24,8 +24,8 @@ public class HTTPClient extends Client {
     private HttpURLConnection connection;
 
     public HTTPClient(String url, String requestMethod, 
-            Hashtable<String, String> parameters) throws MalformedURLException, 
-            UnsupportedEncodingException 
+            Hashtable<String, String> parameters) 
+            throws MalformedURLException, UnsupportedEncodingException 
     {
         super(url, requestMethod, parameters);
     }
@@ -36,17 +36,10 @@ public class HTTPClient extends Client {
     
     @Override
     public String sendRequest() throws IOException {
-        // TODO in new function
-        connection = (HttpURLConnection) url.openConnection();
-        connection.setRequestMethod(requestMethod);
-        connection.setDoInput(true);
-        connection.setDoOutput(true);
+        openUrlConnection();
         
-        // TODO in new function
         if(requestMethod.equals(Client.REQUEST_POST)) {
-            DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
-            dos.writeBytes(parametersString);
-            dos.close();
+            writeParametersBytesToServer();
         }
 
         InputStreamReader isr = new InputStreamReader(connection.getInputStream());
@@ -62,6 +55,21 @@ public class HTTPClient extends Client {
         
         br.close();
         return responseBuilder.toString();
+    }
+    
+    private void openUrlConnection() throws IOException 
+    {
+        connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod(requestMethod);
+        connection.setDoInput(true);
+        connection.setDoOutput(true);
+    }
+    
+    private void writeParametersBytesToServer() throws IOException 
+    {
+        DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+        dos.writeBytes(parametersString);
+        dos.close();
     }
     
 }

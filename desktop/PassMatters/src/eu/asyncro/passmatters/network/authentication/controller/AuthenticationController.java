@@ -16,6 +16,7 @@ import eu.asyncro.passmatters.network.TCPSocketConnectionController;
 import eu.asyncro.passmatters.network.WebServiceResultHandler;
 import eu.asyncro.passmatters.network.authentication.model.User;
 import eu.asyncro.passmatters.network.authentication.view.LoginFrame;
+import eu.asyncro.passmatters.util.Messenger;
 import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
@@ -178,10 +179,12 @@ public class AuthenticationController implements Loginer, Logouter {
                     }
                     else {
                         System.out.println("logout problem"); // TODO change
+                        Messenger.showErrorMessage("Unexpected logout problem occured.", null);
                     }
                 } catch (InterruptedException | ExecutionException ex) {
                     Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
                     // TODO message ?
+                    Messenger.showErrorMessage("Unexpected logout exception occured.", null);
                 }
             }
             

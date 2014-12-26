@@ -7,6 +7,7 @@ import eu.asyncro.passmatters.config.paste.view.PasteValidationFailedFrame;
 import eu.asyncro.passmatters.dao.DAOFactory;
 import eu.asyncro.passmatters.main.MainAppListener;
 import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
+import eu.asyncro.passmatters.util.Messenger;
 import java.awt.AWTException;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
@@ -57,8 +58,7 @@ public class PasteOptionController implements PasteOptionValidator,
         try {
             pasteOptionValidationFrame.showFrame();
         } catch (AWTException ex) {
-            // TODO messenger
-            System.out.println(ex.getMessage());
+            Messenger.showErrorMessage("There was a problem during validation.", null);
         }
     }
     
@@ -110,7 +110,7 @@ public class PasteOptionController implements PasteOptionValidator,
     private void savePasteShortcut() {
         final PasteShortcut pasteShortcut = new PasteShortcut(recorder.getRecordedKeyEvents());
         try {
-                new SwingWorker<Boolean, Void>() {
+            new SwingWorker<Boolean, Void>() {
 
                 @Override
                 protected Boolean doInBackground() throws Exception {
@@ -119,19 +119,19 @@ public class PasteOptionController implements PasteOptionValidator,
                             .savePasteShortcut(pasteShortcut);
                 }
 
-                    @Override
-                    protected void done() {
-                        try {
-                            super.done();
-                            savingResult = get();
-                            finishConfig();
-                        } catch (InterruptedException | ExecutionException ex) {
-                            // TODO messenger
-                        }
+                @Override
+                protected void done() {
+                    try {
+                        super.done();
+                        savingResult = get();
+                        finishConfig();
+                    } catch (InterruptedException | ExecutionException ex) {
+                        Messenger.showErrorMessage("Could not finish schortcut saving.", null);
                     }
+                }
             }.execute();
         } catch (Exception ex) {
-            // TODO Messenger  
+            Messenger.showErrorMessage("Could not save schortcut.", null);
         }
     }
 
@@ -145,7 +145,7 @@ public class PasteOptionController implements PasteOptionValidator,
             mainAppListener.pasteConfigFinished();
         }
         else {
-            // TODO show error messege
+            Messenger.showErrorMessage("Could not finish configuration.", null);
         }
     }
     

@@ -26,7 +26,6 @@ public class TCPSocketConnectionController extends ConnectionController {
     
     public TCPSocketConnectionController(MainAppListener mainAppListener) {
         this.mainAppListener = mainAppListener;
-        if(this.mainAppListener == null) System.out.println("mainapp is null in tcp soc conn cont");
     } 
 
     @Override
@@ -54,7 +53,6 @@ public class TCPSocketConnectionController extends ConnectionController {
         outputToServer.flush();
         outputToServer.write(data.getBytes());
 
-        // TODO - waiting for message ??
         String messageFromServer = null;
         if(!data.equals(Protocol.LOGOUT)) {
             messageFromServer = inputFromServer.readLine();

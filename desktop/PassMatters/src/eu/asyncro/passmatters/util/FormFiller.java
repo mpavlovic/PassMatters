@@ -63,7 +63,6 @@ public class FormFiller implements ClipboardOwner {
     
     private Transferable getClipboardContents() throws IllegalStateException
     {
-        //Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); // TODO should it be outside ?
         Transferable contents = clipboard.getContents(null);
         return contents;
     }
@@ -112,16 +111,16 @@ public class FormFiller implements ClipboardOwner {
     
     private PasteShortcut getPasteSchortcut() throws Exception 
     {
-        PasteShortcut pasteShortcut = 
-                DAOFactory.getFactory(DAOFactory.FILE)
+        PasteShortcut pasteShortcut
+                = DAOFactory.getFactory(DAOFactory.FILE)
                 .getPasteShortcutDAO()
                 .getPasteShortcut();
-        
-        if(null == pasteShortcut) {
-            System.out.println("Password typing error occured.");
-            throw new Exception("Password typing error occured.");
+
+        if (null == pasteShortcut) {
+            System.out.println("Password typing exception occured.");
+            throw new Exception("Password typing exception occured.");
         }
-        
+
         return pasteShortcut;
     }
     

@@ -6,6 +6,7 @@
 
 package eu.asyncro.passmatters.network;
 
+import eu.asyncro.passmatters.main.MainAppListener;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -21,6 +22,12 @@ public class TCPSocketConnectionController extends ConnectionController {
     private Socket clientSocket;
     private DataOutputStream outputToServer;
     private BufferedReader inputFromServer;
+    private MainAppListener mainAppListener;
+    
+    public TCPSocketConnectionController(MainAppListener mainAppListener) {
+        this.mainAppListener = mainAppListener;
+        if(this.mainAppListener == null) System.out.println("mainapp is null in tcp soc conn cont");
+    } 
 
     @Override
     public boolean openConnection() throws IOException 
@@ -73,26 +80,9 @@ public class TCPSocketConnectionController extends ConnectionController {
     // new Class ?
     @Override
     public void startListening() {
-        new Thread(new Runnable() {
-            // TODO variable listening...
-            @Override
-            public void run() {
-                try(BufferedReader listener = new BufferedReader(
-                            new InputStreamReader(clientSocket.getInputStream()))) 
-                {
-                    String message;
-                    System.out.println("listening...");
-                    while((message = listener.readLine()) != null) {
-                        System.out.println("From listener: " + message);
-                        // TODO handle password fill...
-                    }
-                    
-                } catch (IOException ex) {
-                    // TODO fix ??
-                    System.out.println("EXCEPTION IN LISTENER: " + ex.getMessage());
-                }
-            }
-        }).start();
+        FormFillListener formFillListener = 
+                new FormFillListener(clientSocket, mainAppListener);
+        formFillListener.start();
     }
     
  

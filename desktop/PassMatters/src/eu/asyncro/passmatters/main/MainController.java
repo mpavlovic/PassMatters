@@ -16,7 +16,7 @@ import eu.asyncro.passmatters.network.authentication.controller.AuthenticationCo
 public class MainController implements MainAppListener {
     
     private PasteOptionController pasteOptionController;
-   AuthenticationController authController;
+    private AuthenticationController authController;
     /**
      * Constructor.
      */
@@ -80,6 +80,12 @@ public class MainController implements MainAppListener {
             //Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public void passwordFilled() {
+        // TODO show on history or buble
+        System.out.println("password filled");
     }
     
 }

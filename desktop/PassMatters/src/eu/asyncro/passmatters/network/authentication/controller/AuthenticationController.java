@@ -38,21 +38,24 @@ public class AuthenticationController implements Loginer, Logouter {
     private boolean isUserLoggedIn = false;
     private String token;
     
-    public AuthenticationController() {
+    public AuthenticationController(MainAppListener mainAppListener) {
+        this.mainAppListener = mainAppListener;
         initailize();
     }
-
+    
+    /**
     public AuthenticationController(MainAppListener mainAppListener) {
         this();
         this.mainAppListener = mainAppListener;
     }
+    */
     
     private void initailize() {
         loginFrame = new LoginFrame();
         loginFrame.setLoginer(this);
         
         client = new HTTPClient(LOGIN_URL, Client.REQUEST_POST);
-        connectionController = new TCPSocketConnectionController();
+        connectionController = new TCPSocketConnectionController(mainAppListener);
     }
     
     public void startLogin() {
@@ -103,8 +106,7 @@ public class AuthenticationController implements Loginer, Logouter {
                     // TODO messenger
                 }
             }
-            
-            
+
         }.execute();
     }
 
@@ -184,10 +186,5 @@ public class AuthenticationController implements Loginer, Logouter {
             }
             
         }.execute();
-        
-        
-        
     }
-    
-    
 }

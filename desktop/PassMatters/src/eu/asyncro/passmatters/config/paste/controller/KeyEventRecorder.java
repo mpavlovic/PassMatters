@@ -106,7 +106,7 @@ public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
             else if(info.getEventType() == KeyEvent.KEY_RELEASED) {
                 robot.keyRelease(info.getKeyCode());
             }
-            Thread.sleep(1);
+            Thread.sleep(5);
         }
         
         if(typeEnterKey) {

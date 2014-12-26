@@ -15,13 +15,15 @@ public class Application {
         
         try {
             
-//            MainController maincontroller = new MainController();
-//            maincontroller.startApp();
+            MainController maincontroller = new MainController();
+            maincontroller.startApp();
             
+            /*
             Thread.sleep(3000);
             FormFiller ff = new FormFiller(null);
-            ff.fillFocusedForm("password");
+            ff.fillFocusedForm("wc8H3W4U!Q");
             System.out.println("gotovo");
+            */
             
             /*
             System.out.println("login...");

@@ -13,4 +13,5 @@ package eu.asyncro.passmatters.main;
 public interface MainAppListener {
     public void pasteConfigFinished();
     public void loginFinished();
+    public void passwordFilled();
 }

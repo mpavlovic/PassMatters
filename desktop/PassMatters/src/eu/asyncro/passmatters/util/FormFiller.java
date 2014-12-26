@@ -28,7 +28,7 @@ public class FormFiller implements ClipboardOwner {
 
     private MainAppListener mainAppListener;
     private Clipboard clipboard;
-    private static final long SLEEP_INTERVAL = 30;
+    private static final long SLEEP_INTERVAL = 40;
     
     public FormFiller(MainAppListener mainAppListener) 
             throws IllegalStateException 
@@ -44,21 +44,21 @@ public class FormFiller implements ClipboardOwner {
     
     public void fillFocusedForm(String content) throws Exception 
     {
-        Transferable clipboardContentBeforeNewOne = getClipboardContents(); //TODO null
-        System.out.println(clipboardContentBeforeNewOne.toString()); // TODO remove
+        Thread.sleep(2000);
         
-        PasteShortcut pasteShortcut = 
-                DAOFactory.getFactory(DAOFactory.FILE)
-                .getPasteShortcutDAO()
-                .getPasteShortcut(); // TODO null
+        Transferable clipboardContentBeforeNewOne = getClipboardContents(); //TODO null ?
+        
+        PasteShortcut pasteShortcut = getPasteSchortcut();
         
         clearClipboard();
         setClipboardContents(content);
         
         KeyTyper typer = new KeyEventRecorder();
-        typer.typeKeys(pasteShortcut.getKeyEvents(), true);
+        typer.typeKeys(pasteShortcut.getKeyEvents(), false);
         
         returnContentsToClipboard(clipboardContentBeforeNewOne);
+        
+        mainAppListener.passwordFilled();
     }
     
     private Transferable getClipboardContents() throws IllegalStateException
@@ -108,6 +108,21 @@ public class FormFiller implements ClipboardOwner {
             }
             
         }, this);
-    } 
+    }
+    
+    private PasteShortcut getPasteSchortcut() throws Exception 
+    {
+        PasteShortcut pasteShortcut = 
+                DAOFactory.getFactory(DAOFactory.FILE)
+                .getPasteShortcutDAO()
+                .getPasteShortcut();
+        
+        if(null == pasteShortcut) {
+            System.out.println("Password typing error occured.");
+            throw new Exception("Password typing error occured.");
+        }
+        
+        return pasteShortcut;
+    }
     
 }

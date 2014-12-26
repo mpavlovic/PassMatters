@@ -14,10 +14,13 @@ import eu.asyncro.passmatters.util.Messenger;
  * Main controller class which establishes main application workflow.
  * @author Milan
  */
-public class MainController implements MainAppListener {
+public class MainController implements MainAppListener, MainFrameListener {
     
     private PasteOptionController pasteOptionController;
     private AuthenticationController authController;
+    
+    private MainFrame mainFrame;
+    
     /**
      * Constructor.
      */
@@ -31,6 +34,9 @@ public class MainController implements MainAppListener {
     private void initialize() {
         authController = new AuthenticationController(this);
         pasteOptionController = new PasteOptionController(this);
+        
+        mainFrame = new MainFrame();
+        mainFrame.setMainFrameListener(this);
     }
     
     /**
@@ -75,7 +81,9 @@ public class MainController implements MainAppListener {
         try {
             System.out.println("login finished"); // todo remove
             
-            //authController.logout(); // TODO remove!!
+            //authController.logout(); // TODO implement and remove!!
+            
+            mainFrame.showFrame();
             
         } catch (Exception ex) {
             //Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

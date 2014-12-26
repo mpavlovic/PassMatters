@@ -6,12 +6,16 @@
 
 package eu.asyncro.passmatters.main;
 
+import java.awt.EventQueue;
+
 /**
  *
  * @author Milan
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private MainFrameListener mainFrameListener;
+    
     /**
      * Creates new form MainFrame
      */
@@ -98,7 +102,21 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void showFrame() {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                setVisible(true);
+                setLocationRelativeTo(null);
+            }
+        });
+    }
 
+    public void setMainFrameListener(MainFrameListener mainFrameListener) {
+        this.mainFrameListener = mainFrameListener;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaHistory;
     private javax.swing.JButton btnLogout;

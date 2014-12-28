@@ -12,7 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Contains CRUD methods for working with PasteShortcut objects. 
+ * 
+ * @see PasteShortcutDAO
+ * @see PasteShortcut
  * @author Milan
  */
 public class FilePasteShortcutDAO implements PasteShortcutDAO {

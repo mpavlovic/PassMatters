@@ -7,7 +7,10 @@
 package eu.asyncro.passmatters.dao;
 
 /**
- *
+ * Concrete DAO factory for file storage type.
+ * Produces DAO objects which manipulate with 
+ * data saved in files.
+ * 
  * @author Milan
  */
 public class FileDAOFactory extends DAOFactory {

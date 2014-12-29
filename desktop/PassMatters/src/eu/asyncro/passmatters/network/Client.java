@@ -26,7 +26,7 @@ public abstract class Client {
     protected String requestMethod;
     protected String parametersString;
     protected Hashtable<String, String> parametersTable;
-    protected URL url; 
+    protected URL url;
     
     private final String ENCODING = "UTF-8";
 

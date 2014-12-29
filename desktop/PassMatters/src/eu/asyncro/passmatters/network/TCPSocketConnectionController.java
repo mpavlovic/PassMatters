@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Socket;
 
 /**
  * Maintains raw TCP connection to remote server via TCP socket.
@@ -19,7 +18,7 @@ import java.net.Socket;
  */
 public class TCPSocketConnectionController extends ConnectionController {
     
-    private Socket clientSocket;
+    private Connector connector;
     private DataOutputStream outputToServer;
     private BufferedReader inputFromServer;
     private MainAppListener mainAppListener;
@@ -32,7 +31,7 @@ public class TCPSocketConnectionController extends ConnectionController {
     public boolean openConnection() throws IOException 
     {
         
-        clientSocket = new Socket(IP_ADDRESS, PORT);
+        connector = new TCPConnector(IP_ADDRESS, PORT);
         openStreams();
 
         String messageFromServer;
@@ -42,8 +41,8 @@ public class TCPSocketConnectionController extends ConnectionController {
     
     private void openStreams() throws IOException 
     {
-        outputToServer = new DataOutputStream(clientSocket.getOutputStream());
-        inputFromServer = new BufferedReader(new InputStreamReader(clientSocket.
+        outputToServer = new DataOutputStream(connector.getOutputStream());
+        inputFromServer = new BufferedReader(new InputStreamReader(connector.
                 getInputStream()));
     }
     
@@ -70,16 +69,15 @@ public class TCPSocketConnectionController extends ConnectionController {
     {
         sendData(Protocol.LOGOUT);
         System.out.println("before close"); // TODO remove
-        clientSocket.close();
+        connector.close();
         System.out.println("after close"); // TODO remove
         return true;
     }
     
-    // new Class ?
     @Override
     public void startListening() {
         FormFillListener formFillListener = 
-                new FormFillListener(clientSocket, mainAppListener);
+                new FormFillListener(connector, mainAppListener);
         formFillListener.start();
     }
     

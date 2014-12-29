@@ -10,32 +10,22 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.util.Hashtable;
+import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Class for sending HTTP requests to a remote server.
+ * Class for sending HTTPS requests to a remote server.
  * @author Milan
  */
-public class HTTPClient extends Client {
+public class HTTPSClient extends Client {
     
-    private HttpURLConnection connection;
+    private HttpsURLConnection connection;
 
-    public HTTPClient(String url, String requestMethod, 
-            Hashtable<String, String> parameters) 
-            throws MalformedURLException, UnsupportedEncodingException 
-    {
-        super(url, requestMethod, parameters);
-    }
-
-    public HTTPClient(String urlString, String requestMethod) {
+    public HTTPSClient(String urlString, String requestMethod) {
         super(urlString, requestMethod);
     }
-    
+
     @Override
-    public String sendRequest() throws IOException {
+    public String sendRequest() throws Exception {
         openUrlConnection();
         
         if(requestMethod.equals(Client.REQUEST_POST)) {
@@ -56,20 +46,21 @@ public class HTTPClient extends Client {
         br.close();
         return responseBuilder.toString();
     }
-    
+
     private void openUrlConnection() throws IOException 
-    {     
-        connection = (HttpURLConnection) url.openConnection();
+    {
+        connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod(requestMethod);
         connection.setDoInput(true);
         connection.setDoOutput(true);
     }
-    
+
     private void writeParametersBytesToServer() throws IOException 
     {
         DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
         dos.writeBytes(parametersString);
         dos.close();
     }
+    
     
 }

@@ -28,7 +28,7 @@ public class FormFiller implements ClipboardOwner {
 
     private MainAppListener mainAppListener;
     private Clipboard clipboard;
-    private static final long SLEEP_INTERVAL = 40;
+    private static final long SLEEP_INTERVAL = 60;
     
     public FormFiller(MainAppListener mainAppListener) 
             throws IllegalStateException 
@@ -44,7 +44,7 @@ public class FormFiller implements ClipboardOwner {
     
     public void fillFocusedForm(String content) throws Exception 
     {
-        Thread.sleep(2000);
+        //Thread.sleep(2000);
         
         Transferable clipboardContentBeforeNewOne = getClipboardContents(); //TODO null ?
         
@@ -54,11 +54,11 @@ public class FormFiller implements ClipboardOwner {
         setClipboardContents(content);
         
         KeyTyper typer = new KeyEventRecorder();
-        typer.typeKeys(pasteShortcut.getKeyEvents(), false);
+        typer.typeKeys(pasteShortcut.getKeyEvents(), true);
         
         returnContentsToClipboard(clipboardContentBeforeNewOne);
         
-        mainAppListener.passwordFilled();
+        if(mainAppListener != null) mainAppListener.passwordFilled();
     }
     
     private Transferable getClipboardContents() throws IllegalStateException

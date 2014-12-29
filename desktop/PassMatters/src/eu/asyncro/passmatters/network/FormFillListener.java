@@ -10,9 +10,7 @@ import eu.asyncro.passmatters.main.MainAppListener;
 import eu.asyncro.passmatters.util.FormFiller;
 import eu.asyncro.passmatters.util.Messenger;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,18 +20,18 @@ import java.util.logging.Logger;
  */
 public class FormFillListener extends Thread {
 
-    private Socket clientSocket;
     private FormFiller formFiller;
+    private Connector connector;
 
-    public FormFillListener(Socket clientSocket, MainAppListener mainAppListener) {
-        this.clientSocket = clientSocket;
+    public FormFillListener(Connector connector, MainAppListener mainAppListener) {
+        this.connector = connector;
         formFiller = new FormFiller(mainAppListener);
     }
     
     @Override
     public void run() {
         try (BufferedReader listener = new BufferedReader(
-                new InputStreamReader(clientSocket.getInputStream()))) {
+                new InputStreamReader(connector.getInputStream()))) {
             String message;
             System.out.println("listening..."); // TODO remove
             
@@ -46,6 +44,7 @@ public class FormFillListener extends Thread {
         } catch (Exception ex) {
             Logger.getLogger(FormFillListener.class.getName()).log(Level.SEVERE, null, ex); // TODO fix
             Messenger.showErrorMessage("There was a problem in network listener:" + ex.getMessage(), null);
+            // watch out on SocketException when closing socket
         }
     }
 }

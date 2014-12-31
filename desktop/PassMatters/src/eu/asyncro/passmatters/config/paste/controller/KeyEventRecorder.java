@@ -101,15 +101,17 @@ public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
     {   
         Robot robot = new Robot();
         
-        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+        //robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        //robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
         
         for(KeyEventInfo info: keys) {
             if(info.getEventType() == KeyEvent.KEY_PRESSED) {
                 robot.keyPress(info.getKeyCode());
+                System.out.println("key pressed"); // TODO asap
             }
             else if(info.getEventType() == KeyEvent.KEY_RELEASED) {
                 robot.keyRelease(info.getKeyCode());
+                System.out.println("key released"); // TODO asap
             }
             Thread.sleep(5);
         }

@@ -28,18 +28,20 @@ public class FormFiller implements ClipboardOwner {
 
     private MainAppListener mainAppListener;
     private Clipboard clipboard;
+    private KeyTyper typer;
     private static final long SLEEP_INTERVAL = 60;
     
     public FormFiller(MainAppListener mainAppListener) 
             throws IllegalStateException 
     {
         this.mainAppListener = mainAppListener;
+        typer = new KeyEventRecorder();
         clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     }
     
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents) {
-        System.out.println("lost ownership");
+        System.out.println("LOST CLIPBOARD OWNERSHIP");
     }
     
     public void fillFocusedForm(String content) throws Exception 
@@ -53,7 +55,8 @@ public class FormFiller implements ClipboardOwner {
         clearClipboard();
         setClipboardContents(content);
         
-        KeyTyper typer = new KeyEventRecorder();
+        Thread.sleep(SLEEP_INTERVAL);
+        
         typer.typeKeys(pasteShortcut.getKeyEvents(), true);
         
         returnContentsToClipboard(clipboardContentBeforeNewOne);

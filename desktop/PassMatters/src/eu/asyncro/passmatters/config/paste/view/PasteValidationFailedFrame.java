@@ -8,10 +8,11 @@ import eu.asyncro.passmatters.config.paste.controller.PasteOptionConfigurator;
  */
 public class PasteValidationFailedFrame extends javax.swing.JFrame {
 
-    private PasteOptionConfigurator configurator;
+    private final PasteOptionConfigurator configurator;
     
     /**
      * Creates new form PasteOptionValidationFailedDialog
+     * @param configurator
      */
     public PasteValidationFailedFrame(PasteOptionConfigurator configurator) {
         this.configurator = configurator;
@@ -28,20 +29,20 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblValidationFailed = new javax.swing.JLabel();
+        lblTryAgain = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         btnTryAgain = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Validation Failed");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Unfortunatelly, paste option validation failed.");
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblValidationFailed.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblValidationFailed.setText("Unfortunatelly, paste option validation failed.");
+        lblValidationFailed.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("It is recommended that you try again.");
+        lblTryAgain.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTryAgain.setText("It is recommended that you try again.");
 
         btnExit.setText("Exit");
         btnExit.setFocusable(false);
@@ -67,8 +68,8 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblValidationFailed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTryAgain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnTryAgain)
@@ -80,9 +81,9 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblValidationFailed)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblTryAgain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit)
@@ -119,7 +120,7 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnTryAgain;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblTryAgain;
+    private javax.swing.JLabel lblValidationFailed;
     // End of variables declaration//GEN-END:variables
 }

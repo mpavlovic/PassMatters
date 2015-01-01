@@ -22,10 +22,12 @@ public class FormFillListener extends Thread {
 
     private FormFiller formFiller;
     private Connector connector;
+    private MainAppListener mainAppListener;
 
     public FormFillListener(Connector connector, MainAppListener mainAppListener) {
         this.connector = connector;
-        formFiller = new FormFiller(mainAppListener);
+        this.mainAppListener = mainAppListener;
+        formFiller = new FormFiller();
     }
     
     @Override
@@ -38,13 +40,16 @@ public class FormFillListener extends Thread {
             while ((message = listener.readLine()) != null) {
                 System.out.println("From listener: " + message); // TODO remove
                 // TODO decryption
-                formFiller.fillFocusedForm(message);
+                if(!formFiller.fillFocusedForm(message)) {
+                    Messenger.showErrorMessage("There was a problem during "
+                            + "password entering.", null);
+                }
+                else mainAppListener.passwordFilled();
             }
 
         } catch (Exception ex) {
             Logger.getLogger(FormFillListener.class.getName()).log(Level.SEVERE, null, ex); // TODO fix
-            Messenger.showErrorMessage("There was a problem in network listener:" + ex.getMessage(), null);
-            // watch out on SocketException when closing socket
+            // TODO watch out on SocketException when closing socket
         }
     }
 }

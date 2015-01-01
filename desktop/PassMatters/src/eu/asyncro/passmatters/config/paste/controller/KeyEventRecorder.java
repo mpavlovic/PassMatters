@@ -3,7 +3,6 @@ package eu.asyncro.passmatters.config.paste.controller;
 import eu.asyncro.passmatters.config.paste.model.KeyEventInfo;
 import java.awt.AWTException;
 import java.awt.Robot;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -16,7 +15,11 @@ import java.util.ArrayList;
  */
 public class KeyEventRecorder extends KeyAdapter implements KeyTyper {
     
-    protected ArrayList<KeyEventInfo> recordedKeyEvents = new ArrayList<>();
+    private final ArrayList<KeyEventInfo> recordedKeyEvents;
+
+    public KeyEventRecorder() {
+        this.recordedKeyEvents = new ArrayList<>();
+    }
     
     /**
      * Executes every time when keyboard key is released.

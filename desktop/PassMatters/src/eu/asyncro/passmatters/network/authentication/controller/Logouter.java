@@ -11,5 +11,5 @@ package eu.asyncro.passmatters.network.authentication.controller;
  * @author Milan
  */
 public interface Logouter {
-    public void logout() throws Exception;
+    public void logout();
 }

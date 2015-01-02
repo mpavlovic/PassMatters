@@ -18,6 +18,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +38,7 @@ public class FormFiller implements ClipboardOwner {
     private final Clipboard clipboard;
     private final KeyTyper typer;
     
+    private Transferable clipboardContentBeforeNewOne;
 
     public FormFiller() 
             throws IllegalStateException 
@@ -51,7 +54,8 @@ public class FormFiller implements ClipboardOwner {
     
     public boolean fillFocusedForm(String content) throws Exception 
     {      
-        Transferable clipboardContentBeforeNewOne = getClipboardContents();
+        Thread.sleep(3000); // TODO remove
+        if(false == tryToGetClipboardContents()) return false;
         
         PasteShortcut pasteShortcut = getPasteSchortcut();
         if(null == pasteShortcut) return false;
@@ -65,8 +69,10 @@ public class FormFiller implements ClipboardOwner {
         return tryToReturnPreviousContentToClipboard(clipboardContentBeforeNewOne);
     }
     
-    private Transferable getClipboardContents() throws IllegalStateException
+    private Transferable getClipboardContents() 
+            throws IllegalStateException, InterruptedException
     {
+        Thread.sleep(SLEEP_INTERVAL_BEFORE_PASSWORD_FILL);
         Transferable contents = clipboard.getContents(null);
         return contents;
     }
@@ -140,7 +146,22 @@ public class FormFiller implements ClipboardOwner {
                 numberOfFails++;
             }
         }
-        return numberOfFails < MAX_FAILS_BEFORE_PASS_IN_CLIPBOARD;
+        return success;
+    }
+    
+    private boolean tryToGetClipboardContents() {
+        int numberOfFails = 0;
+        boolean success = false;
+        while(numberOfFails < MAX_FAILS_BEFORE_PASS_IN_CLIPBOARD && !success) {
+            try {
+                clipboardContentBeforeNewOne = getClipboardContents();
+                success = true;
+            }
+            catch(IllegalStateException | InterruptedException ex) {
+                numberOfFails++;
+            }
+        }
+        return success;
     }
     
     private boolean tryToSetClipboardContents(String content) {
@@ -154,7 +175,7 @@ public class FormFiller implements ClipboardOwner {
                 numberOfFails++;
             }
         }
-        return numberOfFails < MAX_FAILS_BEFORE_PASS_IN_CLIPBOARD;
+        return success;
     }
     
     private boolean tryToReturnPreviousContentToClipboard(Transferable content) {
@@ -168,7 +189,7 @@ public class FormFiller implements ClipboardOwner {
                 numberOfFails++;
             }
         }
-        return numberOfFails < MAX_FAILS_AFTER_PASS_IN_CLIPBOARD;
+        return success;
     }
     
 }

@@ -11,5 +11,5 @@ package eu.asyncro.passmatters.main;
  * @author Milan
  */
 public interface MainFrameListener {
-    
+    public void logoutPerformed();
 }

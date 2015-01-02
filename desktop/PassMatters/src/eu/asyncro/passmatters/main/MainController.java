@@ -9,6 +9,8 @@ package eu.asyncro.passmatters.main;
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
 import eu.asyncro.passmatters.util.Messenger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main controller class which establishes main application workflow.
@@ -81,13 +83,10 @@ public class MainController implements MainAppListener, MainFrameListener {
         try {
             System.out.println("login finished"); // todo remove
             
-            //authController.logout(); // TODO implement and remove!!
-            
             mainFrame.showFrame();
             
         } catch (Exception ex) {
-            //Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-            ex.printStackTrace();
+            ex.printStackTrace(); // TODO handle 
         }
     }
 
@@ -95,6 +94,18 @@ public class MainController implements MainAppListener, MainFrameListener {
     public void passwordFilled() {
         // TODO show on history or buble
         System.out.println("password filled");
+    }
+
+    @Override
+    public void logoutPerformed() {
+        mainFrame.setStatus("Logging out...");
+        authController.logout();
+    }
+
+    @Override
+    public void logoutFinished() {
+        mainFrame.dispose();
+        authController.startLogin();
     }
     
 }

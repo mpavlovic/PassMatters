@@ -128,6 +128,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
 
             @Override
             public void run() {
+                reset();
                 setVisible(true);
             }
         });
@@ -152,6 +153,15 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
     private void addListeners() {
         btnLogin.addActionListener(this);
         pwdMaster.addActionListener(this);
+    }
+    
+    private void reset() {
+        btnLogin.setEnabled(true);
+        txtUsername.setEnabled(true);
+        txtUsername.setText(null);
+        pwdMaster.setEnabled(true);
+        pwdMaster.setText(null);
+        lblLoginStatus.setText("Please enter your credentials.");
     }
     
     @Override

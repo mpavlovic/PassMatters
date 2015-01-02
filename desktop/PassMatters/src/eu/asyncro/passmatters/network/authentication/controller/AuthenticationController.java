@@ -35,7 +35,7 @@ public class AuthenticationController implements Loginer, Logouter {
     private LoginFrame loginFrame;
     private Client client;
     private ConnectionController connectionController;
-    private MainAppListener mainAppListener;
+    private final MainAppListener mainAppListener;
     private boolean isUserLoggedIn = false;
     private String token;
     
@@ -43,13 +43,6 @@ public class AuthenticationController implements Loginer, Logouter {
         this.mainAppListener = mainAppListener;
         initailize();
     }
-    
-    /**
-    public AuthenticationController(MainAppListener mainAppListener) {
-        this();
-        this.mainAppListener = mainAppListener;
-    }
-    */
     
     private void initailize() {
         loginFrame = new LoginFrame();
@@ -118,6 +111,7 @@ public class AuthenticationController implements Loginer, Logouter {
         parameters.put("username", username);
         parameters.put("password", password);
         client.setParameters(parameters);
+        client.setUrl(LOGIN_URL); // TODO be careful with call order
         String loginResponse = client.sendRequest();
         return (String) loginResponseHandler.handleResult(loginResponse);
     }
@@ -153,7 +147,7 @@ public class AuthenticationController implements Loginer, Logouter {
     }
 
     @Override
-    public void logout() throws Exception {
+    public void logout() {
         
         new SwingWorker<Boolean, Object>() {
 
@@ -163,9 +157,7 @@ public class AuthenticationController implements Loginer, Logouter {
                 if(!connectionController.closeConnection()) return false;
                 System.out.println("tcp logout finished"); // TODO remove
                 
-                if(!invalidateToken()) return false;
-                
-                return true;
+                return invalidateToken();
             }
 
             @Override
@@ -175,15 +167,13 @@ public class AuthenticationController implements Loginer, Logouter {
                     if(get()) {
                         System.out.println("FINISH"); // TODO remove
                         isUserLoggedIn = false;
-                        // TODO inform main controller about finished logout
+                        mainAppListener.logoutFinished();
                     }
                     else {
-                        System.out.println("logout problem"); // TODO change
                         Messenger.showErrorMessage("Unexpected logout problem occured.", null);
                     }
                 } catch (InterruptedException | ExecutionException ex) {
-                    Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
-                    // TODO message ?
+                    Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex); //  TODO remove
                     Messenger.showErrorMessage("Unexpected logout exception occured.", null);
                 }
             }

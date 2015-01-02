@@ -20,9 +20,9 @@ import java.util.logging.Logger;
  */
 public class FormFillListener extends Thread {
 
-    private FormFiller formFiller;
-    private Connector connector;
-    private MainAppListener mainAppListener;
+    private final FormFiller formFiller;
+    private final Connector connector;
+    private final MainAppListener mainAppListener;
 
     public FormFillListener(Connector connector, MainAppListener mainAppListener) {
         this.connector = connector;

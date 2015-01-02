@@ -45,6 +45,11 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("PassMatters");
 
         btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         lblStatus.setText("You are logged in.");
 
@@ -102,6 +107,10 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        mainFrameListener.logoutPerformed();
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     
     public void showFrame() {
         EventQueue.invokeLater(new Runnable() {
@@ -115,6 +124,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void setMainFrameListener(MainFrameListener mainFrameListener) {
         this.mainFrameListener = mainFrameListener;
+    }
+    
+    public void setStatus(String status) {
+        lblStatus.setText(status);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

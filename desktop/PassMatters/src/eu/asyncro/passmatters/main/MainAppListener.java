@@ -15,4 +15,5 @@ public interface MainAppListener {
     public void loginFinished();
     public void logoutFinished();
     public void passwordFilled();
+    public void systemTrayActionPerformed();
 }

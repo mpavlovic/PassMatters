@@ -9,8 +9,8 @@ package eu.asyncro.passmatters.main;
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
 import eu.asyncro.passmatters.util.Messenger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.AWTException;
+import javax.swing.JFrame;
 
 /**
  * Main controller class which establishes main application workflow.
@@ -20,11 +20,12 @@ public class MainController implements MainAppListener, MainFrameListener {
     
     private PasteOptionController pasteOptionController;
     private AuthenticationController authController;
+    private SystemTrayController systemTrayController;
     
     private MainFrame mainFrame;
     
     /**
-     * Constructor.
+     * Creates new instance of this class.
      */
     public MainController() {
         initialize();
@@ -36,6 +37,7 @@ public class MainController implements MainAppListener, MainFrameListener {
     private void initialize() {
         authController = new AuthenticationController(this);
         pasteOptionController = new PasteOptionController(this);
+        systemTrayController = new SystemTrayController(this);
         
         mainFrame = new MainFrame();
         mainFrame.setMainFrameListener(this);
@@ -80,16 +82,25 @@ public class MainController implements MainAppListener, MainFrameListener {
      */
     @Override
     public void loginFinished() {
-        try {
-            System.out.println("login finished"); // todo remove
-            
-            mainFrame.showFrame();
-            
-        } catch (Exception ex) {
-            ex.printStackTrace(); // TODO handle 
-        }
+        System.out.println("login finished"); // todo remove
+        mainFrame.showFrame();
+        showInSystemTray();
     }
 
+    private void showInSystemTray() {
+        if(systemTrayController.isSystemTraySupported()
+                && !systemTrayController.isTrayIconAdded()) 
+        {
+            try {
+                systemTrayController.showInSystemTray();
+                mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            } catch (AWTException | UnsupportedOperationException | SecurityException ex) {
+                System.out.println("Unexpected problem with System Tray occured.");
+                ex.printStackTrace(); // TODO remove
+            }
+        }
+    }
+    
     @Override
     public void passwordFilled() {
         // TODO show on history or buble
@@ -106,6 +117,18 @@ public class MainController implements MainAppListener, MainFrameListener {
     public void logoutFinished() {
         mainFrame.dispose();
         authController.startLogin();
+    }
+
+    @Override
+    public void systemTrayActionPerformed() {
+        if(authController.isUserLoggedIn()) {
+            if(!mainFrame.isVisible()) {
+            mainFrame.showFrame();
+            }
+            else {
+                mainFrame.toFront();
+            }
+        }
     }
     
 }

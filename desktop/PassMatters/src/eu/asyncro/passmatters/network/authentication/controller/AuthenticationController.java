@@ -87,9 +87,8 @@ public class AuthenticationController implements Loginer, Logouter {
                     if(result) {
                         System.out.println("logged in"); // TODO maknuti
                         isUserLoggedIn = true;
-                        mainAppListener.loginFinished();
                         loginFrame.dispose();
-                        // obavijestiti app o main windowu i prikazati ga
+                        mainAppListener.loginFinished();
                     }
                     else {
                         loginFrame.setLoginFailed();

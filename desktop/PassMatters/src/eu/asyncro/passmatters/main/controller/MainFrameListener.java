@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.main;
+package eu.asyncro.passmatters.main.controller;
 
 /**
  *

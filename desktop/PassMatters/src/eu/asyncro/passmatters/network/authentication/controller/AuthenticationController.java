@@ -6,7 +6,7 @@
 
 package eu.asyncro.passmatters.network.authentication.controller;
 
-import eu.asyncro.passmatters.main.MainAppListener;
+import eu.asyncro.passmatters.main.controller.MainAppListener;
 import eu.asyncro.passmatters.network.Client;
 import eu.asyncro.passmatters.network.ConnectionController;
 import eu.asyncro.passmatters.network.HTTPClient;

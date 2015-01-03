@@ -6,6 +6,7 @@
 
 package eu.asyncro.passmatters.network.authentication.view;
 
+import eu.asyncro.passmatters.main.view.BaseFrame;
 import eu.asyncro.passmatters.network.authentication.controller.Loginer;
 import eu.asyncro.passmatters.network.authentication.model.User;
 import java.awt.EventQueue;
@@ -16,7 +17,7 @@ import java.awt.event.ActionListener;
  *
  * @author Milan
  */
-public class LoginFrame extends javax.swing.JFrame implements ActionListener {
+public class LoginFrame extends BaseFrame implements ActionListener {
 
     private Loginer loginer;
     
@@ -24,6 +25,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
      * Creates new form LoginFrame
      */
     public LoginFrame() {
+        super();
         initComponents();
         setLocationRelativeTo(null);
         addListeners();
@@ -66,18 +68,18 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtUsername)
+                    .addComponent(pwdMaster)
                     .addGroup(pnlLoginLayout.createSequentialGroup()
                         .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMasterPassword)
-                            .addComponent(lblUsername))
-                        .addGap(0, 135, Short.MAX_VALUE))
-                    .addComponent(pwdMaster))
+                            .addComponent(lblUsername)
+                            .addComponent(lblMasterPassword))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(lblUsername)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -103,7 +105,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(lblLoginStatus)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnlLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -113,7 +115,7 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(lblLoginStatus))
@@ -123,9 +125,9 @@ public class LoginFrame extends javax.swing.JFrame implements ActionListener {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
     public void showFrame() {
         EventQueue.invokeLater(new Runnable() {
-
             @Override
             public void run() {
                 reset();

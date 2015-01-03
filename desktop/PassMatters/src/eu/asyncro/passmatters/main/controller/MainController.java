@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.main;
+package eu.asyncro.passmatters.main.controller;
 
+import eu.asyncro.passmatters.main.view.MainFrame;
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionController;
 import eu.asyncro.passmatters.network.authentication.controller.AuthenticationController;
 import eu.asyncro.passmatters.util.Messenger;
@@ -123,7 +124,7 @@ public class MainController implements MainAppListener, MainFrameListener {
     public void systemTrayActionPerformed() {
         if(authController.isUserLoggedIn()) {
             if(!mainFrame.isVisible()) {
-            mainFrame.showFrame();
+                mainFrame.showFrame();
             }
             else {
                 mainFrame.toFront();

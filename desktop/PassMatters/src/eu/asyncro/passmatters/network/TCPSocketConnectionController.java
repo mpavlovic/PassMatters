@@ -6,7 +6,7 @@
 
 package eu.asyncro.passmatters.network;
 
-import eu.asyncro.passmatters.main.MainAppListener;
+import eu.asyncro.passmatters.main.controller.MainAppListener;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;

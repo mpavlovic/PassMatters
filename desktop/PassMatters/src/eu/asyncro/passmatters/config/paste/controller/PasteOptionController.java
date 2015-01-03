@@ -5,10 +5,9 @@ import eu.asyncro.passmatters.config.paste.view.InputPasteOptionFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteOptionValidationFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteValidationFailedFrame;
 import eu.asyncro.passmatters.dao.DAOFactory;
-import eu.asyncro.passmatters.main.MainAppListener;
+import eu.asyncro.passmatters.main.controller.MainAppListener;
 import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
 import eu.asyncro.passmatters.util.Messenger;
-import java.awt.AWTException;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
 import javax.swing.SwingWorker;
@@ -65,11 +64,7 @@ public class PasteOptionController implements PasteOptionValidator,
     @Override
     public void startPasteValidation(KeyEventRecorder recorder) {
         this.recorder = recorder;
-        try {
-            pasteOptionValidationFrame.showFrame();
-        } catch (AWTException ex) {
-            Messenger.showErrorMessage("There was a problem during validation.", null);
-        }
+        pasteOptionValidationFrame.showFrame();
     }
     
     @Override
@@ -93,7 +88,7 @@ public class PasteOptionController implements PasteOptionValidator,
     
     /**
      * Starts paste option configuration 
-     * by showing config frame.
+     * by showing configuration frame.
      */
     private void startConfig() {
         generateCopyText();

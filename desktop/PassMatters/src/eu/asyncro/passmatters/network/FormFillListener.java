@@ -6,7 +6,7 @@
 
 package eu.asyncro.passmatters.network;
 
-import eu.asyncro.passmatters.main.MainAppListener;
+import eu.asyncro.passmatters.main.controller.MainAppListener;
 import eu.asyncro.passmatters.util.FormFiller;
 import eu.asyncro.passmatters.util.Messenger;
 import java.io.BufferedReader;

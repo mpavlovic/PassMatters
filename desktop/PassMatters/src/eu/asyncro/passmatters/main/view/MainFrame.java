@@ -4,22 +4,23 @@
  * and open the template in the editor.
  */
 
-package eu.asyncro.passmatters.main;
+package eu.asyncro.passmatters.main.view;
 
-import java.awt.EventQueue;
+import eu.asyncro.passmatters.main.controller.MainFrameListener;
 
 /**
  *
  * @author Milan
  */
-public class MainFrame extends javax.swing.JFrame {
+public class MainFrame extends BaseFrame {
 
     private MainFrameListener mainFrameListener;
     
     /**
-     * Creates new form MainFrame
+     * Creates new MainFrame instance
      */
     public MainFrame() {
+        super();
         initComponents();
     }
 
@@ -45,6 +46,7 @@ public class MainFrame extends javax.swing.JFrame {
         setTitle("PassMatters");
 
         btnLogout.setText("Logout");
+        btnLogout.setFocusable(false);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
@@ -110,17 +112,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         mainFrameListener.logoutPerformed();
     }//GEN-LAST:event_btnLogoutActionPerformed
-
-    
-    public void showFrame() {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                setVisible(true);
-                setLocationRelativeTo(null);
-            }
-        });
-    }
 
     public void setMainFrameListener(MainFrameListener mainFrameListener) {
         this.mainFrameListener = mainFrameListener;

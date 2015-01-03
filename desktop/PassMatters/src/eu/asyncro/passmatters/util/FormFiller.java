@@ -18,8 +18,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -28,7 +26,7 @@ import java.util.logging.Logger;
 public class FormFiller implements ClipboardOwner {
 
     private final long SLEEP_INTERVAL_FOR_CLIPBOARD = 60;
-    private final long SLEEP_INTERVAL_BEFORE_PASSWORD_FILL = 100;
+    private final long SLEEP_INTERVAL_BEFORE_PASSWORD_FILL = 200;
     
     private final int MAX_FAILS_BEFORE_PASS_IN_CLIPBOARD = 10;
     private final int MAX_FAILS_AFTER_PASS_IN_CLIPBOARD = 20;

@@ -7,6 +7,7 @@
 package eu.asyncro.passmatters.config.paste.view;
 
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionValidator;
+import eu.asyncro.passmatters.main.view.BaseFrame;
 import java.awt.AWTException;
 
 /**
@@ -15,7 +16,7 @@ import java.awt.AWTException;
  * 
  * @author Milan
  */
-public class PasteOptionValidationFrame extends javax.swing.JFrame {
+public class PasteOptionValidationFrame extends BaseFrame {
 
     private PasteOptionValidator validator;
     
@@ -71,11 +72,12 @@ public class PasteOptionValidationFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   /**
-    * Shows this frame with focused text field and pasted text inside it.
-    * @throws AWTException 
-    */ 
-    public void showFrame() throws AWTException {
+    /**
+     * Shows this frame with focused text field and pasted text inside it.
+     * This is overloaded method from BaseFrame superclass.
+     */
+    @Override
+    public void showFrame() {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             @Override

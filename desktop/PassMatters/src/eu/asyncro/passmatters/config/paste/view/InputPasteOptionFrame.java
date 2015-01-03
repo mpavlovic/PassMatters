@@ -8,6 +8,7 @@ package eu.asyncro.passmatters.config.paste.view;
 
 import eu.asyncro.passmatters.config.paste.controller.KeyEventRecorder;
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionValidator;
+import eu.asyncro.passmatters.main.view.BaseFrame;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -17,7 +18,7 @@ import java.awt.event.KeyEvent;
  * 
  * @author Milan
  */
-public class InputPasteOptionFrame extends javax.swing.JFrame {
+public class InputPasteOptionFrame extends BaseFrame {
 
     private int keyCount = 0;
     private final KeyEventRecorder recorder = new KeyEventRecorder();
@@ -28,6 +29,7 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
      * Creates new form InputPasteOptionFrame
      */
     public InputPasteOptionFrame() {
+        super();
         initComponents();
         addListeners();
         setLocationRelativeTo(null);
@@ -86,7 +88,8 @@ public class InputPasteOptionFrame extends javax.swing.JFrame {
      * @param copyString String which is shown in first (upper) text field. 
      */
     public void showFrame(final String copyString) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {          
+            @Override
             public void run() {
                 setCopyString(copyString);
                 setVisible(true);

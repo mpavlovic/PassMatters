@@ -1,12 +1,13 @@
 package eu.asyncro.passmatters.config.paste.view;
 
 import eu.asyncro.passmatters.config.paste.controller.PasteOptionConfigurator;
+import eu.asyncro.passmatters.main.view.BaseFrame;
 
 /**
  * This frame is shown when paste option validation wasn't successful.
  * @author Milan
  */
-public class PasteValidationFailedFrame extends javax.swing.JFrame {
+public class PasteValidationFailedFrame extends BaseFrame {
 
     private final PasteOptionConfigurator configurator;
     
@@ -15,6 +16,7 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
      * @param configurator
      */
     public PasteValidationFailedFrame(PasteOptionConfigurator configurator) {
+        super();
         this.configurator = configurator;
         initComponents();
         showFrame();
@@ -104,18 +106,6 @@ public class PasteValidationFailedFrame extends javax.swing.JFrame {
         configurator.configurePasteOption();
     }//GEN-LAST:event_btnTryAgainActionPerformed
 
-    /**
-     * Shows this frame.
-     */
-    private void showFrame() {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                setLocationRelativeTo(null);
-                setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;

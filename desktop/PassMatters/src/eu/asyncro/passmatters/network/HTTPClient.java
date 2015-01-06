@@ -30,8 +30,8 @@ public class HTTPClient extends Client {
         super(url, requestMethod, parameters);
     }
 
-    public HTTPClient(String urlString, String requestMethod) {
-        super(urlString, requestMethod);
+    public HTTPClient(String requestMethod) {
+        super(requestMethod);
     }
     
     @Override

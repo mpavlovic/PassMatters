@@ -9,7 +9,7 @@ package eu.asyncro.passmatters.network.authentication.controller;
 import eu.asyncro.passmatters.main.controller.MainAppListener;
 import eu.asyncro.passmatters.network.Client;
 import eu.asyncro.passmatters.network.ConnectionController;
-import eu.asyncro.passmatters.network.HTTPClient;
+import eu.asyncro.passmatters.network.HTTPSClient;
 import eu.asyncro.passmatters.network.JsonAdapter;
 import eu.asyncro.passmatters.network.Protocol;
 import eu.asyncro.passmatters.network.TCPSocketConnectionController;
@@ -29,8 +29,8 @@ import javax.swing.SwingWorker;
  */
 public class AuthenticationController implements Loginer, Logouter {
     
-    private final String LOGIN_URL = "http://178.62.212.164/api/login";
-    private final String LOGOUT_URL = "http://178.62.212.164/api/logout";
+    private final String LOGIN_URL = "https://www.passmatters.eu/api/login";
+    private final String LOGOUT_URL = "https://www.passmatters.eu/api/logout";
     
     private LoginFrame loginFrame;
     private Client client;
@@ -48,7 +48,7 @@ public class AuthenticationController implements Loginer, Logouter {
         loginFrame = new LoginFrame();
         loginFrame.setLoginer(this);
         
-        client = new HTTPClient(LOGIN_URL, Client.REQUEST_POST);
+        client = new HTTPSClient(Client.REQUEST_POST);
         connectionController = new TCPSocketConnectionController(mainAppListener);
     }
     
@@ -109,8 +109,7 @@ public class AuthenticationController implements Loginer, Logouter {
         Hashtable<String, String> parameters = new Hashtable<>();
         parameters.put("username", username);
         parameters.put("password", password);
-        client.setParameters(parameters);
-        client.setUrl(LOGIN_URL); // TODO be careful with call order
+        client.createRequest(LOGIN_URL, parameters);
         String loginResponse = client.sendRequest();
         return (String) loginResponseHandler.handleResult(loginResponse);
     }
@@ -138,8 +137,7 @@ public class AuthenticationController implements Loginer, Logouter {
     {
         Hashtable<String, String> params = new Hashtable<>();
         params.put("token", token);
-        client.setUrl(LOGOUT_URL);
-        client.setParameters(params);
+        client.createRequest(LOGOUT_URL, params);
         String response = client.sendRequest();
         System.out.println(response); // TODO remove
         return response.equals(Protocol.USER_LOGGED_OUT);

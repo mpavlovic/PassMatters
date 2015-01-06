@@ -1,14 +1,16 @@
 package eu.asyncro.passmatters.main;
 
+import eu.asyncro.passmatters.main.controller.MainController;
 import eu.asyncro.passmatters.util.FormFiller;
 
 /**
- *This is application entry point class with main method.
+ * This is application entry point class with main method.
  * @author Milan
  */
 public class Application {
     
     /**
+     * Main. Starts the application.
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -19,11 +21,15 @@ public class Application {
             maincontroller.startApp();
             
             /*
-            Thread.sleep(3000);
-            FormFiller ff = new FormFiller(null);
-            ff.fillFocusedForm("wc8H3W4U!Q");
-            System.out.println("gotovo");
+            FormFiller ff = new FormFiller();
+            boolean res = ff.fillFocusedForm("1q2w3e");
+            if(res) System.out.println("OK");
+            else System.out.println("FALSE");
+            System.exit(0);
             */
+            
+            //System.out.println("gotovo");
+            
             
             /*
             System.out.println("login...");

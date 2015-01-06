@@ -30,10 +30,16 @@ public abstract class Client {
     
     private final String ENCODING = "UTF-8";
 
+    public Client(String requestMethod) {
+        this.requestMethod = requestMethod;
+    }
+    
+    /*
     public Client(String urlString, String requestMethod) {
         this.urlString = urlString;
         this.requestMethod = requestMethod;
     }
+    */
     
     public Client(String urlString, String requestMethod, Hashtable<String, String> parameters) 
             throws MalformedURLException, UnsupportedEncodingException 
@@ -41,11 +47,12 @@ public abstract class Client {
         this.urlString = urlString;
         this.requestMethod = requestMethod;
         this.parametersTable = parameters;
-        finalizeURLParameters();
+        finalizeURLAndParameters();
     }
     
     public abstract String sendRequest() throws Exception;
-
+    
+    /*
     public void setParameters(Hashtable<String, String> parameters) 
             throws UnsupportedEncodingException, MalformedURLException 
     {
@@ -59,8 +66,17 @@ public abstract class Client {
         this.urlString = urlString;
         finalizeURLParameters();
     }
+    */
     
-    private void finalizeURLParameters() 
+    public void createRequest(String urlString, Hashtable<String, String> parameters) 
+            throws UnsupportedEncodingException, MalformedURLException 
+    {
+        this.urlString = urlString;
+        this.parametersTable = parameters;
+        finalizeURLAndParameters();
+    }
+    
+    private void finalizeURLAndParameters() 
             throws UnsupportedEncodingException, MalformedURLException 
     {
         formatStringParameters();

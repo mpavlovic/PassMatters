@@ -62,6 +62,7 @@ public class TCPSocketConnectionController extends ConnectionController {
     
     /**
      * Closes the TCP connection with remote server. 
+     * @return true if connection is successfully closed, false otherwise
      * @throws IOException 
      */
     @Override

@@ -20,8 +20,8 @@ public class HTTPSClient extends Client {
     
     private HttpsURLConnection connection;
 
-    public HTTPSClient(String urlString, String requestMethod) {
-        super(urlString, requestMethod);
+    public HTTPSClient(String requestMethod) {
+        super(requestMethod);
     }
 
     @Override

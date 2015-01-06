@@ -84,6 +84,7 @@ public class MainController implements MainAppListener, MainFrameListener {
     @Override
     public void loginFinished() {
         System.out.println("login finished"); // todo remove
+        mainFrame.setStatus("You are logged in.");
         mainFrame.showFrame();
         showInSystemTray();
     }

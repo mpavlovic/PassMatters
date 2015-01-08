@@ -89,6 +89,10 @@ public class MainController implements MainAppListener, MainFrameListener {
         showInSystemTray();
     }
 
+    /**
+     * Shows application's system tray icon if not already showed.
+     * Calls showInSystemTray() method SystemTrayController
+     */
     private void showInSystemTray() {
         if(systemTrayController.isSystemTraySupported()
                 && !systemTrayController.isTrayIconAdded()) 

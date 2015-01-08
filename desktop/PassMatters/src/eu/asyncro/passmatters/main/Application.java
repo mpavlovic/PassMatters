@@ -10,7 +10,8 @@ import eu.asyncro.passmatters.util.FormFiller;
 public class Application {
     
     /**
-     * Main. Starts the application.
+     * Main. Starts the application by instantiating 
+     * MainController class and calling .startApp() method.
      * @param args the command line arguments
      */
     public static void main(String[] args) {

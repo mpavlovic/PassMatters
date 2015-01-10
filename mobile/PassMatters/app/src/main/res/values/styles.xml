@@ -1,13 +1,20 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="wuffyTheme" parent="Theme.Base.AppCompat.Light.DarkActionBar">
+    <style name="pmTheme" parent="Theme.Base.AppCompat.Light.DarkActionBar">
         <item name="android:actionBarStyle">@style/actionBarStyle</item>
 
     </style>
+
     <style name="actionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/blue</item>
-        <item name="android:icon">@drawable/ic_launcher</item>
+        <item name="android:background">@color/app_primary_color</item>
+        <item name="android:icon">@drawable/ic_icon_no_bg</item>
     </style>
+
+    <style name="buttonStyle">
+        <item name="android:background">@color/app_divider_color</item>
+
+    </style>
+
 
 </resources>

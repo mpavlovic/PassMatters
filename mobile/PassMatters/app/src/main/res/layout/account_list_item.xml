@@ -8,12 +8,10 @@
         android:id="@+id/tvAccountName"
         android:layout_width="fill_parent"
         android:gravity="center"
-        android:textSize="24dp"
+        android:background="@color/app_divider_color"
+        android:textSize="34dp"
         android:layout_margin="3dp"
         android:layout_height="wrap_content" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:background="@color/blue"/>
+
 
 </LinearLayout>

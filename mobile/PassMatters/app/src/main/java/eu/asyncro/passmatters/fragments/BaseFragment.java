@@ -1,5 +1,6 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.os.SystemClock;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import com.dmacan.lightandroid.LightFragment;
 import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.controllers.ControllerLogOut;
 import eu.asyncro.passmatters.controllers.ManagerSession;
+import eu.asyncro.passmatters.receivers.LockReceiver;
 
 /**
  * Created by ahuskano on 12/5/2014.
@@ -44,4 +46,6 @@ public abstract class BaseFragment extends LightFragment {
     public void setControllerLogOut(ControllerLogOut controllerLogOut) {
         this.controllerLogOut = controllerLogOut;
     }
+
+
 }

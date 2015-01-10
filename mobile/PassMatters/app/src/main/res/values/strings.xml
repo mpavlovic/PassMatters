@@ -7,6 +7,6 @@
     <string name="action_logout">Log out</string>
     <string name="placeholder_username">Username</string>
     <string name="placeholder_password">Password</string>
-    <string name="bt_sign_in">Sign in</string>
+    <string name="bt_sign_in">Sign in to your account</string>
 
 </resources>

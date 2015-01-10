@@ -3,6 +3,7 @@ package eu.asyncro.passmatters.controllers;
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
+import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
 import eu.asyncro.passmatters.data.responses.ResponseLogOut;
 import eu.asyncro.passmatters.interfaces.OnLogOutListener;
@@ -33,8 +34,16 @@ public class ControllerLogOut extends LightController {
     };
 
     public void logOut(String token) {
-        LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).logOut(token, callbackLogout);
+        if (Settings.demoMode)
+            demoLogOut();
+        else
+            LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).logOut(token, callbackLogout);
+    }
 
+    private void demoLogOut(){
+        ResponseLogOut responseLogOut=new ResponseLogOut();
+        responseLogOut.setCode(1);
+        onLogOutListener.onLogOut(responseLogOut);
     }
 
     public OnLogOutListener getOnLogOutListener() {

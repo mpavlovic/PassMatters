@@ -1,26 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/md_20"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:hint="@string/placeholder_username"
-        android:layout_margin="@dimen/et_margin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/etPassword"
-        android:hint="@string/placeholder_password"
-        android:password="true"
-        android:layout_margin="@dimen/et_margin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/app_light_primary_color"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/etUsername"
+            android:hint="@string/placeholder_username"
+            android:layout_margin="@dimen/et_margin"
+            android:drawableLeft="@drawable/user_small"
+            android:textColor="@color/app_primary_text_color"
+            android:textColorHint="@color/app_primary_text_color"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:hint="@string/placeholder_password"
+            android:password="true"
+            android:drawableLeft="@drawable/password_small"
+            android:layout_margin="@dimen/et_margin"
+            android:textColor="@color/app_primary_text_color"
+            android:textColorHint="@color/app_primary_text_color"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
     <Button
+        style="@style/buttonStyle"
         android:id="@+id/btSignIn"
+        android:layout_marginTop="@dimen/md_20"
         android:text="@string/bt_sign_in"
-        android:layout_margin="@dimen/bt_margin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

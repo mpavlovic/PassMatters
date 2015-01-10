@@ -3,6 +3,7 @@ package eu.asyncro.passmatters.controllers;
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
+import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
 import eu.asyncro.passmatters.data.requests.RequestSignIn;
 import eu.asyncro.passmatters.data.responses.ResponseSignIn;
@@ -31,16 +32,17 @@ public class ControllerSignIn extends LightController {
     };
 
     public void signIn(RequestSignIn request) {
-        LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).signIn(request, callbackSignIn);
-
-//        demoSignIn(request);
+        if (Settings.demoMode)
+            demoSignIn(request);
+        else
+            LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).signIn(request, callbackSignIn);
     }
 
     private void demoSignIn(RequestSignIn request) {
 
         if (request.getUsername().equals("demo")) {
             ResponseSignIn response = new ResponseSignIn();
-            response.setLogged(1);
+            response.setCode(1);
 
             getOnDataReadListener().onDataRead(response);
         }

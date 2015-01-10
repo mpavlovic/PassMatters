@@ -3,6 +3,7 @@ package eu.asyncro.passmatters.controllers;
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
+import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
 import eu.asyncro.passmatters.data.responses.ResponseAccount;
 import eu.asyncro.passmatters.interfaces.OnAccountSendedListener;
@@ -32,7 +33,15 @@ public class ControllerAccount extends LightController {
     };
 
     public void setAccount(String token, int accountId) {
-        LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION_PORT).create(APIPassMatters.class).sendAccount(token, accountId, callbackAccount);
+        if (Settings.demoMode)
+            demoSetAccount();
+        else
+            LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION_PORT).create(APIPassMatters.class).sendAccount(token, accountId, callbackAccount);
+    }
+    private void demoSetAccount(){
+        ResponseAccount responseAccount=new ResponseAccount();
+        responseAccount.setStatus(1);
+        onAccountSendedListener.onAccountSended(responseAccount);
     }
 
     public OnAccountSendedListener getOnAccountSendedListener() {

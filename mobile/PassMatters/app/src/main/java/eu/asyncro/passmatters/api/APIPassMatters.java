@@ -17,8 +17,8 @@ import retrofit.http.Query;
  */
 public interface APIPassMatters {
 
-    public static String API_LOCATION = "http://178.62.212.164";
-    public static String API_LOCATION_PORT = "http://178.62.212.164:3000";
+    public static String API_LOCATION = "https://www.passmatters.eu";
+    public static String API_LOCATION_PORT = "http://www.passmatters.eu:3000";
 
     @POST("/api/login")
     void signIn(@Body LightRequest request, Callback<ResponseSignIn> response);

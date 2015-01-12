@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eu.asyncro.passmatters.R;
-import eu.asyncro.passmatters.activitys.ActivityMain;
+import eu.asyncro.passmatters.activities.ActivityMain;
 import eu.asyncro.passmatters.adapters.ThreeDListAdapter;
 import eu.asyncro.passmatters.controllers.ControllerAccount;
 import eu.asyncro.passmatters.controllers.ControllerAccounts;

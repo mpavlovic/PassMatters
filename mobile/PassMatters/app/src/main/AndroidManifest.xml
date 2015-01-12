@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/pmTheme">
         <activity
-            android:name="eu.asyncro.passmatters.activitys.ActivitySplash"
+            android:name="eu.asyncro.passmatters.activities.ActivitySplash"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:name=".activitys.ActivityMain"></activity>
+            android:name=".activities.ActivityMain"></activity>
     </application>
 
 </manifest>

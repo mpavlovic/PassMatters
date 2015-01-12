@@ -1,4 +1,4 @@
-package eu.asyncro.passmatters.activitys;
+package eu.asyncro.passmatters.activities;
 
 import com.dmacan.lightandroid.LightSplashActivity;
 

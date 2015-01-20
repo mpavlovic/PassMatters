@@ -31,10 +31,10 @@ public class EncryptionKeyGenerator {
             throws NoSuchAlgorithmException, InvalidKeySpecException, 
                 UnsupportedEncodingException 
     {
-        int keyLength = 20*8;
-        int numberOfIterations = 4096;
+        int keyLength = 256;
+        int numberOfIterations = 120000;
         
-        byte[] saltBytes = salt.getBytes();
+        byte[] saltBytes = salt.getBytes(); //getSalt(); // salt.getBytes();
         char[] passwordChars = password.toCharArray();
         
         PBEKeySpec keySpecifications = new PBEKeySpec(passwordChars, saltBytes, numberOfIterations, keyLength);

@@ -1,4 +1,4 @@
-package eu.asyncro.passmatters.activitys;
+package eu.asyncro.passmatters.activities;
 
 import android.content.Intent;
 import android.os.SystemClock;
@@ -20,7 +20,7 @@ public class ActivityMain extends LightActivity {
 
     private long oldTime = SystemClock.elapsedRealtime();
     private long newTime = SystemClock.elapsedRealtime();
-    private long DELAY = 5000;
+    private long DELAY = 500000;
 
     @Override
     public int provideLayoutRes() {
@@ -36,7 +36,6 @@ public class ActivityMain extends LightActivity {
     public void onUserInteraction() {
         super.onUserInteraction();
         newTime = SystemClock.elapsedRealtime();
-        Log.d("lock_test", "onUserInteraction oldtime: "+oldTime+" new time: "+newTime);
         if (newTime - oldTime >= DELAY) {
             sendAction();
             oldTime = newTime;

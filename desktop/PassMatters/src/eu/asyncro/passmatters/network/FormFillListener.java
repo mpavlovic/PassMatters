@@ -15,7 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This class is responsible for listening if incoming message from remote 
+ * server arrives. This message is actually a password which need to be decrypted 
+ * and placed in focused form field. Listening is established in separate thread.
+ * 
  * @author Milan
  */
 public class FormFillListener extends Thread {
@@ -23,7 +26,14 @@ public class FormFillListener extends Thread {
     private final FormFiller formFiller;
     private final Connector connector;
     private final MainAppListener mainAppListener;
-
+    
+    /**
+     * Constructor.
+     * @param connector Connector for establishing TCP connection to the remote server 
+     * via (SSL)Socket.
+     * @param mainAppListener MainAppListener which needs to be noticed when focused
+     * form field is filled with received password.
+     */
     public FormFillListener(Connector connector, MainAppListener mainAppListener) {
         this.connector = connector;
         this.mainAppListener = mainAppListener;

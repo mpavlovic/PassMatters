@@ -23,6 +23,10 @@ public class TCPSocketConnectionController extends ConnectionController {
     private BufferedReader inputFromServer;
     private MainAppListener mainAppListener;
     
+    /**
+     * Creates new instance of this class.
+     * @param mainAppListener MainAppListener
+     */
     public TCPSocketConnectionController(MainAppListener mainAppListener) {
         this.mainAppListener = mainAppListener;
     } 
@@ -39,6 +43,10 @@ public class TCPSocketConnectionController extends ConnectionController {
         return messageFromServer.equals(Protocol.CONNECTED);
     }
     
+    /**
+     * Opens the input and output stream from and to remote server.
+     * @throws IOException 
+     */
     private void openStreams() throws IOException 
     {
         outputToServer = new DataOutputStream(connector.getOutputStream());
@@ -60,11 +68,6 @@ public class TCPSocketConnectionController extends ConnectionController {
         return messageFromServer;
     }
     
-    /**
-     * Closes the TCP connection with remote server. 
-     * @return true if connection is successfully closed, false otherwise
-     * @throws IOException 
-     */
     @Override
     public boolean closeConnection() throws IOException 
     {

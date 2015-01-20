@@ -109,14 +109,26 @@ public class MainFrame extends BaseFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Executes when logout button is clicked.
+     * @param evt java.awt.event.ActionEvent event raised when clicked
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         mainFrameListener.logoutPerformed();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Sets MainFrameListener to this class, i.e. frame.
+     * @param mainFrameListener MainframeListener to set.
+     */
     public void setMainFrameListener(MainFrameListener mainFrameListener) {
         this.mainFrameListener = mainFrameListener;
     }
     
+    /**
+     * Sets tje given argument as a status in status label.
+     * @param status Status string to set. 
+     */
     public void setStatus(String status) {
         lblStatus.setText(status);
     }

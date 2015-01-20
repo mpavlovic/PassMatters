@@ -20,6 +20,10 @@ public class HTTPSClient extends Client {
     
     private HttpsURLConnection connection;
 
+     /**
+     * Constructor.
+     * @param requestMethod request method type (public static member of Client)
+     */
     public HTTPSClient(String requestMethod) {
         super(requestMethod);
     }
@@ -47,6 +51,11 @@ public class HTTPSClient extends Client {
         return responseBuilder.toString();
     }
 
+    /**
+     * Opens HTTP connection to the remote URL
+     * @see public URLConnection openConnection() in java.net.URL
+     * @throws IOException 
+     */
     private void openUrlConnection() throws IOException 
     {
         connection = (HttpsURLConnection) url.openConnection();
@@ -55,6 +64,12 @@ public class HTTPSClient extends Client {
         connection.setDoOutput(true);
     }
 
+    /**
+     * Used for writing parameters to the opened URL connection 
+     * through DataOutputStream. This method is used when this Client needs to 
+     * send a HTTP POST request. 
+     * @throws IOException 
+     */
     private void writeParametersBytesToServer() throws IOException 
     {
         DataOutputStream dos = new DataOutputStream(connection.getOutputStream());

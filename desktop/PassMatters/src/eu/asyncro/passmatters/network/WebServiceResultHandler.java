@@ -7,7 +7,8 @@
 package eu.asyncro.passmatters.network;
 
 /**
- *
+ * Interface containing method for handling result (response) string from
+ * a web service (or remote server).
  * @author Milan
  */
 public interface WebServiceResultHandler {

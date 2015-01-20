@@ -13,13 +13,36 @@ package eu.asyncro.passmatters.network;
  */
 public class Protocol {
     
-    // response messages
+    // RESPONSE MESSAGES
+    /**
+     * 'Bad credentials' message.
+     */
     public static final String BAD_CREDENTIALS = "{\"code\":0,\"message\":\"Bad credentials\"}";
+    
+    /**
+     * 'Connected' message.
+     */
     public static final String CONNECTED = "{status: 1, message: \"Connected\"}";
+    
+    /**
+     * 'User not found' message
+     */
     public static final String USER_NOT_FOUND = "{status: 0, message: \"User not found\"}";
+    
+    /**
+     * 'Authenticated' message
+     */
     public static final String AUTHENTICATED = "{status: 1, message: \"Authenticated\"}";
+    
+    /**
+     * 'User logged out' message
+     */
     public static final String USER_LOGGED_OUT = "{\"code\":1,\"message\":\"User logged out\"}";
     
-    // request messages
+    
+    // REQUEST MESSAGES
+    /**
+     * 'Logout' message
+     */
     public static final String LOGOUT = "{\"step\": 3}";
 }

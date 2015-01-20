@@ -9,7 +9,7 @@ package eu.asyncro.passmatters.network;
 import org.json.JSONObject;
 
 /**
- *
+ * Class responsible for manipulating with JSON strings.
  * @author Milan
  */
 public class JsonAdapter {
@@ -18,6 +18,11 @@ public class JsonAdapter {
     private static final String CODE = "code";
     private static final String MESSAGE = "message";
         
+    /**
+     * Returns login token from received JSON string.  
+     * @param jsonString JSON with 'token' field
+     * @return String token
+     */
     public static String getToken(String jsonString) {
         jsonString = jsonString.replace(END,"");
         JSONObject object = new JSONObject(jsonString);
@@ -28,6 +33,12 @@ public class JsonAdapter {
         else return null;
     }
     
+    /**
+     * Creates JSON string with 'step' and 'token' fields. Used for TCP client 
+     * authentication. 
+     * @param token token for sending to the remote server
+     * @return formatted JSON string
+     */
     public static String getAuthJsonString(String token) {
         JSONObject object = new JSONObject();
         object.put("step", 1);

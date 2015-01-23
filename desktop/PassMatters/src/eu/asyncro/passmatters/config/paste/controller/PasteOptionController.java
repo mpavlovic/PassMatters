@@ -6,7 +6,7 @@ import eu.asyncro.passmatters.config.paste.view.PasteOptionValidationFrame;
 import eu.asyncro.passmatters.config.paste.view.PasteValidationFailedFrame;
 import eu.asyncro.passmatters.dao.DAOFactory;
 import eu.asyncro.passmatters.main.controller.MainAppListener;
-import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
+import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FULL_PATH;
 import eu.asyncro.passmatters.util.Messenger;
 import java.io.File;
 import java.util.concurrent.ExecutionException;
@@ -161,7 +161,7 @@ public class PasteOptionController implements PasteOptionValidator,
      * @see exists() method in JDK class File
      */
     public boolean isShortcutFileCreated() {
-        File file = new File(PASTE_SHORTCUT_FILE_NAME);
+        File file = new File(PASTE_SHORTCUT_FULL_PATH);
         return file.exists();
     }
     
@@ -174,7 +174,7 @@ public class PasteOptionController implements PasteOptionValidator,
             mainAppListener.pasteConfigFinished();
         }
         else {
-            Messenger.showErrorMessage("Could not finish configuration.", null);
+            Messenger.showErrorMessage("Could not finish configuration.", null); // TODO exit
         }
     }
     

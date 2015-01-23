@@ -22,7 +22,13 @@ public final class Constants {
         
     }
     
-    public static final String PASTE_SHORTCUT_FILE_NAME = "paste.ser";
+    private static final String USER_HOME_DIRECTORY = System.getProperty("user.home");
+    private static final String APP_DIRECTORY = "/passmatters/";
+    private static final String PASTE_SHORTCUT_FILE_NAME = "paste.ser";
+    
+    public static final String FULL_APP_DIRECTORY = USER_HOME_DIRECTORY + APP_DIRECTORY; 
+    public static final String PASTE_SHORTCUT_FULL_PATH = FULL_APP_DIRECTORY
+            + PASTE_SHORTCUT_FILE_NAME;
     
     
 }

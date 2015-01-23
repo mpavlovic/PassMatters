@@ -1,6 +1,6 @@
 package eu.asyncro.passmatters.dao;
 
-import static eu.asyncro.passmatters.util.Constants.PASTE_SHORTCUT_FILE_NAME;
+import static eu.asyncro.passmatters.util.Constants.*;
 import eu.asyncro.passmatters.config.paste.model.PasteShortcut;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +24,7 @@ public class FilePasteShortcutDAO implements PasteShortcutDAO {
     public PasteShortcut getPasteShortcut() {
         PasteShortcut pasteShortcut = null;
         
-        File pasteShortcutFile = new File(PASTE_SHORTCUT_FILE_NAME);
+        File pasteShortcutFile = new File(PASTE_SHORTCUT_FULL_PATH);
         
         try(ObjectInputStream ois = 
                 new ObjectInputStream(new FileInputStream(pasteShortcutFile)))
@@ -41,7 +41,11 @@ public class FilePasteShortcutDAO implements PasteShortcutDAO {
     @Override
     public boolean savePasteShortcut(PasteShortcut pasteShortcut) {
         boolean result = true;
-        File pasteShortcutFile = new File(PASTE_SHORTCUT_FILE_NAME);
+        File appDirectory = new File(FULL_APP_DIRECTORY);
+        if(!appDirectory.exists()) {
+            if(!appDirectory.mkdirs()) return false;
+        }
+        File pasteShortcutFile = new File(PASTE_SHORTCUT_FULL_PATH);
         try(ObjectOutputStream oos = 
                 new ObjectOutputStream(new FileOutputStream(pasteShortcutFile))) 
         {

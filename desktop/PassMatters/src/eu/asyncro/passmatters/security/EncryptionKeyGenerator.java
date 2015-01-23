@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eu.asycro.passmatters.security;
+package eu.asyncro.passmatters.security;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -34,7 +34,7 @@ public class EncryptionKeyGenerator {
         int keyLength = 256;
         int numberOfIterations = 120000;
         
-        byte[] saltBytes = salt.getBytes(); //getSalt(); // salt.getBytes();
+        byte[] saltBytes = bytesToHex(getSalt()).getBytes(); // salt.getBytes();
         char[] passwordChars = password.toCharArray();
         
         PBEKeySpec keySpecifications = new PBEKeySpec(passwordChars, saltBytes, numberOfIterations, keyLength);
@@ -52,11 +52,12 @@ public class EncryptionKeyGenerator {
         MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
         messageDigest.reset();
         byte[] digest = messageDigest.digest("passmatters.eu".getBytes("utf-8"));
+        System.out.println("Hash: " + bytesToHex(digest)); // TODO remove
         return digest;
     }
     
     // http://stackoverflow.com/questions/9655181/convert-from-byte-array-to-hex-string-in-java
-    private static String bytesToHex(byte[] bytes) {
+    public static String bytesToHex(byte[] bytes) {
         char[] hexArray = "0123456789ABCDEF".toCharArray();
         char[] hexChars = new char[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {
@@ -67,7 +68,7 @@ public class EncryptionKeyGenerator {
         return new String(hexChars);
     }
     
-    private static byte[] hexToBytes(String s) {
+    public static byte[] hexToBytes(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {

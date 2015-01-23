@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eu.asycro.passmatters.security;
+package eu.asyncro.passmatters.security;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.security.Key;
@@ -23,7 +23,7 @@ public class SymmetricEncrypter extends Encrypter {
             throws NoSuchAlgorithmException, NoSuchPaddingException 
     {
         super();
-        this.cipherAlgorithmName = "AES/CBC/PKCS5Padding";
+        this.cipherAlgorithmName = "AES/CBC/NoPadding";
         this.cipher = Cipher.getInstance(cipherAlgorithmName);
     }
 
@@ -46,11 +46,13 @@ public class SymmetricEncrypter extends Encrypter {
         return encryptedBytes;
     }
 
-    public String decrypt(String base64EncryptedString, byte[] secretKey, String initVector)
+    public String decrypt(String base64EncryptedString, byte[] secretKey, String base64InitVector)
             throws Exception 
     {
         byte[] decodedEncryptedBytes = Base64.decode(base64EncryptedString);
-        byte[] initVectorBytes = initVector.getBytes(charset);
+        byte[] initVectorBytes = Base64.decode(base64InitVector); //base64InitVector.getBytes(charset);
+        System.out.println("IV length: " + initVectorBytes.length); // TODO remove
+        System.out.println(new String(initVectorBytes, charset));
         byte[] decryptedBytes = decrypt(decodedEncryptedBytes, secretKey, initVectorBytes);
         return new String(decryptedBytes, charset);
     }

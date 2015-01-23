@@ -46,4 +46,10 @@ public interface MainAppListener {
      * when user double-clicks on system tray icon.
      */
     public void systemTrayActionPerformed();
+    
+    /**
+     * This method is called when password is received from remote server.
+     * @return password byte array
+     */
+    public byte[] passwordArrived();
 }

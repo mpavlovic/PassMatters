@@ -136,5 +136,10 @@ public class MainController implements MainAppListener, MainFrameListener {
             }
         }
     }
+
+    @Override
+    public byte[] passwordArrived() {
+        return authController.getSecretKey();
+    }
     
 }

@@ -16,6 +16,7 @@ import eu.asyncro.passmatters.network.TCPSocketConnectionController;
 import eu.asyncro.passmatters.network.WebServiceResultHandler;
 import eu.asyncro.passmatters.network.authentication.model.User;
 import eu.asyncro.passmatters.network.authentication.view.LoginFrame;
+import eu.asyncro.passmatters.security.EncryptionKeyGenerator;
 import eu.asyncro.passmatters.util.Messenger;
 import java.util.Hashtable;
 import java.util.concurrent.ExecutionException;
@@ -38,6 +39,7 @@ public class AuthenticationController implements Loginer, Logouter {
     private final MainAppListener mainAppListener;
     private boolean isUserLoggedIn = false;
     private String token;
+    private byte[] secretKey;
     
     public AuthenticationController(MainAppListener mainAppListener) {
         this.mainAppListener = mainAppListener;
@@ -59,6 +61,11 @@ public class AuthenticationController implements Loginer, Logouter {
     public boolean isUserLoggedIn() {
         return isUserLoggedIn;
     }
+
+    public byte[] getSecretKey() {
+        return secretKey;
+    }
+    
     
     @Override
     public void submit(final User user) {       
@@ -73,6 +80,8 @@ public class AuthenticationController implements Loginer, Logouter {
                 if(!connectionController.openConnection()) return false;
                 
                 if(!authenticateOnServer(token)) return false;
+                
+                secretKey = EncryptionKeyGenerator.generateSecretKey(user.getPassword(), null);
                 
                 connectionController.startListening();
                 

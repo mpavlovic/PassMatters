@@ -7,12 +7,15 @@
 package eu.asyncro.passmatters.network;
 
 import eu.asyncro.passmatters.main.controller.MainAppListener;
+import eu.asyncro.passmatters.security.SymmetricEncrypter;
 import eu.asyncro.passmatters.util.FormFiller;
 import eu.asyncro.passmatters.util.Messenger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * This class is responsible for listening if incoming message from remote 
@@ -26,6 +29,8 @@ public class FormFillListener extends Thread {
     private final FormFiller formFiller;
     private final Connector connector;
     private final MainAppListener mainAppListener;
+    private final String DELIMITER = "\\|::\\|";
+    private SymmetricEncrypter symmetricEncrypter;
     
     /**
      * Constructor.
@@ -34,10 +39,13 @@ public class FormFillListener extends Thread {
      * @param mainAppListener MainAppListener which needs to be noticed when focused
      * form field is filled with received password.
      */
-    public FormFillListener(Connector connector, MainAppListener mainAppListener) {
+    public FormFillListener(Connector connector, MainAppListener mainAppListener) 
+            throws NoSuchAlgorithmException, NoSuchPaddingException 
+    {
         this.connector = connector;
         this.mainAppListener = mainAppListener;
         formFiller = new FormFiller();
+        symmetricEncrypter = new SymmetricEncrypter();
     }
     
     @Override
@@ -49,8 +57,16 @@ public class FormFillListener extends Thread {
             
             while ((message = listener.readLine()) != null) {
                 System.out.println("From listener: " + message); // TODO remove
-                // TODO decryption
-                if(!formFiller.fillFocusedForm(message)) {
+                
+                String[] data = message.split(DELIMITER);
+                byte[] key = mainAppListener.passwordArrived();
+                
+                System.out.println("Pass: " + data[0]);
+                System.out.println("IV: " + data[1]);
+                
+                String pass = symmetricEncrypter.decrypt(data[0], key, data[1]);
+                
+                if(!formFiller.fillFocusedForm(pass)) {
                     Messenger.showErrorMessage("There was a problem during "
                             + "password entering.", null);
                 }

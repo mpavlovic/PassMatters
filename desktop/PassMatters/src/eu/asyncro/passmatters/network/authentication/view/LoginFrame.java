@@ -14,7 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- *
+ * This frame is used for entering the username and password
+ * required for login. The frame is shown when user needs to perform login.
  * @author Milan
  */
 public class LoginFrame extends BaseFrame implements ActionListener {
@@ -136,14 +137,25 @@ public class LoginFrame extends BaseFrame implements ActionListener {
         });
     }
 
+    /**
+     * Sets the appropriate Loginer for performing login action.
+     * @param loginer Loginer to be set
+     */
     public void setLoginer(Loginer loginer) {
         this.loginer = loginer;
     }
     
+    /**
+     * Sets status message on login status label. 
+     * @param status status to be set
+     */
     public void setStatus(String status) {
         lblLoginStatus.setText(status);
     }
     
+    /**
+     * Clears entered password and shows login failed status.
+     */
     public void setLoginFailed() {
         setStatus("Login failed. Bad credentials.");
         btnLogin.setEnabled(true);
@@ -152,11 +164,17 @@ public class LoginFrame extends BaseFrame implements ActionListener {
         txtUsername.setEnabled(true);
     }
     
+    /**
+     * Adds appropriate listeners to class members.
+     */
     private void addListeners() {
         btnLogin.addActionListener(this);
         pwdMaster.addActionListener(this);
     }
     
+    /**
+     * Resets all frame components to default state (before login). 
+     */
     private void reset() {
         btnLogin.setEnabled(true);
         txtUsername.setEnabled(true);

@@ -36,8 +36,9 @@ public abstract class ConnectionController {
     
     /**
      * Starts listening for incoming (asynchronous) messages from remote server.
+     * @throws java.lang.Exception
      */
-    public abstract void startListening();
+    public abstract void startListening() throws Exception;
     
     /**
      * Closes opened connection to the remote server.

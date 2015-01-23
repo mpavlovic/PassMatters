@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.SwingWorker;
 
 /**
- *
+ * This controller class contains logic for performing network login and logout.
  * @author Milan
  */
 public class AuthenticationController implements Loginer, Logouter {
@@ -41,11 +41,18 @@ public class AuthenticationController implements Loginer, Logouter {
     private String token;
     private byte[] secretKey;
     
+    /**
+     * Creates new instance of this class.
+     * @param mainAppListener MainAppListener for registering on events.
+     */
     public AuthenticationController(MainAppListener mainAppListener) {
         this.mainAppListener = mainAppListener;
         initailize();
     }
     
+    /**
+     * Initializes class members. 
+     */
     private void initailize() {
         loginFrame = new LoginFrame();
         loginFrame.setLoginer(this);
@@ -54,14 +61,25 @@ public class AuthenticationController implements Loginer, Logouter {
         connectionController = new TCPSocketConnectionController(mainAppListener);
     }
     
+    /**
+     * Starts the user login by showing login frame.
+     */
     public void startLogin() {
         loginFrame.showFrame();
     }
 
+    /**
+     * Checks whether is user logged in or not.
+     * @return <code>true</code> if user is logged in, <code>false</code> otherwise
+     */
     public boolean isUserLoggedIn() {
         return isUserLoggedIn;
     }
 
+    /**
+     * Returns generated secret key for password decryption.
+     * @return secret key bytes 
+     */
     public byte[] getSecretKey() {
         return secretKey;
     }
@@ -112,6 +130,14 @@ public class AuthenticationController implements Loginer, Logouter {
         }.execute();
     }
 
+    /**
+     * Fetches the login token from remote server. 
+     * Token is used for authentication after TCP connection is established.
+     * @param username user's username 
+     * @param password user's password
+     * @return assigned temporary token
+     * @throws Exception 
+     */
     private String getLoginToken(String username, String password) 
             throws Exception 
     {
@@ -135,12 +161,25 @@ public class AuthenticationController implements Loginer, Logouter {
         }
     };
     
+    /**
+     * Sends the given login token to the remote server via sockets 
+     * for authentication.
+     * @param token obtained token after http authentication
+     * @return true if user is authenticated with good token, false otherwise
+     * @throws Exception 
+     */
     private boolean authenticateOnServer(String token) throws Exception {
         String authString = JsonAdapter.getAuthJsonString(token);
         String authResult = connectionController.sendData(authString);
         return authResult.equals(Protocol.AUTHENTICATED);
     }
     
+    /**
+     * Invalidates the current user's token. 
+     * This method is used when logout is performed.
+     * @return true if token was invalidated successfully, false otherwise
+     * @throws Exception 
+     */
     private boolean invalidateToken() 
             throws Exception 
     {

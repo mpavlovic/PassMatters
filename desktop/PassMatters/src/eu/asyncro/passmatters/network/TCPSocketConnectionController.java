@@ -79,7 +79,7 @@ public class TCPSocketConnectionController extends ConnectionController {
     }
     
     @Override
-    public void startListening() {
+    public void startListening() throws Exception {
         FormFillListener formFillListener = 
                 new FormFillListener(connector, mainAppListener);
         formFillListener.start();

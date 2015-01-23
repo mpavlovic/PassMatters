@@ -126,7 +126,7 @@ public class MainFrame extends BaseFrame {
     }
     
     /**
-     * Sets tje given argument as a status in status label.
+     * Sets the given argument as a status in status label.
      * @param status Status string to set. 
      */
     public void setStatus(String status) {

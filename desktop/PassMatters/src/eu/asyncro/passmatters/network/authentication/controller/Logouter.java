@@ -7,9 +7,13 @@
 package eu.asyncro.passmatters.network.authentication.controller;
 
 /**
- *
+ *This interface contains method declarations for logout functionality. 
  * @author Milan
  */
 public interface Logouter {
+    
+    /**
+     * Performs logout action.
+     */
     public void logout();
 }

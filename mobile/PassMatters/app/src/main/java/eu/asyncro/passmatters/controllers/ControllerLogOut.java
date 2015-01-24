@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.controllers;
 
+import android.app.Activity;
+
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
@@ -14,7 +16,7 @@ import retrofit.client.Response;
 /**
  * Created by ahuskano on 12/5/2014.
  */
-public class ControllerLogOut extends LightController {
+public class ControllerLogOut extends BaseController {
 
     private OnLogOutListener onLogOutListener;
 
@@ -33,7 +35,12 @@ public class ControllerLogOut extends LightController {
         }
     };
 
+    public ControllerLogOut(Activity activity) {
+        super(activity);
+    }
+
     public void logOut(String token) {
+        showDialog();
         if (Settings.demoMode)
             demoLogOut();
         else

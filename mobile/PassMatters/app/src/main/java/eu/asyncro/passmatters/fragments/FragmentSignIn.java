@@ -36,7 +36,7 @@ public class FragmentSignIn extends BaseFragment implements View.OnClickListener
 
     private void init() {
         ((Button) getView().findViewById(R.id.btSignIn)).setOnClickListener(this);
-        controller = new ControllerSignIn();
+        controller = new ControllerSignIn(getActivity());
         controller.setOnDataReadListener(this);
         controller.setOnErrorListener(this);
         password = (EditText) getView().findViewById(R.id.etPassword);
@@ -68,10 +68,12 @@ public class FragmentSignIn extends BaseFragment implements View.OnClickListener
         } else {
             toastIt(res.getMessage());
         }
+        controller.dismissDialog();
     }
 
     @Override
     public void onError(RetrofitError error) {
+        controller.dismissDialog();
 
     }
 

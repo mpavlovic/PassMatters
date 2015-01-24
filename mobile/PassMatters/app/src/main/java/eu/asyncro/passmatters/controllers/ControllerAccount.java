@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.controllers;
 
+import android.app.Activity;
+
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
@@ -14,7 +16,7 @@ import retrofit.client.Response;
 /**
  * Created by ahuskano on 12/5/2014.
  */
-public class ControllerAccount extends LightController {
+public class ControllerAccount extends BaseController {
 
     private OnAccountSendedListener onAccountSendedListener;
 
@@ -32,7 +34,12 @@ public class ControllerAccount extends LightController {
         }
     };
 
+    public ControllerAccount(Activity activity) {
+        super(activity);
+    }
+
     public void setAccount(String token, int accountId) {
+        showDialog();
         if (Settings.demoMode)
             demoSetAccount();
         else

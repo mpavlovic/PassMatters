@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -33,12 +35,13 @@ import retrofit.RetrofitError;
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class FragmentAccounts extends BaseFragment implements OnDataReadListener, OnAccountSendedListener, OnErrorListener, OnLogOutListener, AdapterView.OnItemClickListener, OnLockListener {
+public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnDataReadListener, OnAccountSendedListener, OnErrorListener, OnLogOutListener, AdapterView.OnItemClickListener, OnLockListener {
 
     private ControllerAccounts controllerAccounts;
     private ControllerAccount controllerAccount;
     private ThreeDListAdapter adapter;
     private ThreeDListView listView;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public int provideLayoutRes() {
@@ -47,8 +50,8 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
 
     @Override
     public void main() {
-
         init();
+        swipeRefreshLayout.setRefreshing(true);
         controllerAccounts.getAccounts(ManagerSession.getToken(getActivity().getBaseContext()));
     }
 
@@ -65,8 +68,12 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
         adapter = new ThreeDListAdapter(getActivity());
         listView.setOnItemClickListener(this);
         listView.setAdapter(adapter);
-        ((ActivityMain) getActivity()).setLockReceiver(new LockReceiver(getActivity(),this));
+        ((ActivityMain) getActivity()).setLockReceiver(new LockReceiver(getActivity(), this));
         initThreeDList();
+        swipeRefreshLayout = (SwipeRefreshLayout) getView().findViewById(R.id.swipe_container);
+        swipeRefreshLayout.setColorScheme(R.color.swipe_color_1, R.color.swipe_color_2, R.color.swipe_color_3, R.color.swipe_color_4);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
     }
 
     @Override
@@ -78,11 +85,15 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
                 accountList.add(data);
             adapter.setItems(accountList);
             adapter.notifyDataSetChanged();
+            //  ((LinearLayout) getView().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
         } else {
             toastIt(accounts.getMessage());
         }
         controllerAccounts.dismissDialog();
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(false);
     }
+
 
     @Override
     public void onError(RetrofitError error) {
@@ -154,5 +165,17 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
 
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container, new FragmentSignIn()).commit();
 
+    }
+
+    @Override
+    public void refresh() {
+        swipeRefreshLayout.setEnabled(true);
+        swipeRefreshLayout.setRefreshing(true);
+        controllerAccounts.getAccounts(ManagerSession.getToken(getActivity().getBaseContext()));
+    }
+
+    @Override
+    public void onRefresh() {
+        Log.d("refresh", "test onRefresh");
     }
 }

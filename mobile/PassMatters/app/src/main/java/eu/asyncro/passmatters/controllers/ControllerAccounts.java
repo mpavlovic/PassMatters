@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.controllers;
 
+import android.app.Activity;
+
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
@@ -15,7 +17,7 @@ import retrofit.client.Response;
 /**
  * Created by ahuskano on 11/9/2014.
  */
-public class ControllerAccounts extends LightController {
+public class ControllerAccounts extends BaseController {
 
     private Callback<ResponseAccounts> callbackAccounts = new Callback<ResponseAccounts>() {
         @Override
@@ -30,6 +32,10 @@ public class ControllerAccounts extends LightController {
                 getOnErrorListener().onError(error);
         }
     };
+
+    public ControllerAccounts(Activity activity) {
+        super(activity);
+    }
 
     public void getAccounts(String token) {
         if (Settings.demoMode)

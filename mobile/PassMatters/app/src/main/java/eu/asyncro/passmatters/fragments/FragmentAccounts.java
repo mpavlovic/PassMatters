@@ -53,13 +53,13 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
     }
 
     private void init() {
-        controllerAccounts = new ControllerAccounts();
+        controllerAccounts = new ControllerAccounts(getActivity());
         controllerAccounts.setOnDataReadListener(this);
         controllerAccounts.setOnErrorListener(this);
-        controllerLogOut = new ControllerLogOut();
+        controllerLogOut = new ControllerLogOut(getActivity());
         controllerLogOut.setOnLogOutListener(this);
         controllerAccounts.setOnErrorListener(this);
-        controllerAccount = new ControllerAccount();
+        controllerAccount = new ControllerAccount(getActivity());
         controllerAccount.setOnAccountSendedListener(this);
         listView = (ThreeDListView) getView().findViewById(R.id.threeDListView);
         adapter = new ThreeDListAdapter(getActivity());

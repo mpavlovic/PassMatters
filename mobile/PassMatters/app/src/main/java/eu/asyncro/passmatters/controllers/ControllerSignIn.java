@@ -1,5 +1,7 @@
 package eu.asyncro.passmatters.controllers;
 
+import android.app.Activity;
+
 import com.dmacan.lightandroid.data.LightController;
 import com.dmacan.lightandroid.util.LightAPIUtil;
 
@@ -14,7 +16,7 @@ import retrofit.client.Response;
 /**
  * Created by ahuskano on 11/8/2014.
  */
-public class ControllerSignIn extends LightController {
+public class ControllerSignIn extends BaseController {
 
     private Callback<ResponseSignIn> callbackSignIn = new Callback<ResponseSignIn>() {
         @Override
@@ -31,7 +33,12 @@ public class ControllerSignIn extends LightController {
         }
     };
 
+    public ControllerSignIn(Activity activity) {
+        super(activity);
+    }
+
     public void signIn(RequestSignIn request) {
+        showDialog();
         if (Settings.demoMode)
             demoSignIn(request);
         else

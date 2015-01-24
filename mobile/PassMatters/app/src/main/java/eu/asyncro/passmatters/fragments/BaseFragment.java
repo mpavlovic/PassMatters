@@ -1,6 +1,8 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.app.ProgressDialog;
 import android.os.SystemClock;
+import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +22,7 @@ public abstract class BaseFragment extends LightFragment {
     public abstract int getMenuResource();
 
     protected ControllerLogOut controllerLogOut;
+
 
 
     @Override

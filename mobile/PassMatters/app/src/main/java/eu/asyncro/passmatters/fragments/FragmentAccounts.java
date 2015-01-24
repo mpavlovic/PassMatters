@@ -81,11 +81,14 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
         } else {
             toastIt(accounts.getMessage());
         }
+        controllerAccounts.dismissDialog();
     }
 
     @Override
     public void onError(RetrofitError error) {
-
+        controllerAccounts.dismissDialog();
+        controllerAccount.dismissDialog();
+        controllerLogOut.dismissDialog();
     }
 
     private void fillAdapter(DataAccount[] accounts) {
@@ -105,6 +108,7 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
         if (response.getCode() == getResources().getInteger(R.integer.success_code)) {
             onLock();
         }
+        controllerLogOut.dismissDialog();
     }
 
     @Override
@@ -120,6 +124,7 @@ public class FragmentAccounts extends BaseFragment implements OnDataReadListener
         ResponseAccount responseAccount = (ResponseAccount) response;
         if (responseAccount.getStatus() == getResources().getInteger(R.integer.error_code))
             controllerLogOut.logOut(ManagerSession.getToken(getActivity().getBaseContext()));
+        controllerAccount.dismissDialog();
     }
 
     private ThreeDListView initThreeDList() {

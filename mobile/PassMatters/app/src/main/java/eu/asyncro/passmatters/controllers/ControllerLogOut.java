@@ -40,6 +40,7 @@ public class ControllerLogOut extends BaseController {
     }
 
     public void logOut(String token) {
+        showDialog();
         if (Settings.demoMode)
             demoLogOut();
         else

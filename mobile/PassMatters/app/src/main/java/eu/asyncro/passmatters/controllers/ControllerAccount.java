@@ -39,6 +39,7 @@ public class ControllerAccount extends BaseController {
     }
 
     public void setAccount(String token, int accountId) {
+        showDialog();
         if (Settings.demoMode)
             demoSetAccount();
         else

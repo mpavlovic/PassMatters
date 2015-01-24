@@ -38,6 +38,7 @@ public class ControllerAccounts extends BaseController {
     }
 
     public void getAccounts(String token) {
+        showDialog();
         if (Settings.demoMode)
             demoAccounts();
         else

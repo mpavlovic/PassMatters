@@ -35,7 +35,7 @@ public class TCPSocketConnectionController extends ConnectionController {
     public boolean openConnection() throws IOException 
     {
         
-        connector = new TCPConnector(IP_ADDRESS, PORT);
+        connector = new SSLConnector(IP_ADDRESS, SECURE_PORT);
         openStreams();
 
         String messageFromServer;

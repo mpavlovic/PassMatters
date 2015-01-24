@@ -34,7 +34,6 @@ public class SSLConnector implements Connector {
     {
         this.host = host;
         this.sslPort = sslPort;
-//        Security.addProvider(new Provider()); // ??
         SSLSocketFactory sslSocketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
         clientSocket = (SSLSocket) sslSocketFactory.createSocket(host, sslPort);
     }

@@ -20,6 +20,16 @@ import javax.crypto.spec.PBEKeySpec;
  */
 public class EncryptionKeyGenerator {
     
+    /**
+     * Generates secret key from provided password and salt.
+     * Uses some of internal functions for key generation. 
+     * @param password password to generate the secret key from
+     * @param salt parameter for key generation function
+     * @return return value (byte array) from private function used for key generation
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     * @throws UnsupportedEncodingException 
+     */
     public static byte[] generateSecretKey(String password, String salt)
             throws NoSuchAlgorithmException, InvalidKeySpecException,
             UnsupportedEncodingException 
@@ -27,6 +37,16 @@ public class EncryptionKeyGenerator {
         return generatePBKDF2Key(password, salt);
     }
 
+    /**
+     * Generates secret key for symmetric encryption/decryption using 
+     * PBKDF2 (Password Based Key Derivation Function 2) function.
+     * @param password password to generate the secret key from
+     * @param salt parameter for PBKDF2 key generation function
+     * @return generated secret key
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     * @throws UnsupportedEncodingException 
+     */
     private static byte[] generatePBKDF2Key(String password, String salt) 
             throws NoSuchAlgorithmException, InvalidKeySpecException, 
                 UnsupportedEncodingException 
@@ -46,6 +66,13 @@ public class EncryptionKeyGenerator {
         return key;
     }
 
+    /**
+     * Returns salt for key generation if needed. This function should be used
+     * if salt needs to be generated inside of this class.
+     * @return generated salt
+     * @throws NoSuchAlgorithmException
+     * @throws UnsupportedEncodingException 
+     */
     private static byte[] getSalt() throws NoSuchAlgorithmException, 
             UnsupportedEncodingException 
     {
@@ -56,7 +83,13 @@ public class EncryptionKeyGenerator {
         return digest;
     }
     
-    // http://stackoverflow.com/questions/9655181/convert-from-byte-array-to-hex-string-in-java
+    // 
+    /**
+     * Converts given byte array to hexadecimal string.
+     * @param bytes byte array that wants to be converted to hex string
+     * @return hexadecimal string representing given byte array in byte parameter
+     * @see http://stackoverflow.com/questions/9655181/convert-from-byte-array-to-hex-string-in-java
+     */
     public static String bytesToHex(byte[] bytes) {
         char[] hexArray = "0123456789ABCDEF".toCharArray();
         char[] hexChars = new char[bytes.length * 2];
@@ -68,12 +101,18 @@ public class EncryptionKeyGenerator {
         return new String(hexChars);
     }
     
-    public static byte[] hexToBytes(String s) {
-        int len = s.length();
+    /**
+     * Converts given hexadecimal string to byte array.
+     * @param hexString hex string that wants to be converted to byte array
+     * @return byte array of hex string provided in hexString argument;
+     *         each byte represents to appropriate char in hexString
+     */
+    public static byte[] hexToBytes(String hexString) {
+        int len = hexString.length();
         byte[] data = new byte[len / 2];
         for (int i = 0; i < len; i += 2) {
-            data[i / 2] = (byte) ((Character.digit(s.charAt(i), 16) << 4)
-                    + Character.digit(s.charAt(i + 1), 16));
+            data[i / 2] = (byte) ((Character.digit(hexString.charAt(i), 16) << 4)
+                    + Character.digit(hexString.charAt(i + 1), 16));
         }
         return data;
     }

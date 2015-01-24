@@ -14,7 +14,7 @@ public abstract class ConnectionController {
 
     protected final String IP_ADDRESS = "178.62.212.164";
     protected final int PORT = 1337;
-    protected final int SECURE_PORT = 443;
+    protected final int SECURE_PORT = 8000;
     
     protected volatile boolean listening = false; // TODO do i need it ?
     

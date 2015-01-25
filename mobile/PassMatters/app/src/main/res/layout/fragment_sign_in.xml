@@ -3,33 +3,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_margin="@dimen/md_20"
-    android:layout_gravity="center"
+    android:layout_margin="20dp"
+    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"/>
 
     <LinearLayout
         android:orientation="vertical"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:background="@color/app_light_primary_color"
+        android:background="@color/transapernt"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:text="@string/username_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
         <EditText
             android:id="@+id/etUsername"
-            android:hint="@string/placeholder_username"
             android:layout_margin="@dimen/et_margin"
-            android:drawableLeft="@drawable/user_small"
-            android:textColor="@color/app_primary_text_color"
+            android:background="@drawable/edittext"
+            android:textColor="@color/white"
             android:textColorHint="@color/app_primary_text_color"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="20dp"
+            android:text="@string/password_placeholder"
+            android:layout_width="wrap_content"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
 
         <EditText
             android:id="@+id/etPassword"
-            android:hint="@string/placeholder_password"
             android:password="true"
-            android:drawableLeft="@drawable/password_small"
+            android:background="@drawable/edittext"
             android:layout_margin="@dimen/et_margin"
-            android:textColor="@color/app_primary_text_color"
+            android:textColor="@color/white"
             android:textColorHint="@color/app_primary_text_color"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />
@@ -39,8 +58,10 @@
     <Button
         style="@style/buttonStyle"
         android:id="@+id/btSignIn"
+        android:background="@color/transapernt"
         android:layout_marginTop="@dimen/md_20"
         android:text="@string/bt_sign_in"
+        android:textColor="@color/white"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

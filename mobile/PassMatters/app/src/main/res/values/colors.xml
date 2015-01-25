@@ -5,4 +5,8 @@
     <color name="swipe_color_3">#F2B50F</color>
     <color name="swipe_color_4">#00933B</color>
 
+    <color name="transapernt">#00000000</color>
+
+    <color name="white">#FFFFFF</color>
+
 </resources>

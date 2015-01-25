@@ -11,4 +11,8 @@
     <string name="placeholder_password">Password</string>
     <string name="bt_sign_in">Sign in to your account</string>
 
+    <!-- log in-->
+    <string name="username_placeholder">Username</string>
+    <string name="password_placeholder">Password</string>
+
 </resources>

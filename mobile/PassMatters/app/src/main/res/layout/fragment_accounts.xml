@@ -2,13 +2,14 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
+    android:background="@color/transparent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/app_light_primary_color">
+        android:background="@color/transparent">
 
         <LinearLayout
             android:id="@+id/linearLayout1"
@@ -20,15 +21,15 @@
 
             <ImageView
                 android:id="@+id/imageView1"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/fix_frame"></ImageView>
+                android:layout_height="wrap_content"></ImageView>
 
             <View
                 android:id="@+id/imageView2"
                 android:layout_width="fill_parent"
                 android:layout_height="86.7dip"
-                android:background="#99000000" />
+                android:background="@color/app_primary_color_transparent" />
         </LinearLayout>
 
 

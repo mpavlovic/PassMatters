@@ -17,7 +17,7 @@
         android:orientation="vertical"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:background="@color/transapernt"
+        android:background="@color/transparent"
         android:layout_height="wrap_content">
 
         <TextView
@@ -58,7 +58,7 @@
     <Button
         style="@style/buttonStyle"
         android:id="@+id/btSignIn"
-        android:background="@color/transapernt"
+        android:background="@color/transparent"
         android:layout_marginTop="@dimen/md_20"
         android:text="@string/bt_sign_in"
         android:textColor="@color/white"

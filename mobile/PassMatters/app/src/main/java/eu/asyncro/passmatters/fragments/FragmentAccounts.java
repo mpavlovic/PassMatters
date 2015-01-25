@@ -4,6 +4,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import com.dmacan.lightandroid.api.LightResponse;
 import com.dmacan.lightandroid.api.listener.OnDataReadListener;
@@ -85,7 +86,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
                 accountList.add(data);
             adapter.setItems(accountList);
             adapter.notifyDataSetChanged();
-            //  ((LinearLayout) getView().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
+            ((LinearLayout) getView().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
         } else {
             toastIt(accounts.getMessage());
         }

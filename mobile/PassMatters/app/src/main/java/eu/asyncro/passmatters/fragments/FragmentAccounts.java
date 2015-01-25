@@ -1,7 +1,6 @@
 package eu.asyncro.passmatters.fragments;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
@@ -43,6 +42,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
     private ThreeDListAdapter adapter;
     private ThreeDListView listView;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private List<DataAccount> accountList;
 
     @Override
     public int provideLayoutRes() {
@@ -57,6 +57,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
     }
 
     private void init() {
+        accountList = new ArrayList<DataAccount>();
         controllerAccounts = new ControllerAccounts(getActivity());
         controllerAccounts.setOnDataReadListener(this);
         controllerAccounts.setOnErrorListener(this);
@@ -80,19 +81,25 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
     @Override
     public void onDataRead(LightResponse response) {
         ResponseAccounts accounts = (ResponseAccounts) response;
+        clearList();
         if (accounts.getCode() == getResources().getInteger(R.integer.success_code)) {
-            List<DataAccount> accountList = new ArrayList<DataAccount>();
             for (DataAccount data : accounts.getAccounts())
                 accountList.add(data);
-            adapter.setItems(accountList);
+            if (adapter.getCount() == 0)
+                adapter.setItems(accountList);
             adapter.notifyDataSetChanged();
-            ((LinearLayout) getView().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
+            if (adapter.getCount() != 0)
+                ((LinearLayout) getView().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
         } else {
             toastIt(accounts.getMessage());
         }
         controllerAccounts.dismissDialog();
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
+    }
+
+    private void clearList() {
+        accountList.clear();
     }
 
 
@@ -177,6 +184,6 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
 
     @Override
     public void onRefresh() {
-        Log.d("refresh", "test onRefresh");
+
     }
 }

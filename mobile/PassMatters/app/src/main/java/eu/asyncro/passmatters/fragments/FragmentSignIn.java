@@ -1,6 +1,8 @@
 package eu.asyncro.passmatters.fragments;
 
+import android.content.Context;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -47,9 +49,16 @@ public class FragmentSignIn extends BaseFragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btSignIn:
+                hideKeyboard();
                 controller.signIn(getData());
                 break;
         }
+    }
+    private void hideKeyboard(){
+        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(password.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(username.getWindowToken(), 0);
+
     }
 
     private RequestSignIn getData() {

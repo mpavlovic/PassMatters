@@ -58,7 +58,7 @@
     <Button
         style="@style/buttonStyle"
         android:id="@+id/btSignIn"
-        android:background="@color/transparent"
+        android:background="@color/transparent_80"
         android:layout_marginTop="@dimen/md_20"
         android:text="@string/bt_sign_in"
         android:textColor="@color/white"

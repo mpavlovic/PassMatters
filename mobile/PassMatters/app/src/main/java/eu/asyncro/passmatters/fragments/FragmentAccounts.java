@@ -128,6 +128,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
             onLock();
         }
         controllerLogOut.dismissDialog();
+        toastIt(response.getMessage());
     }
 
     @Override

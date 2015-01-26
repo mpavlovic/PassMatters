@@ -11,10 +11,15 @@ import java.awt.Frame;
 import javax.swing.JOptionPane;
 
 /**
- * Služi za prikaz poruka obavijesti ili grešaka.
+ * Class with static methods for showing different message dialogs.
  * @author Milan
  */
 public class Messenger {
+    /**
+     * Shows dialog with info message.
+     * @param message info message to be shown in dialog
+     * @param frame parent frame of dialog
+     */
     public static void showInfoMessage(final String message, final Frame frame) {
         EventQueue.invokeLater(new Runnable() {
 
@@ -25,6 +30,11 @@ public class Messenger {
         });
     }
     
+    /**
+     * Shows dialog with error message.
+     * @param message error message to be shown in dialog
+     * @param frame parent frame of dialog
+     */
     public static void showErrorMessage(final String message, final Frame frame) {
         EventQueue.invokeLater(new Runnable() {
 
@@ -35,6 +45,11 @@ public class Messenger {
         });
     }
     
+    /**
+     * Shows dialog with warning message.
+     * @param message warning message to be shown in dialog
+     * @param frame parent frame of dialog
+     */
     public static void showWarningMessage(final String message, final Frame frame) {
         EventQueue.invokeLater(new Runnable() {
 

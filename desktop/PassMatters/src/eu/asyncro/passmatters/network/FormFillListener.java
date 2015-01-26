@@ -66,7 +66,7 @@ public class FormFillListener extends Thread {
                 
                 String pass = symmetricEncrypter.decrypt(data[0], key, data[1]);
                 
-                if(!formFiller.fillFocusedForm(pass)) {
+                if(!formFiller.fillFocusedFormField(pass)) {
                     Messenger.showErrorMessage("There was a problem during "
                             + "password entering.", null);
                 }

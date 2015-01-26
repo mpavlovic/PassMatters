@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 
 import com.dmacan.lightandroid.data.LightController;
 
+import eu.asyncro.passmatters.R;
+
 /**
  * Created by ahuskano on 1/24/2015.
  */
@@ -29,10 +31,11 @@ public abstract class BaseController extends LightController {
         dialog.show();
     }
     private ProgressDialog setUpDialog(){
-        dialog=new ProgressDialog(getActivity());
+        dialog=new ProgressDialog(getActivity(), R.style.DialogTheme);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
+        dialog.setProgressStyle(android.R.style.Widget_Holo_ProgressBar_Large);
         return dialog;
     }
 

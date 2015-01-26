@@ -70,7 +70,7 @@ public class ThreeDListAdapter extends BaseAdapter
         
         viewItem.setText(data.getName());
         
-        viewItem.setImage(context.getResources().getDrawable(R.drawable.ic_icon));
+      //  viewItem.setImage(context.getResources().getDrawable(R.drawable.ic_icon));
         viewItem.setId(thePosition);       
         viewItem.validateState();
         return viewItem;

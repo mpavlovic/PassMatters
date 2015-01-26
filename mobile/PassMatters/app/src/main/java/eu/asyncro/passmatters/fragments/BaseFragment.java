@@ -38,6 +38,9 @@ public abstract class BaseFragment extends LightFragment {
                 if (controllerLogOut != null)
                     controllerLogOut.logOut(ManagerSession.getToken(getActivity().getBaseContext()));
                 break;
+            case R.id.refresh:
+                refresh();
+                break;
         }
         return true;
     }
@@ -50,5 +53,7 @@ public abstract class BaseFragment extends LightFragment {
         this.controllerLogOut = controllerLogOut;
     }
 
+    public void refresh(){
 
+    }
 }

@@ -3,7 +3,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/refresh"
+        android:title="@string/action_refresh"
+        android:orderInCategory="100" />
+
+    <item
         android:id="@+id/logOut"
         android:title="@string/action_logout"
         android:orderInCategory="100" />
+
 </menu>

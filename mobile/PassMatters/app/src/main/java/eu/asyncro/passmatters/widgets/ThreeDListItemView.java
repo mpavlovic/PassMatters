@@ -45,7 +45,7 @@ public class ThreeDListItemView extends LinearLayout {
     private final static float IMAGE_PADDING_X = 10.7f;
     private final static float IMAGE_PADDING_Y = 7.3f;
 
-    private final static float TEXT_SIZE = 18;
+    private final static float TEXT_SIZE = 22;
     private final static float TEXT_SHADOW_RADIUS = 0.6f;
     private final static int TEXT_COLOR = Color.WHITE;
     private final static int TEXT_SHADOW_COLOR = Color.BLACK;

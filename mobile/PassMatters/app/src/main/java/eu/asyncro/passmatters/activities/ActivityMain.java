@@ -23,6 +23,7 @@ public class ActivityMain extends LightActivity {
 
     /**
      * Method used to provide layout
+     *
      * @return layout
      */
     @Override
@@ -35,7 +36,7 @@ public class ActivityMain extends LightActivity {
      */
     @Override
     public void main() {
-        getSupportFragmentManager().beginTransaction().add(R.id.container,new FragmentSignIn()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new FragmentSignIn()).commit();
     }
 
     /**
@@ -48,14 +49,15 @@ public class ActivityMain extends LightActivity {
         if (newTime - oldTime >= DELAY) {
             sendAction();
             oldTime = newTime;
-        }else
+        } else
             oldTime = newTime;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        lockReceiver.destroy();
+        if (lockReceiver != null)
+            lockReceiver.destroy();
     }
 
     public LockReceiver getLockReceiver() {

@@ -12,7 +12,7 @@ package eu.asyncro.passmatters.network;
  */
 public abstract class ConnectionController {
 
-    protected final String IP_ADDRESS = "178.62.212.164";
+    protected final String HOST = "passmatters.eu";
     protected final int PORT = 1337;
     protected final int SECURE_PORT = 8000;
     

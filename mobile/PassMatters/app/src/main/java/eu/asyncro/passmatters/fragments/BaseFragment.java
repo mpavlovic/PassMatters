@@ -1,28 +1,24 @@
 package eu.asyncro.passmatters.fragments;
 
-import android.app.ProgressDialog;
-import android.os.SystemClock;
-import android.support.v4.app.DialogFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import com.dmacan.lightandroid.LightFragment;
+import com.lightandroid.LightFragment;
 
 import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.controllers.ControllerLogOut;
 import eu.asyncro.passmatters.controllers.ManagerSession;
-import eu.asyncro.passmatters.receivers.LockReceiver;
 
 /**
- * Created by ahuskano on 12/5/2014.
+ * Abstract class of every fragment used in PassMatters
  */
 public abstract class BaseFragment extends LightFragment {
 
     public abstract int getMenuResource();
 
     protected ControllerLogOut controllerLogOut;
-
 
 
     @Override
@@ -53,7 +49,15 @@ public abstract class BaseFragment extends LightFragment {
         this.controllerLogOut = controllerLogOut;
     }
 
+    /**
+     *
+     *  this method is just here so we can override it in fragment where we need it
+     */
     public void refresh(){
 
+    }
+
+    public void toastIt(String msg){
+        Toast.makeText(getActivity(),msg,Toast.LENGTH_SHORT).show();
     }
 }

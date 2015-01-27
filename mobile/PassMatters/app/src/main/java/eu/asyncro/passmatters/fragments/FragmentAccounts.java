@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 
-import com.dmacan.lightandroid.api.LightResponse;
-import com.dmacan.lightandroid.api.listener.OnDataReadListener;
-import com.dmacan.lightandroid.api.listener.OnErrorListener;
+import com.lightandroid.api.LightResponse;
+import com.lightandroid.api.listener.OnDataReadListener;
+import com.lightandroid.api.listener.OnErrorListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ import eu.asyncro.passmatters.widgets.ThreeDListView;
 import retrofit.RetrofitError;
 
 /**
- * Created by ahuskano on 11/8/2014.
+ * Fragment class for accounts showing
  */
 public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, OnDataReadListener, OnAccountSendedListener, OnErrorListener, OnLogOutListener, AdapterView.OnItemClickListener, OnLockListener {
 
@@ -44,11 +44,18 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<DataAccount> accountList;
 
+    /**
+     * Method to provide layout
+     * @return layout
+     */
     @Override
     public int provideLayoutRes() {
         return R.layout.fragment_accounts;
     }
 
+    /**
+     * Method to set up fragment
+     */
     @Override
     public void main() {
         init();
@@ -56,6 +63,9 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         controllerAccounts.getAccounts(ManagerSession.getToken(getActivity().getBaseContext()));
     }
 
+    /**
+     * Method to set up fragment
+     */
     private void init() {
         accountList = new ArrayList<DataAccount>();
         controllerAccounts = new ControllerAccounts(getActivity());
@@ -78,6 +88,10 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
 
     }
 
+    /**
+     * Method that will be called when server return data
+     * @param response
+     */
     @Override
     public void onDataRead(LightResponse response) {
         ResponseAccounts accounts = (ResponseAccounts) response;
@@ -98,11 +112,18 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         swipeRefreshLayout.setEnabled(false);
     }
 
+    /**
+     * Method used to clear list
+     */
     private void clearList() {
         accountList.clear();
     }
 
 
+    /**
+     * Method that will be called when server return a error
+     * @param error
+     */
     @Override
     public void onError(RetrofitError error) {
         controllerAccounts.dismissDialog();
@@ -116,11 +137,19 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
     }
 
 
+    /**
+     * Method that return menu
+     * @return menu
+     */
     @Override
     public int getMenuResource() {
         return R.menu.accounts_menu;
     }
 
+    /**
+     * Method that will be called when user need to log out from app
+     * @param response
+     */
     @Override
     public void onLogOut(LightResponse response) {
         ResponseLogOut logOutResponse = (ResponseLogOut) response;
@@ -131,6 +160,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         toastIt(response.getMessage());
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (i > 0) {
@@ -139,6 +169,10 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         }
     }
 
+    /**
+     * Method that will be called when server return response from account
+     * @param response
+     */
     @Override
     public void onAccountSended(LightResponse response) {
         ResponseAccount responseAccount = (ResponseAccount) response;
@@ -147,6 +181,10 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         controllerAccount.dismissDialog();
     }
 
+    /**
+     * Method used to set up listview
+     * @return listview
+     */
     private ThreeDListView initThreeDList() {
         listView.setHighlightViewContainer(new HighlightedViewContainer() {
             @Override
@@ -168,6 +206,9 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         return listView;
     }
 
+    /**
+     * Method called when user will be redirect to log in screen
+     */
     @Override
     public void onLock() {
         ((ActivityMain) getActivity()).getLockReceiver().destroy();
@@ -176,6 +217,9 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
 
     }
 
+    /**
+     * Method used to enable refreshing
+     */
     @Override
     public void refresh() {
         swipeRefreshLayout.setEnabled(true);
@@ -183,6 +227,9 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
         controllerAccounts.getAccounts(ManagerSession.getToken(getActivity().getBaseContext()));
     }
 
+    /**
+     * Method that will be called when user swipe list
+     */
     @Override
     public void onRefresh() {
 

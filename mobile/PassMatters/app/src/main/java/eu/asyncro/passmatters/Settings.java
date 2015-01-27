@@ -1,7 +1,7 @@
 package eu.asyncro.passmatters;
 
 /**
- * Created by ahuskano on 1/8/2015.
+ * Class for configuration
  */
 public class Settings {
 

@@ -2,8 +2,7 @@ package eu.asyncro.passmatters.controllers;
 
 import android.app.Activity;
 
-import com.dmacan.lightandroid.data.LightController;
-import com.dmacan.lightandroid.util.LightAPIUtil;
+import com.lightandroid.util.LightAPIUtil;
 
 import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
@@ -14,12 +13,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by ahuskano on 12/5/2014.
+ * Controller used to management log out action
  */
 public class ControllerLogOut extends BaseController {
 
     private OnLogOutListener onLogOutListener;
 
+    /**
+     * Callback used to forwarding server response
+     */
     private Callback<ResponseLogOut> callbackLogout = new Callback<ResponseLogOut>() {
         @Override
         public void success(ResponseLogOut responseLogOut, Response response) {
@@ -39,6 +41,10 @@ public class ControllerLogOut extends BaseController {
         super(activity);
     }
 
+    /**
+     * Method used to send log out request to server
+     * @param token
+     */
     public void logOut(String token) {
         showDialog();
         if (Settings.demoMode)
@@ -47,6 +53,9 @@ public class ControllerLogOut extends BaseController {
             LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).logOut(token, callbackLogout);
     }
 
+    /**
+     * Method used to generate demo response
+     */
     private void demoLogOut(){
         ResponseLogOut responseLogOut=new ResponseLogOut();
         responseLogOut.setCode(1);

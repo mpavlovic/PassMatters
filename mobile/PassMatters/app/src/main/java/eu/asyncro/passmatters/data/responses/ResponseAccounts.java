@@ -1,12 +1,12 @@
 package eu.asyncro.passmatters.data.responses;
 
-import com.dmacan.lightandroid.api.LightResponse;
+import com.lightandroid.api.LightResponse;
 import com.google.gson.annotations.Expose;
 
 import eu.asyncro.passmatters.data.DataAccount;
 
 /**
- * Created by ahuskano on 11/9/2014.
+ * Data model of Accounts responses
  */
 public class ResponseAccounts extends LightResponse {
 

@@ -10,7 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import eu.asyncro.passmatters.interfaces.OnLockListener;
 
 /**
- * Created by ahuskano on 1/10/2015.
+ * Class used as lock receiver
  */
 public class LockReceiver {
 
@@ -24,6 +24,9 @@ public class LockReceiver {
         }
     };
 
+    /**
+     * Creating broadcast receiver
+     */
     BroadcastReceiver onLockReceiver = new BroadcastReceiver() {
 
         @Override
@@ -33,12 +36,16 @@ public class LockReceiver {
         }
     };
 
+
     public LockReceiver(Activity activity, OnLockListener onLockListener) {
         this.activity = activity;
         this.onLockListener = onLockListener;
         LocalBroadcastManager.getInstance(activity).registerReceiver(onLockReceiver, new IntentFilter(LockReceiver.KEY));
     }
 
+    /**
+     * Destroying broadcast receiver
+     */
     public void destroy() {
         LocalBroadcastManager.getInstance(activity).unregisterReceiver(onLockReceiver);
     }

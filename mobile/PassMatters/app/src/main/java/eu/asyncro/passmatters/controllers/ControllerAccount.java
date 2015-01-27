@@ -2,8 +2,7 @@ package eu.asyncro.passmatters.controllers;
 
 import android.app.Activity;
 
-import com.dmacan.lightandroid.data.LightController;
-import com.dmacan.lightandroid.util.LightAPIUtil;
+import com.lightandroid.util.LightAPIUtil;
 
 import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
@@ -14,12 +13,15 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by ahuskano on 12/5/2014.
+ * Controller used to clicked acoount management
  */
 public class ControllerAccount extends BaseController {
 
     private OnAccountSendedListener onAccountSendedListener;
 
+    /**
+     * Callback used to forwarding server responses
+     */
     private Callback<ResponseAccount> callbackAccount = new Callback<ResponseAccount>() {
         @Override
         public void success(ResponseAccount responseAccount, Response response) {
@@ -38,6 +40,11 @@ public class ControllerAccount extends BaseController {
         super(activity);
     }
 
+    /**
+     * Method used to send request on server
+     * @param token session token
+     * @param accountId
+     */
     public void setAccount(String token, int accountId) {
         showDialog();
         if (Settings.demoMode)
@@ -45,6 +52,10 @@ public class ControllerAccount extends BaseController {
         else
             LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION_PORT).create(APIPassMatters.class).sendAccount(token, accountId, callbackAccount);
     }
+
+    /**
+     * Method used to generate demo response
+     */
     private void demoSetAccount(){
         ResponseAccount responseAccount=new ResponseAccount();
         responseAccount.setStatus(1);

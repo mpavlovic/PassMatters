@@ -1,7 +1,7 @@
 package eu.asyncro.passmatters.interfaces;
 
 /**
- * Created by ahuskano on 1/10/2015.
+ * Interface used as listener for action on application lock
  */
 public interface OnLockListener {
 

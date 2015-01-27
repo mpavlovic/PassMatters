@@ -1,9 +1,9 @@
 package eu.asyncro.passmatters.data.requests;
 
-import com.dmacan.lightandroid.api.LightRequest;
+import com.lightandroid.api.LightRequest;
 
 /**
- * Created by ahuskano on 11/9/2014.
+ * Data model of account request
  */
 public class RequestAccount extends LightRequest {
 }

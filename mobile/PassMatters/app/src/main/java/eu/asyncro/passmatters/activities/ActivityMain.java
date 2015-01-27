@@ -36,7 +36,7 @@ public class ActivityMain extends LightActivity {
      */
     @Override
     public void main() {
-        getSupportFragmentManager().beginTransaction().add(R.id.container, new FragmentSignIn()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, new FragmentSignIn(),FragmentSignIn.class.getSimpleName()).commit();
     }
 
     /**
@@ -56,8 +56,10 @@ public class ActivityMain extends LightActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (lockReceiver != null)
+        if (lockReceiver != null) {
             lockReceiver.destroy();
+        }
+
     }
 
     public LockReceiver getLockReceiver() {

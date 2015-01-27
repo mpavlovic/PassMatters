@@ -1,10 +1,10 @@
 package eu.asyncro.passmatters.data.responses;
 
-import com.dmacan.lightandroid.api.LightResponse;
+import com.lightandroid.api.LightResponse;
 import com.google.gson.annotations.Expose;
 
 /**
- * Created by ahuskano on 11/8/2014.
+ * Data model of sign in response
  */
 public class ResponseSignIn extends LightResponse {
 

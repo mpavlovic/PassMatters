@@ -2,8 +2,7 @@ package eu.asyncro.passmatters.controllers;
 
 import android.app.Activity;
 
-import com.dmacan.lightandroid.data.LightController;
-import com.dmacan.lightandroid.util.LightAPIUtil;
+import com.lightandroid.util.LightAPIUtil;
 
 import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
@@ -14,10 +13,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by ahuskano on 11/8/2014.
+ * Controller used to management sign in process
  */
 public class ControllerSignIn extends BaseController {
 
+    /**
+     * Callback used to forwarding server response
+     */
     private Callback<ResponseSignIn> callbackSignIn = new Callback<ResponseSignIn>() {
         @Override
         public void success(ResponseSignIn responseSignIn, Response response) {
@@ -37,6 +39,10 @@ public class ControllerSignIn extends BaseController {
         super(activity);
     }
 
+    /**
+     * Method used to send sign in request
+     * @param request
+     */
     public void signIn(RequestSignIn request) {
         showDialog();
         if (Settings.demoMode)
@@ -45,6 +51,10 @@ public class ControllerSignIn extends BaseController {
             LightAPIUtil.getRestAdapter(APIPassMatters.API_LOCATION).create(APIPassMatters.class).signIn(request, callbackSignIn);
     }
 
+    /**
+     * Method used to generate demo response
+     * @param request
+     */
     private void demoSignIn(RequestSignIn request) {
 
         if (request.getUsername().equals("demo")) {

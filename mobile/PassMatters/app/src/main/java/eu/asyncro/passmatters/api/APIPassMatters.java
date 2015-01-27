@@ -1,6 +1,6 @@
 package eu.asyncro.passmatters.api;
 
-import com.dmacan.lightandroid.api.LightRequest;
+import com.lightandroid.api.LightRequest;
 
 import eu.asyncro.passmatters.data.responses.ResponseAccount;
 import eu.asyncro.passmatters.data.responses.ResponseAccounts;
@@ -13,7 +13,7 @@ import retrofit.http.POST;
 import retrofit.http.Query;
 
 /**
- * Created by ahuskano on 11/8/2014.
+ * Interface used to server request/response communication
  */
 public interface APIPassMatters {
 

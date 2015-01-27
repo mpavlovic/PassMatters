@@ -3,12 +3,12 @@ package eu.asyncro.passmatters.controllers;
 import android.app.Activity;
 import android.app.ProgressDialog;
 
-import com.dmacan.lightandroid.data.LightController;
+import com.lightandroid.data.LightController;
 
 import eu.asyncro.passmatters.R;
 
 /**
- * Created by ahuskano on 1/24/2015.
+ * Abstract class used as base controller
  */
 public abstract class BaseController extends LightController {
     private Activity activity;
@@ -25,20 +25,30 @@ public abstract class BaseController extends LightController {
         this.activity = activity;
     }
 
+    /**
+     * Method used to show dialog
+     */
     public void showDialog(){
         if(dialog==null)
             setUpDialog();
         dialog.show();
     }
-    private ProgressDialog setUpDialog(){
+
+    /**
+     * Method used to set up dialog
+     *
+     */
+    private void setUpDialog(){
         dialog=new ProgressDialog(getActivity(), R.style.DialogTheme);
         dialog.setIndeterminate(true);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setProgressStyle(android.R.style.Widget_Holo_ProgressBar_Large);
-        return dialog;
     }
 
+    /**
+     * Method used to dismiss showing dialog
+     */
     public void dismissDialog(){
         if(dialog!=null && dialog.isShowing())
             dialog.dismiss();

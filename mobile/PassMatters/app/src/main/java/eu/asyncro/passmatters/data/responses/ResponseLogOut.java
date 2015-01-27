@@ -1,9 +1,9 @@
 package eu.asyncro.passmatters.data.responses;
 
-import com.dmacan.lightandroid.api.LightResponse;
+import com.lightandroid.api.LightResponse;
 
 /**
- * Created by ahuskano on 12/5/2014.
+ * Data model of log out response
  */
 public class ResponseLogOut extends LightResponse {
 

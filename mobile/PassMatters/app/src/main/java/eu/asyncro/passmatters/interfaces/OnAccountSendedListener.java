@@ -1,9 +1,9 @@
 package eu.asyncro.passmatters.interfaces;
 
-import com.dmacan.lightandroid.api.LightResponse;
+import com.lightandroid.api.LightResponse;
 
 /**
- * Created by ahuskano on 12/5/2014.
+ * Interface used as listener for server response on account request
  */
 public interface OnAccountSendedListener {
 

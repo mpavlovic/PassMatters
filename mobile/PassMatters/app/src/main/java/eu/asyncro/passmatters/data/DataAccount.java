@@ -1,10 +1,10 @@
 package eu.asyncro.passmatters.data;
 
-import com.dmacan.lightandroid.type.LightData;
+import com.lightandroid.type.LightData;
 import com.google.gson.annotations.Expose;
 
 /**
- * Created by ahuskano on 11/9/2014.
+ * Account data model
  */
 public class DataAccount extends LightData{
 

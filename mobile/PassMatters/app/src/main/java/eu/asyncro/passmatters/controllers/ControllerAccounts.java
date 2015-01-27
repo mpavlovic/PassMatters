@@ -2,8 +2,7 @@ package eu.asyncro.passmatters.controllers;
 
 import android.app.Activity;
 
-import com.dmacan.lightandroid.data.LightController;
-import com.dmacan.lightandroid.util.LightAPIUtil;
+import com.lightandroid.util.LightAPIUtil;
 
 import eu.asyncro.passmatters.Settings;
 import eu.asyncro.passmatters.api.APIPassMatters;
@@ -15,10 +14,13 @@ import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 /**
- * Created by ahuskano on 11/9/2014.
+ * Controller used to management all accounts
  */
 public class ControllerAccounts extends BaseController {
 
+    /**
+     * Callback used to forwarding server response
+     */
     private Callback<ResponseAccounts> callbackAccounts = new Callback<ResponseAccounts>() {
         @Override
         public void success(ResponseAccounts responseAccounts, Response response) {
@@ -37,6 +39,10 @@ public class ControllerAccounts extends BaseController {
         super(activity);
     }
 
+    /**
+     * Method used to send server request
+     * @param token session token
+     */
     public void getAccounts(String token) {
         showDialog();
         if (Settings.demoMode)
@@ -46,6 +52,9 @@ public class ControllerAccounts extends BaseController {
     }
 
 
+    /**
+     * Method used to generate demo response
+     */
     private void demoAccounts() {
         DataAccount[] account = new DataAccount[7];
         account[0] = new DataAccount(1, "Facebook");

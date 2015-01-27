@@ -3,14 +3,15 @@ package eu.asyncro.passmatters.presenters;
 import android.view.View;
 import android.widget.TextView;
 
-import com.dmacan.lightandroid.presenter.LightAdapterItem;
+import com.lightandroid.presenter.LightAdapterItem;
 
 import eu.asyncro.passmatters.R;
 import eu.asyncro.passmatters.data.DataAccount;
 
 /**
- * Created by ahuskano on 11/14/2014.
+ * Deprecated presenter for accounts
  */
+@Deprecated
 public class PresenterAccount implements LightAdapterItem {
 
     private DataAccount account;

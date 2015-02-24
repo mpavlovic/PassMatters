@@ -23,7 +23,7 @@ public class ActivitySplash extends LightSplashActivity {
      */
     @Override
     public int getSplashTime() {
-        return 20;
+        return 2000;
     }
 
     /**

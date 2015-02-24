@@ -108,6 +108,7 @@ public class FragmentAccounts extends BaseFragment implements SwipeRefreshLayout
             toastIt(accounts.getMessage());
         }
         controllerAccounts.dismissDialog();
+        controllerAccount.dismissDialog();
         swipeRefreshLayout.setRefreshing(false);
         swipeRefreshLayout.setEnabled(false);
     }

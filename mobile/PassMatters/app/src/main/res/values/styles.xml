@@ -7,7 +7,7 @@
     </style>
 
     <style name="actionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/app_primary_color</item>
+        <item name="android:background">@color/action_bar</item>
         <item name="android:icon">@drawable/ic_icon_no_bg</item>
     </style>
 

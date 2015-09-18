@@ -20,4 +20,6 @@ public class FileDAOFactory extends DAOFactory {
         return new FilePasteShortcutDAO();
     }
     
+    
+    
 }

@@ -1,6 +1,14 @@
 PassMatters
 ===========
+### Authors:
+Milan Pavlovic: [desktop](https://github.com/mpavlovic/PassMatters/tree/master/desktop) <br>
+Alen Huskanovic: [mobile](https://github.com/mpavlovic/PassMatters/tree/master/mobile) <br>
+Zoran Antolowic: web (not available)
 
+### Project Documentation
+Made in 2014/15. More details are available [here](https://drive.google.com/file/d/0B-f3kXADuiadM2Z1aEY5bGM4UG8/view?usp=sharing).
+
+### Description
 PassMatters (“Password matters”) is a system that makes user&#39;s password management easier.
 Using exactly the same password for several accounts, exchanging passwords via unencrypted
 email or saving passwords in applications such as FTP clients is extremely insecure.
@@ -14,4 +22,4 @@ password will be instantly typed into the focused text field on associated PC. W
 philosophy, each account can be secured with strong and unique password, since users don’t
 have to remember them.
 
-More details are available [here](https://drive.google.com/file/d/0B-f3kXADuiadM2Z1aEY5bGM4UG8/view?usp=sharing).
+
